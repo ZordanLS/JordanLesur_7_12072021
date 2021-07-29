@@ -1,1 +1,2 @@
-# JordanLesur_7_12072021
+Projet 7 du parcours Développeur Web
+Jordan LESUR - OpenClassrooms
