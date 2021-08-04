@@ -2,18 +2,26 @@
 
 const express = require("express");
 const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
 const saucesRoutes = require("./routes/sauce");
 const userRoutes = require("./routes/user");
 const path = require("path");
 require("dotenv").config();
+var mysql = require('mysql');
 
 // Connection à la base de données
 
-mongoose
-  .connect(process.env.DATABASE_URL_USER, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("Connexion à MongoDB réussie !"))
-  .catch(() => console.log("Connexion à MongoDB échouée !"));
+
+var con = mysql.createConnection({
+  host: process.env.DATABASE_HOST,
+  user: process.env.DATABASE_USER,
+  password: process.env.DATABASE_PASSWORD
+});
+
+con.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected!");
+});
+
 
 const app = express();
 
