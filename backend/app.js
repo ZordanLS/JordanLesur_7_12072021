@@ -1,9 +1,10 @@
+  
 // Importations
 
 const express = require("express");
 const bodyParser = require("body-parser");
-const saucesRoutes = require("./routes/sauce");
-const userRoutes = require("./routes/user");
+//const saucesRoutes = require("./routes/sauce");
+//const userRoutes = require("./routes/user");
 const path = require("path");
 require("dotenv").config();
 var mysql = require('mysql');
@@ -38,9 +39,9 @@ app.use(bodyParser.json());
 
 // Déclaration des différents chemins
 
-app.use("/api/sauces", saucesRoutes);
+//app.use("/api/sauces", saucesRoutes);
 
-app.use("/api/auth", userRoutes);
+//app.use("/api/auth", userRoutes);
 
 app.use("/images", express.static(path.join(__dirname, "images")));
 
