@@ -4,6 +4,7 @@ const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   Comment.init(
     {
+      id: { type: DataTypes.NUMBER, allowNull: false },
       user_id: { type: DataTypes.NUMBER, allowNull: false },
       post_id: { type: DataTypes.NUMBER, allowNull: false },
       content: { type: DataTypes.STRING, allowNull: false },
