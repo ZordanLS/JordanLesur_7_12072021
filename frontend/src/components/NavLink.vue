@@ -9,3 +9,6 @@ export default {
 <template>
   <a :href="url">{{ text }}</a>
 </template>
+
+<style lang="scss" scoped>
+</style>
