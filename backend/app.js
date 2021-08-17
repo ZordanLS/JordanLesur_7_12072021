@@ -47,9 +47,7 @@ app.use(bodyParser.json());
 
 //app.use("/api/comment", commentRoutes);
 
-
 app.use("/images", express.static(path.join(__dirname, "images")));
 
 module.exports = app;
 module.exports = db;
-
