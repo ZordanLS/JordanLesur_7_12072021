@@ -3,7 +3,7 @@
     <div class="imgcontainer">
       <img src="../assets/icon-above-font.png" alt="Groupomania" class="logo" />
     </div>
-    <form action="" method="post">
+    <form action="" method="post" onsubmit="event.preventDefault();">
       <div class="container">
         <label for="email"><b>Adresse email</b></label>
         <input type="text" placeholder="Entrez votre adresse email" name="email" required />
@@ -20,14 +20,28 @@
         <label for="passwordconfirm"><b>Confirmez votre mot de passe</b></label>
         <input type="password" placeholder="Confirmez votre mot de passe" name="password" required />
 
-        <button type="submit"> S'inscrire </button>
+        <button id="signupbutton" type="submit">S'inscrire</button>
       </div>
     </form>
   </div>
 </template>
 
 <script>
+export default {
+  mounted() {
+    function signup() {
+      let signupData = "test";
+      fetch("http://localhost:3000/api/auth/signup", { method: "POST", body: JSON.stringify(signupData), headers: { "Content-Type": "application/json" } })
+        .then((res) => res.json())
+        .then((json) => {
+          console.log(json);
+        });
+    }
 
+    let signupButton = document.getElementById("signupbutton");
+    signupButton.addEventListener("click", signup());
+  },
+};
 </script>
 
 <style scoped>
@@ -102,13 +116,13 @@ span.psw {
 }
 
 @media screen and (max-width: 550px) {
-input[type="text"],
-input[type="password"] {
-  width: 90%;
-}
+  input[type="text"],
+  input[type="password"] {
+    width: 90%;
+  }
 
-button {
-  width: 60%;
-}
+  button {
+    width: 60%;
+  }
 }
 </style>

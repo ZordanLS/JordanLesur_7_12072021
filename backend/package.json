@@ -10,8 +10,13 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "bcrypt": "^5.0.0",
+        "bcrypt": "^5.0.1",
+        "bcryptjs": "^2.4.3",
+        "body-parser": "^1.19.0",
+        "config": "^3.3.6",
+        "cors": "^2.8.5",
         "dotenv": "^8.2.0",
+        "espress": "^0.0.0",
         "express": "^4.17.1",
         "express-bouncer": "^0.2.0",
         "helmet": "^3.23.3",
@@ -19,9 +24,11 @@
         "jwt": "^0.2.0",
         "multer": "^1.4.2",
         "mysql": "^2.18.1",
+        "mysql2": "^2.3.0",
         "nodemon": "^2.0.6",
         "sanitize-middleware": "^2.0.14",
         "secure-password-validator": "^1.0.2",
+        "sequelize": "^6.6.5",
         "toobusy-js": "^0.5.1",
         "validator": "^13.1.1"
     }

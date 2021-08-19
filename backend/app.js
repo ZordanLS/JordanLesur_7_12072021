@@ -1,11 +1,12 @@
 // Importations
 
 const express = require("express");
+const app = express();
 const bodyParser = require("body-parser");
 //const likeRoutes = require("./routes/like");
 //const postRoutes = require("./routes/post");
 //const commentRoutes = require("./routes/comment");
-//const userRoutes = require("./routes/user");
+const userRoutes = require("./routes/user");
 const path = require("path");
 require("dotenv").config();
 var mysql = require("mysql");
@@ -24,7 +25,6 @@ db.connect(function (err) {
   console.log("Connected!");
 });
 
-const app = express();
 
 // CORS
 
@@ -35,13 +35,15 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(bodyParser.json());
+//app.use(bodyParser.json());
+app.use(express.json());   
+
 
 // Déclaration des différents chemins
 
 //app.use("/api/like", likeRoutes);
 
-//app.use("/api/auth", userRoutes);
+app.use("/api/auth", userRoutes);
 
 //app.use("/api/post", postRoutes);
 
@@ -49,5 +51,5 @@ app.use(bodyParser.json());
 
 app.use("/images", express.static(path.join(__dirname, "images")));
 
-module.exports = app;
 module.exports = db;
+module.exports = app;
