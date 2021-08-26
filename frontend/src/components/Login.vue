@@ -3,7 +3,7 @@
     <div class="imgcontainer">
       <img src="../assets/icon-above-font.png" alt="Groupomania" class="logo" />
     </div>
-    <form action="" method="post">
+    <form id="loginform" action="auth" method="POST">
       <div class="container">
         <label for="email"><b>Adresse email</b></label>
         <input type="text" placeholder="Entrez votre adresse email" name="email" required />
@@ -11,7 +11,7 @@
         <label for="password"><b>Mot de passe</b></label>
         <input type="password" placeholder="Entrez votre mot de passe" name="password" required />
 
-        <button type="submit">Se connecter</button>
+        <button id="loginbutton" type="submit">Se connecter</button>
         <div>
         <label class="button-label"> <input type="checkbox" checked="checked" name="remember" /> Se souvenir de moi </label>
         </div>
@@ -26,7 +26,21 @@
 
 <script>
 
-
+export default {
+  mounted() {
+    function login() {
+      let loginForm = document.getElementById("loginform");
+      let loginData = new FormData(loginForm);
+      fetch("http://localhost:3000/api/auth/login", { method: "POST", body: JSON.stringify(loginData), headers: { "Content-Type": "application/json" } })
+        .then((res) => res.json())
+        .then((json) => {
+          console.log(json);
+        });
+    }
+    let loginButton = document.getElementById("loginbutton");
+    loginButton.addEventListener("click", login());
+  },
+};
 
 </script>
 
