@@ -27,61 +27,7 @@
 </template>
 
 <script>
-export default {
-import Auth from "../services/Auth.js";
-export default {
-  name: "Signup",
-  data() {
-    return {
-      pseudo: "",
-      email: "",
-      password: "",
-      errorMessage: null,
-      message: null,
-      isValid: true,
-      hasSignedUp: false,
-      emailRules: [
-        (v) => !!v || "L'email est obligatoire",
-        (v) =>
-          /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
-          "L'email doit être valide",
-      ],
-      pseudoRules: [
-        (v) => v.length <= 30 || "Entre 3 et 30 caractères, sans symboles",
-      ],
-      passwordRules: [
-        (v) =>
-          v.length <= 30 ||
-          "Le mot de passe doit être de 8 lettres minimum, majuscules et minucules, pas de symboles",
-      ],
-    };
-  },
-  methods: {
-    async signup() {
-      try {
-        const response = await Auth.signup({
-          pseudo: this.pseudo,
-          email: this.email,
-          password: this.password,
-        });
-        this.message = response.data.message;
-        this.$store.dispatch("setToken", response.data.token);
-        this.$store.dispatch("setUser", response.data.user);
-        this.$store.dispatch("getUserById", response.data.user.id);
 
-        let router = this.$router;
-        setTimeout(function() {
-          router.push("/posts");
-        }, 1500);
-      } catch (error) {
-        this.errorMessage = error.response.data.error;
-        setTimeout(() => {
-          this.errorMessage = "";
-        }, 1500);
-      }
-    },
-  },
-};
 </script>
 
 <style scoped>
