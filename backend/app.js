@@ -6,11 +6,30 @@ const mysql = require('mysql');
 const saucesRoutes = require("./routes/sauce");
 const userRoutes = require("./routes/user");
 const path = require("path");
+const { Sequelize } = require('sequelize');
 require("dotenv").config();
 
 // Connection à la base de données
 
-const db = mysql.createConnection({
+const sequelize = new Sequelize(process.env.DATABASE_NAME, process.env.DATABASE_USER, process.env.DATABASE_PASSWORD, {
+  dialect: "mysql",
+  host: process.env.DATABASE_HOST
+});
+
+try {
+  sequelize.authenticate();
+  console.log('Connecté à la base de données MySQL avec Sequelize!');
+} catch (error) {
+  console.error('Impossible de se connecter, erreur suivante :', error);
+}
+
+// Instruction de test
+
+sequelize.query("SELECT * FROM user").then(([results, metadata]) => {
+  console.log(results);
+})
+
+/*const db = mysql.createConnection({
 
   host: process.env.DATABASE_HOST,
   user: process.env.DATABASE_USER,
@@ -23,7 +42,7 @@ const db = mysql.createConnection({
 db.connect(function(err) {
   if (err) throw err;
   console.log("Connecté à la base de données MySQL!");
-});
+});*/
 
 const app = express();
 
