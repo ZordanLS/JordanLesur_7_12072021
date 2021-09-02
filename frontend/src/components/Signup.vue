@@ -3,7 +3,7 @@
     <div class="imgcontainer">
       <img src="../assets/icon-above-font.png" alt="Groupomania" class="logo" />
     </div>
-    <form action="" method="post" id="signupform">
+    <form id="signupform" onsubmit="return(false)">
       <div class="container">
         <label for="email"><b>Adresse email</b></label>
         <input type="text" placeholder="Entrez votre adresse email" name="email" required />
@@ -17,16 +17,37 @@
         <label for="password"><b>Mot de passe</b></label>
         <input type="password" placeholder="Entrez votre mot de passe" name="password" required />
 
-        <label for="passwordconfirm"><b>Confirmez votre mot de passe</b></label>
-        <input type="password" placeholder="Confirmez votre mot de passe" name="password" required />
-
-        <button id="signupbutton" type="submit">S'inscrire</button>
+        <button id="signupbutton" type="button">S'inscrire</button>
       </div>
     </form>
   </div>
 </template>
 
 <script>
+
+
+export default {
+  mounted() {
+    function signup() {
+      let signupForm = document.forms["signupform"];
+      let signupFormData = new FormData(signupForm);
+      let signupData = {
+        email: signupFormData.get("email"),
+        firstname: signupFormData.get("firstname"),
+        lastname: signupFormData.get("lastname"),
+        password: signupFormData.get("password"),
+      }
+      console.log(signupData);
+      fetch("http://localhost:3000/api/users", { method: "POST", body: JSON.stringify(signupData), headers: { "Content-Type": "application/json" } })
+        .then((res) => res.json())
+        .then((json) => {
+          console.log(json);
+        });
+    }
+    let signupButton = document.getElementById("signupbutton");
+    signupButton.addEventListener("click", signup);
+  },
+};
 
 </script>
 
