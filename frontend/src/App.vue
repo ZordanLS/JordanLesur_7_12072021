@@ -5,7 +5,7 @@
       <router-link to="/">Accueil</router-link>
     </div>
     <div class="nav">
-      <router-link to="/login">Se connecter</router-link> |
+      <router-link to="/Login">Se connecter</router-link> |
       <router-link to="/Signup">S'inscrire</router-link>
     </div>
     </div>

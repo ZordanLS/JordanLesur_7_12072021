@@ -21,6 +21,7 @@ app.use(bodyParser.json());
 // Déclaration des différents chemins
 
 require("./routes/user.routes")(app);
+require("./routes/post.routes")(app);
 
 const db = require("./models");
 //db.sequelize.sync();

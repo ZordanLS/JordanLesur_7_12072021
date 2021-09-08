@@ -16,7 +16,6 @@ exports.create = async (req, res) => {
   // Hash du mot de passe
 
   let hash = await bcrypt.hash(req.body.password, 10);
-  console.log(hash);
 
   // Create a User
   const user = {
