@@ -1,12 +1,18 @@
 <template>
   <div>
-    <div class="imgcontainer">
-      <img src="../assets/icon-above-font.png" alt="Groupomania" class="logo" />
-    </div>
-    <form id="postform" onsubmit="return(false)">
+    <form id="postform">
       <div class="container">
-        <label for="postcontent"><b>Votre post !</b></label>
-        <input type="text" placeholder="Qu'avez-vous à dire?" name="postcontent" required />
+        <textarea
+          onfocus="this.style.height=(this.offsetHeight*4)+'px'"
+          onblur="this.style.height=(this.offsetHeight/4)+'px'"
+          id="postcontent"
+          type="text"
+          placeholder="Qu'avez-vous à dire?"
+          name="postcontent"
+          required
+          maxlength="255"
+        />
+        <!-- <textarea placeholder="Texte" name="postcontent2" cols="70" rows="4" maxlength="255"></textarea> -->
 
         <button id="postbutton" type="button">Publier !</button>
       </div>
@@ -15,11 +21,10 @@
 </template>
 
 <script>
-
 export default {
-  name: 'NewPost',
+  name: "NewPost",
   props: {
-    msg: String
+    msg: String,
   },
   mounted() {
     function post() {
@@ -27,19 +32,19 @@ export default {
       let postFormData = new FormData(postForm);
       let postData = {
         postcontent: postFormData.get("postcontent"),
-      }
+      };
       console.log(postData);
       fetch("http://localhost:3000/api/posts", { method: "POST", body: JSON.stringify(postData), headers: { "Content-Type": "application/json" } })
         .then((res) => res.json())
         .then((json) => {
           console.log(json);
         });
+      location.reload();
     }
     let postButton = document.getElementById("postbutton");
     postButton.addEventListener("click", post);
   },
 };
-
 </script>
 
 <style scoped>
@@ -68,10 +73,10 @@ a {
   height: 20vh;
   overflow: hidden;
 }
+#postcontent,
 input[type="text"],
 input[type="password"] {
   width: 50rem;
-  height: 15rem;
   padding: 12px 20px;
   margin-right: auto;
   margin-left: auto;
@@ -79,6 +84,7 @@ input[type="password"] {
   display: flex;
   border: 1px solid #ccc;
   box-sizing: border-box;
+  resize: none;
 }
 
 button {
