@@ -1,6 +1,7 @@
 module.exports = app => {
     const users = require("../controllers/user.controller.js");
-  
+    const auth = require("../middleware/auth.js");
+
     var router = require("express").Router();
   
     // Create a new User
@@ -14,6 +15,9 @@ module.exports = app => {
   
     // Delete a User with email
     router.delete("/:email", users.delete);
+
+    // Login
+    router.post("/login", users.login);
   
     app.use('/api/users', router);
   };
