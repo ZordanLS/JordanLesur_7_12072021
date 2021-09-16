@@ -109,10 +109,10 @@ exports.delete = (req, res) => {
 // Fonction de connection
 
 exports.login = (req, res, next) => {
-  User.findOne({ email: req.body.email })
+ User.findOne({ email: req.body.email })
     .then((user) => {
       if (!user) {
-        return res.status(401).json({ error: "Utilisateur non trouvé !" });
+        return res.status(404).json({ error: "Utilisateur non trouvé !" });
       }
       bcrypt
         .compare(req.body.password, user.password)
@@ -120,50 +120,25 @@ exports.login = (req, res, next) => {
           if (!valid) {
             return res.status(401).json({ error: "Mot de passe incorrect !" });
           }
-          res.status(200).json({
-            userId: user._id,
-            token: jwt.sign({ userId: user._id }, "RANDOM_TOKEN_SECRET", { expiresIn: "24h" }),
-          });
+          user.token = jwt.sign({ userEmail: user.email, userId: user.id }, "RANDOM_TOKEN_SECRET", { expiresIn: "24h" });
+          User.update(user.dataValues, {
+            where: { id: user.id },
+          })
+            .then((num) => {
+              res.status(200).json({
+                message: "Utilisateur connecté !",
+                userEmail: user.email,
+                userId: user.id,
+                token: user.token,
+              });
+            })
+            .catch((err) => {
+              res.status(500).send({
+                message: "Could not delete User with email=" + email,
+              });
+            });
         })
-        .catch((error) => res.status(500).json({ error }));
+        .catch((error) => res.status(501).json({ error }));
     })
-    .catch((error) => res.status(500).json({ error }));
+    .catch((error) => res.status(502).json({ error }));
 };
-
-/*
-// Importation des modules d'authentification
-
-const bcrypt = require("bcrypt");
-
-const jwt = require("jsonwebtoken");
-
-const { Sequelize } = require('sequelize');
-
-const User = require("../models/user.model.js");
-
-// Fonction de création de compte utilisateur
-
-exports.signup = (req, res, next) => {
-  bcrypt
-    .hash(req.body.password, 10)
-    .then(async (hash) => {
-      await User.create({ email: req.body.email, first_name: req.body.firstname, last_name: req.body.lastname, password: hash, picture: "", role: 0, token: "" });
-      /*const user = new User({
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
-        email: req.body.email,
-        password: hash,
-        picture: "",
-        role: 0,
-        token: "",
-      });
-      */
-/*
-    })
-    .catch((error) => {
-      console.log(error);
-      return res.status(500).json({ error });
-    });
-};
-
-*/

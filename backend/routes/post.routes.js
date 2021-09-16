@@ -1,5 +1,6 @@
 module.exports = (app) => {
   const posts = require("../controllers/post.controller.js");
+  const auth = require("../middleware/auth.js");
 
   var router = require("express").Router();
 
@@ -7,7 +8,7 @@ module.exports = (app) => {
   router.post("/", posts.create);
 
   // Retrieve all Posts
-  router.get("/", posts.findAll);
+  router.get("/",auth, posts.findAll);
 
   // Retrieve a single Post with id
   router.get("/:id", posts.findOne);

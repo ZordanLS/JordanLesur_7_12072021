@@ -13,7 +13,7 @@
 
         <button id="loginbutton" type="button">Se connecter</button>
         <div>
-        <label class="button-label"> <input type="checkbox" checked="unchecked" name="remember" /> Se souvenir de moi </label>
+          <label class="button-label"> <input type="checkbox" checked="unchecked" name="remember" /> Se souvenir de moi </label>
         </div>
       </div>
 
@@ -25,7 +25,6 @@
 </template>
 
 <script>
-
 export default {
   mounted() {
     function login() {
@@ -34,18 +33,18 @@ export default {
       let loginData = {
         email: loginFormData.get("email"),
         password: loginFormData.get("password"),
-      }
+      };
       fetch("http://localhost:3000/api/users/login", { method: "POST", body: JSON.stringify(loginData), headers: { "Content-Type": "application/json" } })
         .then((res) => res.json())
         .then((json) => {
           console.log(json);
+          localStorage.setItem("groupomaniatoken", json.token);
         });
     }
     let loginButton = document.getElementById("loginbutton");
     loginButton.addEventListener("click", login);
   },
 };
-
 </script>
 
 <style scoped>
@@ -120,13 +119,13 @@ span.psw {
 }
 
 @media screen and (max-width: 550px) {
-input[type="text"],
-input[type="password"] {
-  width: 90%;
-}
+  input[type="text"],
+  input[type="password"] {
+    width: 90%;
+  }
 
-button {
-  width: 60%;
-}
+  button {
+    width: 60%;
+  }
 }
 </style>

@@ -14,7 +14,12 @@ export default {
     msg: String,
   },
   mounted() {
-    fetch("http://localhost:3000/api/posts")
+    fetch("http://localhost:3000/api/posts", {
+   method: 'GET',
+   headers: new Headers({
+     'Authorization': 'Basic '+localStorage.getItem("groupomaniatoken"),
+   }),
+ })
       .then(function(res) {
         if (res.ok) {
           return res.json();
@@ -35,6 +40,26 @@ export default {
         let card = document.createElement("div");
         card.setAttribute("class", "card");
 
+        // Création de la partie utilisateur de la carte
+        let cardUser = document.createElement("div");
+        cardUser.setAttribute("class", "carduser");
+
+        // Création de l'image de profil
+        let cardUserPic = document.createElement("img");
+        cardUserPic.setAttribute("class", "userpic");
+        cardUserPic.setAttribute("src", "https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg");
+
+        // Creation du nom d'utilisateur
+        let cardUserName = document.createElement("p");
+        cardUserName.setAttribute("class", "username");
+        cardUserName.innerText = "Utilisateur numéro : " + post.user_id;
+
+        // Creation de la date
+        let cardPostDate = document.createElement("p");
+        cardPostDate.setAttribute("class", "postdate");
+        cardPostDate.innerText = "Date du post";
+
+
         // Création de la div cardBody avec la classe card-body
         let cardBody = document.createElement("div");
         cardBody.setAttribute("class", "");
@@ -46,6 +71,10 @@ export default {
 
         // Création de la structure parent/enfants de la page des produits
         container.appendChild(card);
+        card.appendChild(cardUser);
+        cardUser.appendChild(cardUserPic);
+        cardUser.appendChild(cardUserName);
+        cardUser.appendChild(cardPostDate);
         card.appendChild(cardBody);
         cardBody.appendChild(cardDescription);
       });
@@ -110,5 +139,26 @@ span.psw {
   width: 50rem;
   margin-right: auto;
   margin-left: auto;
+}
+
+.username {
+  text-align: left;
+  padding-left: 1rem;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.carduser {
+  display: flex;
+}
+
+.userpic {
+  max-height: 3.5rem;
+}
+
+.postdate {
+  margin-left: auto;
+  padding-right: 1rem;
+  padding-top: 0.3rem;
 }
 </style>

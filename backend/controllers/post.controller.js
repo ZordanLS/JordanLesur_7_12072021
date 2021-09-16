@@ -1,6 +1,9 @@
 const db = require("../models");
 const Post = db.posts;
+const User = db.users;
 const Op = db.Sequelize.Op;
+const jwt = require("jsonwebtoken");
+
 
 // Create and Save a new Post
 exports.create = (req, res) => {
@@ -12,10 +15,14 @@ exports.create = (req, res) => {
     return;
   }
 
+let userToken = req.body.usertoken
+jwt.verify(userToken, "RANDOM_TOKEN_SECRET", function(err,tokeninfo) {
+  let userIdDecoded = tokeninfo.userId;
+
   // Create a Post
   const post = {
-    user_id: 0,
     content: req.body.postcontent,
+    user_id: userIdDecoded
   };
 
   // Save Post in the database
@@ -28,6 +35,7 @@ exports.create = (req, res) => {
         message: err.message || "Some error occurred while creating the Post.",
       });
     });
+})
 };
 
 // Retrieve all Posts from the database.

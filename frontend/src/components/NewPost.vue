@@ -21,6 +21,7 @@
 </template>
 
 <script>
+
 export default {
   name: "NewPost",
   props: {
@@ -32,9 +33,14 @@ export default {
       let postFormData = new FormData(postForm);
       let postData = {
         postcontent: postFormData.get("postcontent"),
+        usertoken: localStorage.getItem("groupomaniatoken")
       };
       console.log(postData);
-      fetch("http://localhost:3000/api/posts", { method: "POST", body: JSON.stringify(postData), headers: { "Content-Type": "application/json" } })
+      fetch("http://localhost:3000/api/posts", {
+        method: "POST",
+        body: JSON.stringify(postData),
+        headers: { "Content-Type": "application/json" },
+      })
         .then((res) => res.json())
         .then((json) => {
           console.log(json);
