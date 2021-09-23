@@ -4,12 +4,18 @@
       <h1>Profil</h1>
       <div id="profile"></div>
     </div>
+    <ProfileFeed />
   </main>
 </template>
 
 <script>
+import ProfileFeed from "@/components/ProfileFeed.vue";
+
 export default {
   name: "Profile",
+    components: {
+    ProfileFeed
+  },
   props: {
     msg: String,
   },

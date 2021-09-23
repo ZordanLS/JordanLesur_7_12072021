@@ -2,19 +2,19 @@
   <main>
     <div>
       <h1>Les derniers posts :</h1>
-      <div id="posts"></div>
+      <div id="profileposts"></div>
     </div>
   </main>
 </template>
 
 <script>
 export default {
-  name: "Feed",
+  name: "ProfileFeed",
   props: {
     msg: String,
   },
   mounted() {
-    fetch("http://localhost:3000/api/posts", {
+    fetch(`http://localhost:3000/api/posts/user/${this.$route.query.id}`, {
       method: "GET",
       headers: new Headers({
         Authorization: "Basic " + localStorage.getItem("groupomaniatoken"),
@@ -32,7 +32,7 @@ export default {
     // Pour chaque produit, crée une carte et l'intègre au HTML
     function injectHtml(array) {
       array.map(function(post) {
-        let container = document.getElementById("posts");
+        let container = document.getElementById("profileposts");
 
         // Création de l'architecture de la page
 

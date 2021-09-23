@@ -53,7 +53,9 @@ exports.findAll = (req, res) => {
 
 // Retrieve all Posts from one user.
 exports.findUsersPosts = (req, res) => {
-  Post.findAll({ where: user_id = user._id })
+  let id = req.params.id;
+
+  Post.findAll({ where: {user_id: id} })
     .then((data) => {
       res.send(data);
     })
