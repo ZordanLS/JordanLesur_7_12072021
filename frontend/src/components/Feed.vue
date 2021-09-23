@@ -15,11 +15,11 @@ export default {
   },
   mounted() {
     fetch("http://localhost:3000/api/posts", {
-   method: 'GET',
-   headers: new Headers({
-     'Authorization': 'Basic '+localStorage.getItem("groupomaniatoken"),
-   }),
- })
+      method: "GET",
+      headers: new Headers({
+        Authorization: "Basic " + localStorage.getItem("groupomaniatoken"),
+      }),
+    })
       .then(function(res) {
         if (res.ok) {
           return res.json();
@@ -52,13 +52,12 @@ export default {
         // Creation du nom d'utilisateur
         let cardUserName = document.createElement("p");
         cardUserName.setAttribute("class", "username");
-        cardUserName.innerText = "Utilisateur numéro : " + post.user_id;
+        cardUserName.innerText = "Nom d'utilisateur : " + "";
 
         // Creation de la date
         let cardPostDate = document.createElement("p");
         cardPostDate.setAttribute("class", "postdate");
         cardPostDate.innerText = "Date du post";
-
 
         // Création de la div cardBody avec la classe card-body
         let cardBody = document.createElement("div");

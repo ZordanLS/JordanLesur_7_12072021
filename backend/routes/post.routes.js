@@ -10,6 +10,8 @@ module.exports = (app) => {
   // Retrieve all Posts
   router.get("/",auth, posts.findAll);
 
+  router.get("/user/:id", auth, posts.findUsersPosts)
+
   // Retrieve a single Post with id
   router.get("/:id", posts.findOne);
 

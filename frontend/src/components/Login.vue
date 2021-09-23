@@ -18,7 +18,7 @@
       </div>
 
       <div class="container">
-        <span class="psw">Pas encore inscrit ? <a href="#">Créez votre compte</a></span>
+        <span class="psw">Pas encore inscrit ? <router-link to="/Signup">Créez votre compte</router-link> </span>
       </div>
     </form>
   </div>
@@ -39,6 +39,9 @@ export default {
         .then((json) => {
           console.log(json);
           localStorage.setItem("groupomaniatoken", json.token);
+        })
+        .then(() => {
+          window.location.replace("#")
         });
     }
     let loginButton = document.getElementById("loginbutton");

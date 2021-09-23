@@ -42,7 +42,11 @@ export default {
         .then((res) => res.json())
         .then((json) => {
           console.log(json);
+        })
+                .then(() => {
+          window.location.replace("/login")
         });
+
     }
     let signupButton = document.getElementById("signupbutton");
     signupButton.addEventListener("click", signup);

@@ -43,15 +43,15 @@ exports.create = async (req, res) => {
 
 // Find a single User with an id
 exports.findOne = (req, res) => {
-  const email = req.params.email;
+  let id = req.params.id;
 
-  User.findByPk(email)
+  User.findByPk(id)
     .then((data) => {
       res.send(data);
     })
     .catch((err) => {
       res.status(500).send({
-        message: "Error retrieving User with email=" + email,
+        message: "Error retrieving User with id=" + id,
       });
     });
 };
