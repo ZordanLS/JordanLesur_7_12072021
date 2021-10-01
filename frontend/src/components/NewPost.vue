@@ -3,8 +3,8 @@
     <form id="postform">
       <div class="container">
         <textarea
-          onfocus="this.style.height=(this.offsetHeight*4)+'px'"
-          onblur="this.style.height=(this.offsetHeight/4)+'px'"
+          onfocus="this.style.height='250px'"
+          onblur="if(this.value==''){this.style.height=''}"
           id="postcontent"
           type="text"
           placeholder="Qu'avez-vous à dire?"

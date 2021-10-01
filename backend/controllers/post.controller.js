@@ -3,7 +3,7 @@ const Post = db.posts;
 const User = db.users;
 const Op = db.Sequelize.Op;
 const jwt = require("jsonwebtoken");
-
+const { QueryTypes } = require("sequelize");
 
 // Create and Save a new Post
 exports.create = (req, res) => {
@@ -15,32 +15,33 @@ exports.create = (req, res) => {
     return;
   }
 
-let userToken = req.body.usertoken
-jwt.verify(userToken, "RANDOM_TOKEN_SECRET", function(err,tokeninfo) {
-  let userIdDecoded = tokeninfo.userId;
+  let userToken = req.body.usertoken;
+  jwt.verify(userToken, "RANDOM_TOKEN_SECRET", function (err, tokeninfo) {
+    let userIdDecoded = tokeninfo.userId;
 
-  // Create a Post
-  const post = {
-    content: req.body.postcontent,
-    user_id: userIdDecoded
-  };
+    // Create a Post
+    const post = {
+      content: req.body.postcontent,
+      user_id: userIdDecoded,
+    };
 
-  // Save Post in the database
-  Post.create(post)
-    .then((data) => {
-      res.send(data);
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message: err.message || "Some error occurred while creating the Post.",
+    // Save Post in the database
+    Post.create(post)
+      .then((data) => {
+        res.send(data);
+      })
+      .catch((err) => {
+        res.status(500).send({
+          message: err.message || "Some error occurred while creating the Post.",
+        });
       });
-    });
-})
+  });
 };
 
 // Retrieve all Posts from the database.
 exports.findAll = (req, res) => {
-  Post.findAll({ order: [["createdAt", "DESC"]] })
+  db.sequelize
+    .query("SELECT A.*, B.first_name, B.last_name, B.email, B.picture FROM posts A INNER JOIN users B ON A.user_id = B.id order by A.createdAt DESC", { type: QueryTypes.SELECT })
     .then((data) => {
       res.send(data);
     })
@@ -55,7 +56,7 @@ exports.findAll = (req, res) => {
 exports.findUsersPosts = (req, res) => {
   let id = req.params.id;
 
-  Post.findAll({ where: {user_id: id} })
+  Post.findAll({ where: { user_id: id } })
     .then((data) => {
       res.send(data);
     })
@@ -65,7 +66,6 @@ exports.findUsersPosts = (req, res) => {
       });
     });
 };
-
 
 // Find a single Post with an id
 exports.findOne = (req, res) => {

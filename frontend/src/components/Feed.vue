@@ -49,10 +49,16 @@ export default {
         cardUserPic.setAttribute("class", "userpic");
         cardUserPic.setAttribute("src", "https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg");
 
+        function capitalizeFirstLetter(string) {
+          return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+
         // Creation du nom d'utilisateur
         let cardUserName = document.createElement("p");
         cardUserName.setAttribute("class", "username");
-        cardUserName.innerText = "ID utilisateur : " + post.user_id;
+        let firstName = capitalizeFirstLetter(post.first_name);
+        let lastName = capitalizeFirstLetter(post.last_name);
+        cardUserName.innerText = firstName + " " + lastName;
 
         // Creation de la date
         let cardPostDate = document.createElement("p");
