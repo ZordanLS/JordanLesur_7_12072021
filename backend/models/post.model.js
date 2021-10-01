@@ -3,7 +3,7 @@ module.exports = (sequelize, Sequelize) => {
     user_id: { type: Sequelize.INTEGER },
     content: { type: Sequelize.STRING },
   }, {
-    timestamps: false
+    timestamps: true
   });
   ("");
   return Post;

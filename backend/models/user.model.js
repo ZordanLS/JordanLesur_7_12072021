@@ -8,7 +8,7 @@ module.exports = (sequelize, Sequelize) => {
     role: { type: Sequelize.INTEGER},
     token: { type: Sequelize.STRING},
   }, {
-    timestamps: false
+    timestamps: true
   });
 
   return User;

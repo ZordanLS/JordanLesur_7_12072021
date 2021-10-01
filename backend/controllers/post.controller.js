@@ -71,7 +71,7 @@ exports.findUsersPosts = (req, res) => {
 exports.findOne = (req, res) => {
   const id = req.params.id;
 
-  Tutorial.findByPk(id)
+  Post.findByPk(id)
     .then((data) => {
       res.send(data);
     })
