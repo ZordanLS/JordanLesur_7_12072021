@@ -2,13 +2,33 @@
   <main>
     <div>
       <div id="posts"></div>
+      <form id="commentform">
+        <div class="container">
+          <textarea
+            onfocus="this.style.height='150px'"
+            onblur="if(this.value==''){this.style.height=''}"
+            id="commentcontent"
+            type="text"
+            placeholder="Qu'avez-vous à dire?"
+            name="commentcontent"
+            required
+            maxlength="255"
+          />
+          <button id="commentbutton" type="button">Publier !</button>
+        </div>
+      </form>
+      <Comment />
     </div>
   </main>
 </template>
 
 <script>
+import Comment from "@/components/Comment.vue";
 export default {
   name: "Post",
+  components: {
+    Comment,
+  },
   props: {
     msg: String,
   },
@@ -90,11 +110,61 @@ export default {
         cardBody.appendChild(cardDescription);
       });
     }
+    function comment(urlPostId) {
+      let commentForm = document.forms["commentform"];
+      let commentFormData = new FormData(commentForm);
+      let commentText = commentFormData.get("commentcontent");
+      let commentData = {
+        commentcontent: commentText,
+        usertoken: localStorage.getItem("groupomaniatoken"),
+        post_id: urlPostId,
+      };
+      fetch("http://localhost:3000/api/comments", {
+        method: "POST",
+        body: JSON.stringify(commentData),
+        headers: { "Content-Type": "application/json" },
+      }).then((res) => res.json());
+      location.reload();
+    }
+    let commentButton = document.getElementById("commentbutton");
+    commentButton.addEventListener(
+      "click",
+      comment.bind(event, this.$route.query.id)
+    );
   },
 };
 </script>
 
 <style>
+#commentcontent,
+input[type="text"],
+input[type="password"] {
+  width: 50rem;
+  padding: 12px 20px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 1rem;
+  display: flex;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  resize: none;
+}
+
+#commentbutton {
+  background-color: #ff7070;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  margin-left: 30rem;
+  border: none;
+  cursor: pointer;
+  width: 12rem;
+}
+
+#commentbutton:hover {
+  opacity: 0.8;
+}
+
 h1 {
   text-align: left;
   margin: 40px 0 0;

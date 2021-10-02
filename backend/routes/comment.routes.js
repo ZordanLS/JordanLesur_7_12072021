@@ -4,17 +4,27 @@ module.exports = (app) => {
 
   var router = require("express").Router();
 
-  // Create a new Post
+  // Create a new Comment
   router.post("/", comments.create);
 
+  /*
+  
   // Retrieve all comments
   router.get("/",auth, comments.findAll);
 
   // Retrieve a single Post with id
   router.get("/:id", comments.findOne);
 
+*/
+
+  router.get("/post/:id", auth, comments.findPostsComments);
+
+  /*
+
   // Delete a Post with id
   router.delete("/:id", comments.delete);
+
+  */
 
   app.use("/api/comments", router);
 };

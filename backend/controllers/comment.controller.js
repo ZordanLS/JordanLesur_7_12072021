@@ -6,46 +6,50 @@ const Op = db.Sequelize.Op;
 const jwt = require("jsonwebtoken");
 const { QueryTypes } = require("sequelize");
 
-// Create and Save a new Post
+
+// Create and Save a new Comment
 exports.create = (req, res) => {
   // Validate request
-  if (!req.body.postcontent) {
+  if (!req.body.commentcontent) {
     res.status(400).send({
       message: "Content can not be empty!",
     });
     return;
   }
-
+  
   let userToken = req.body.usertoken;
   jwt.verify(userToken, "RANDOM_TOKEN_SECRET", function (err, tokeninfo) {
     let userIdDecoded = tokeninfo.userId;
-
-    // Create a Post
-    const post = {
-      content: req.body.postcontent,
+    
+    // Create a Comment
+    const comment = {
+      content: req.body.commentcontent,
       user_id: userIdDecoded,
+      post_id: req.body.post_id
     };
-
-    // Save Post in the database
-    Post.create(post)
-      .then((data) => {
-        res.send(data);
-      })
-      .catch((err) => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while creating the Post.",
-        });
+    
+    // Save Comment in the database
+    Comment.create(comment)
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message:
+        err.message || "Some error occurred while creating the comment.",
       });
+    });
   });
 };
+
+/*
 
 // Retrieve all Posts from the database.
 exports.findAll = (req, res) => {
   db.sequelize
-    .query(
-      "SELECT A.*, B.first_name, B.last_name, B.email, B.picture FROM posts A INNER JOIN users B ON A.user_id = B.id order by A.createdAt DESC",
-      { type: QueryTypes.SELECT }
+  .query(
+    "SELECT A.*, B.first_name, B.last_name, B.email, B.picture FROM posts A INNER JOIN users B ON A.user_id = B.id order by A.createdAt DESC",
+    { type: QueryTypes.SELECT }
     )
     .then((data) => {
       res.send(data);
@@ -57,13 +61,15 @@ exports.findAll = (req, res) => {
     });
 };
 
-// Retrieve all Posts from one user.
-exports.findUsersPosts = (req, res) => {
+*/
+
+// Retrieve all Comments from one post.
+exports.findPostsComments = (req, res) => {
   let id = req.params.id;
 
   db.sequelize
     .query(
-      `SELECT A.*, B.first_name, B.last_name, B.email, B.picture FROM posts A INNER JOIN users B ON A.user_id = B.id WHERE A.user_id=${id} order by A.createdAt DESC`,
+      `SELECT A.*, B.first_name, B.last_name, B.email, B.picture FROM comments A INNER JOIN users B ON A.user_id = B.id WHERE A.post_id=${id} order by A.createdAt DESC`,
       { type: QueryTypes.SELECT }
     )
     .then((data) => {
@@ -71,10 +77,12 @@ exports.findUsersPosts = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while retrieving posts.",
+        message: err.message || "Some error occurred while retrieving comments.",
       });
     });
 };
+
+/*
 
 // Find a single Post with an id
 exports.findOne = (req, res) => {
@@ -119,3 +127,5 @@ exports.delete = (req, res) => {
       });
     });
 };
+
+*/

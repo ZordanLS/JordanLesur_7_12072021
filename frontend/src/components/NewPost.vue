@@ -12,8 +12,6 @@
           required
           maxlength="255"
         />
-        <!-- <textarea placeholder="Texte" name="postcontent2" cols="70" rows="4" maxlength="255"></textarea> -->
-
         <button id="postbutton" type="button">Publier !</button>
       </div>
     </form>
@@ -29,21 +27,18 @@ export default {
   mounted() {
     function post() {
       let postForm = document.forms["postform"];
+      console.log(postForm);
       let postFormData = new FormData(postForm);
       let postData = {
         postcontent: postFormData.get("postcontent"),
         usertoken: localStorage.getItem("groupomaniatoken"),
       };
-      console.log(postData);
       fetch("http://localhost:3000/api/posts", {
         method: "POST",
         body: JSON.stringify(postData),
         headers: { "Content-Type": "application/json" },
       })
-        .then((res) => res.json())
-        .then((json) => {
-          console.log(json);
-        });
+        .then((res) => res.json());
       location.reload();
     }
     let postButton = document.getElementById("postbutton");
