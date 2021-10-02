@@ -29,62 +29,66 @@ export default {
       });
 
     function injectHtml(post) {
-        post.map(function(post) {
-        console.log(post);
-      function capitalizeFirstLetter(string) {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-      }
+      post.map(function(post) {
+        function capitalizeFirstLetter(string) {
+          return string.charAt(0).toUpperCase() + string.slice(1);
+        }
 
-      let container = document.getElementById("posts");
+        let container = document.getElementById("posts");
 
-      // Création de l'architecture de la page
+        // Création de l'architecture de la page
 
-      // Création de la div card avec la classe card
-      let card = document.createElement("div");
-      card.setAttribute("class", "card");
+        // Création de la div card avec la classe card
+        let card = document.createElement("div");
+        card.setAttribute("class", "card");
 
-      // Création de la partie utilisateur de la carte
-      let cardUser = document.createElement("div");
-      cardUser.setAttribute("class", "carduser");
+        // Création de la partie utilisateur de la carte
+        let cardUser = document.createElement("div");
+        cardUser.setAttribute("class", "carduser");
 
-      // Création de l'image de profil
-      let cardUserPic = document.createElement("img");
-      cardUserPic.setAttribute("class", "userpic");
-      cardUserPic.setAttribute(
-        "src",
-        "https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg"
-      );
+        // Création de l'image de profil
+        let cardUserPic = document.createElement("img");
+        cardUserPic.setAttribute("class", "userpic");
+        cardUserPic.setAttribute(
+          "src",
+          "https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg"
+        );
 
-      // Creation du nom d'utilisateur
-      let cardUserName = document.createElement("p");
-      cardUserName.setAttribute("class", "username");
-      let firstName = capitalizeFirstLetter(post.first_name);
-      let lastName = capitalizeFirstLetter(post.last_name);
-      cardUserName.innerText = firstName + " " + lastName;
+        // Creation du nom d'utilisateur
+        let cardUserName = document.createElement("a");
+        cardUserName.setAttribute("class", "username");
+        cardUserName.setAttribute(
+          "href",
+          "http://localhost:8080/#/Profile?id=" + post.user_id
+        );
 
-      // Creation de la date
-      let cardPostDate = document.createElement("p");
-      cardPostDate.setAttribute("class", "postdate");
-      cardPostDate.innerText = post.createdAt;
+        let firstName = capitalizeFirstLetter(post.first_name);
+        let lastName = capitalizeFirstLetter(post.last_name);
+        cardUserName.innerText = firstName + " " + lastName;
 
-      // Création de la div cardBody avec la classe card-body
-      let cardBody = document.createElement("div");
-      cardBody.setAttribute("class", "");
+        // Creation de la date
+        let cardPostDate = document.createElement("p");
+        cardPostDate.setAttribute("class", "postdate");
+        cardPostDate.innerText = post.createdAt;
 
-      // Création de la description
-      let cardDescription = document.createElement("p");
-      cardDescription.setAttribute("class", "");
-      cardDescription.innerText = post.content;
+        // Création de la div cardBody avec la classe card-body
+        let cardBody = document.createElement("div");
+        cardBody.setAttribute("class", "");
 
-      // Création de la structure parent/enfants de la page des produits
-      container.appendChild(card);
-      card.appendChild(cardUser);
-      cardUser.appendChild(cardUserPic);
-      cardUser.appendChild(cardUserName);
-      cardUser.appendChild(cardPostDate);
-      card.appendChild(cardBody);
-      cardBody.appendChild(cardDescription);
-        });
+        // Création de la description
+        let cardDescription = document.createElement("p");
+        cardDescription.setAttribute("class", "");
+        cardDescription.innerText = post.content;
+
+        // Création de la structure parent/enfants de la page des produits
+        container.appendChild(card);
+        card.appendChild(cardUser);
+        cardUser.appendChild(cardUserPic);
+        cardUser.appendChild(cardUserName);
+        cardUser.appendChild(cardPostDate);
+        card.appendChild(cardBody);
+        cardBody.appendChild(cardDescription);
+      });
     }
   },
 };
@@ -149,7 +153,9 @@ span.psw {
 }
 
 .username {
+  text-decoration: none;
   text-align: left;
+  padding-top: 1rem;
   padding-left: 1rem;
   font-weight: bold;
   font-size: 1.2rem;

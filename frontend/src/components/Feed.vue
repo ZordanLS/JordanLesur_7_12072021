@@ -47,15 +47,22 @@ export default {
         // Création de l'image de profil
         let cardUserPic = document.createElement("img");
         cardUserPic.setAttribute("class", "userpic");
-        cardUserPic.setAttribute("src", "https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg");
+        cardUserPic.setAttribute(
+          "src",
+          "https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg"
+        );
 
         function capitalizeFirstLetter(string) {
           return string.charAt(0).toUpperCase() + string.slice(1);
         }
 
         // Creation du nom d'utilisateur
-        let cardUserName = document.createElement("p");
+        let cardUserName = document.createElement("a");
         cardUserName.setAttribute("class", "username");
+        cardUserName.setAttribute(
+          "href",
+          "http://localhost:8080/#/Profile?id=" + post.user_id
+        );
         let firstName = capitalizeFirstLetter(post.first_name);
         let lastName = capitalizeFirstLetter(post.last_name);
         cardUserName.innerText = firstName + " " + lastName;
@@ -77,7 +84,10 @@ export default {
         //Création du lien vers le post
         let postLink = document.createElement("a");
         postLink.setAttribute("class", "postlink");
-        postLink.setAttribute("href", "http://localhost:8080/#/Post?id="+ post.id)
+        postLink.setAttribute(
+          "href",
+          "http://localhost:8080/#/Post?id=" + post.id
+        );
         postLink.innerText = "Ouvrir le post !";
 
         // Création de la structure parent/enfants de la page des produits
@@ -154,7 +164,9 @@ span.psw {
 }
 
 .username {
+  text-decoration: none;
   text-align: left;
+  padding-top: 1rem;
   padding-left: 1rem;
   font-weight: bold;
   font-size: 1.2rem;
@@ -169,7 +181,7 @@ span.psw {
 }
 
 .cardbody {
-  display:flex;
+  display: flex;
   flex-direction: column;
 }
 
@@ -185,9 +197,8 @@ span.psw {
 }
 
 .postlink {
-margin-right: 0.5rem;
-margin-left: auto;
-padding-bottom: 0.5rem;
+  margin-right: 0.5rem;
+  margin-left: auto;
+  padding-bottom: 0.5rem;
 }
-
 </style>

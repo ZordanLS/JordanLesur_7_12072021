@@ -60,7 +60,11 @@ exports.findAll = (req, res) => {
 exports.findUsersPosts = (req, res) => {
   let id = req.params.id;
 
-  Post.findAll({ where: { user_id: id } })
+  db.sequelize
+    .query(
+      `SELECT A.*, B.first_name, B.last_name, B.email, B.picture FROM posts A INNER JOIN users B ON A.user_id = B.id WHERE A.user_id=${id} order by A.createdAt DESC`,
+      { type: QueryTypes.SELECT }
+    )
     .then((data) => {
       res.send(data);
     })
