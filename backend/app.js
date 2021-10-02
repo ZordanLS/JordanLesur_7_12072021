@@ -22,6 +22,7 @@ app.use(bodyParser.json());
 
 require("./routes/user.routes")(app);
 require("./routes/post.routes")(app);
+require("./routes/comment.routes")(app);
 
 const db = require("./models");
 //db.sequelize.sync();
