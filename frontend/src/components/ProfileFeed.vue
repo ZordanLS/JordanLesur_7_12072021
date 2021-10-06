@@ -32,6 +32,33 @@ export default {
     // Pour chaque produit, crée une carte et l'intègre au HTML
     function injectHtml(array) {
       array.map(function(post) {
+                function twoDigitFormat(x) {
+          if (typeof x == "string") {
+            x = parseInt(x);
+          }
+          if (isNaN(x)) {
+            x = 0;
+          }
+          return (x < 10 ? "0" : "") + x.toString();
+        }
+
+        function postDateFormat(d) {
+          if (typeof d == "string") {
+            d = new Date(d);
+          }
+          return (
+            twoDigitFormat(d.getDate()) +
+            "/" +
+            twoDigitFormat(d.getMonth() + 1) +
+            "/" +
+            d.getFullYear() +
+            " " +
+            twoDigitFormat(d.getHours()) +
+            ":" +
+            twoDigitFormat(d.getMinutes())
+          );
+        }
+
         let container = document.getElementById("profileposts");
 
         // Création de l'architecture de la page
@@ -71,7 +98,7 @@ export default {
         // Creation de la date
         let cardPostDate = document.createElement("p");
         cardPostDate.setAttribute("class", "postdate");
-        cardPostDate.innerText = post.createdAt;
+        cardPostDate.innerText = postDateFormat(post.createdAt);
 
         // Création de la div cardBody avec la classe card-body
         let cardBody = document.createElement("div");

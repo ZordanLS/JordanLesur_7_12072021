@@ -1,17 +1,29 @@
 <template>
   <div>
     <div class="nav-container">
-    <div class="nav">
-      <router-link to="/">Accueil</router-link>
-    </div>
-    <div class="nav">
-      <router-link to="/Login">Se connecter</router-link> |
-      <router-link to="/Signup">S'inscrire</router-link>
-    </div>
+      <div class="nav">
+        <router-link to="/">Accueil</router-link>
+      </div>
+      <div class="nav">
+        <a href="#" id="logoutbutton"> Déconnexion</a>
+      </div>
     </div>
     <router-view />
   </div>
 </template>
+
+<script>
+export default {
+  mounted() {
+    function logout() {
+      localStorage.removeItem("groupomaniatoken");
+      window.location.replace("#");
+    }
+    let logoutButton = document.getElementById("logoutbutton");
+    logoutButton.addEventListener("click", logout);
+  },
+};
+</script>
 
 <style lang="scss">
 #app {

@@ -109,7 +109,9 @@ exports.delete = (req, res) => {
 // Fonction de connection
 
 exports.login = (req, res, next) => {
- User.findOne({ email: req.body.email })
+ User.findOne({ where: {
+
+  email: req.body.email }})
     .then((user) => {
       if (!user) {
         return res.status(404).json({ error: "Utilisateur non trouvé !" });
@@ -134,7 +136,7 @@ exports.login = (req, res, next) => {
             })
             .catch((err) => {
               res.status(500).send({
-                message: "Could not delete User with email=" + email,
+                message: "Could not connect User with email=" + email,
               });
             });
         })

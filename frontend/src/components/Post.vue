@@ -50,6 +50,33 @@ export default {
 
     function injectHtml(post) {
       post.map(function(post) {
+        function twoDigitFormat(x) {
+          if (typeof x == "string") {
+            x = parseInt(x);
+          }
+          if (isNaN(x)) {
+            x = 0;
+          }
+          return (x < 10 ? "0" : "") + x.toString();
+        }
+
+        function postDateFormat(d) {
+          if (typeof d == "string") {
+            d = new Date(d);
+          }
+          return (
+            twoDigitFormat(d.getDate()) +
+            "/" +
+            twoDigitFormat(d.getMonth() + 1) +
+            "/" +
+            d.getFullYear() +
+            " " +
+            twoDigitFormat(d.getHours()) +
+            ":" +
+            twoDigitFormat(d.getMinutes())
+          );
+        }
+
         function capitalizeFirstLetter(string) {
           return string.charAt(0).toUpperCase() + string.slice(1);
         }
@@ -89,7 +116,7 @@ export default {
         // Creation de la date
         let cardPostDate = document.createElement("p");
         cardPostDate.setAttribute("class", "postdate");
-        cardPostDate.innerText = post.createdAt;
+        cardPostDate.innerText = postDateFormat(post.createdAt);
 
         // Création de la div cardBody avec la classe card-body
         let cardBody = document.createElement("div");

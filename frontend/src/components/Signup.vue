@@ -19,6 +19,9 @@
 
         <button id="signupbutton" type="button">S'inscrire</button>
       </div>
+      <div class="container">
+        <span class="psw">Déjà inscrit ? <router-link to="/Login">Connectez vous</router-link> </span>
+      </div>
     </form>
   </div>
 </template>
