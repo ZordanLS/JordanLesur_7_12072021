@@ -101,31 +101,31 @@ exports.findOne = (req, res) => {
         message: "Error retrieving Post with id=" + id,
       });
     });
-};
-
-// Delete a Post with the specified id in the request
+  };
+  
+  */
+// Delete a Comment with the specified id in the request
 exports.delete = (req, res) => {
   const id = req.params.id;
 
-  Post.destroy({
+  Comment.destroy({
     where: { id: id },
   })
     .then((num) => {
       if (num == 1) {
         res.send({
-          message: "Post was deleted successfully!",
+          message: "Comment was deleted successfully!",
         });
       } else {
         res.send({
-          message: `Cannot delete Post with id=${id}. Maybe Post was not found!`,
+          message: `Cannot delete Comment with id=${id}. Maybe Comment was not found!`,
         });
       }
     })
     .catch((err) => {
       res.status(500).send({
-        message: "Could not delete Post with id=" + id,
+        message: "Could not delete Comment with id=" + id,
       });
     });
 };
 
-*/

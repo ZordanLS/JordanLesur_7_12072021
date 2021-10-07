@@ -49,7 +49,7 @@ export default {
       // Création de l'image de profil
       let userPic = document.createElement("img");
       userPic.setAttribute("class", "profileuserpic");
-      userPic.setAttribute("src", "https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg");
+      userPic.setAttribute("src", user.picture);
 
       // Création du nom d'utilisateur
       let userNameContainer = document.createElement("div");

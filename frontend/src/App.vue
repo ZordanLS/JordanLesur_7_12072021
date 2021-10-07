@@ -5,6 +5,7 @@
         <router-link to="/">Accueil</router-link>
       </div>
       <div class="nav">
+        <a id="profilelink"> Mon profil</a>
         <a href="#" id="logoutbutton"> Déconnexion</a>
       </div>
     </div>
@@ -15,12 +16,19 @@
 <script>
 export default {
   mounted() {
+
+    let userId = localStorage.groupomaniauserid;
+    let profileLink = document.getElementById("profilelink");
+    profileLink.setAttribute("href", "http://localhost:8080/#/Profile?id=" + userId);
+    
     function logout() {
+      localStorage.removeItem("groupomaniauserid");
       localStorage.removeItem("groupomaniatoken");
       window.location.replace("#");
     }
     let logoutButton = document.getElementById("logoutbutton");
     logoutButton.addEventListener("click", logout);
+
   },
 };
 </script>

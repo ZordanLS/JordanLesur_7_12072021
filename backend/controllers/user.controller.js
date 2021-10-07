@@ -24,7 +24,7 @@ exports.create = async (req, res) => {
     last_name: req.body.lastname,
     email: req.body.email,
     password: hash,
-    picture: "",
+    picture: req.body.profilepic,
     role: 0,
     token: "",
   };

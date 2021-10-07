@@ -39,6 +39,7 @@ export default {
         .then((json) => {
           console.log(json);
           localStorage.setItem("groupomaniatoken", json.token);
+          localStorage.setItem("groupomaniauserid", json.userId);
         })
         .then(() => {
           window.location.replace("#")
