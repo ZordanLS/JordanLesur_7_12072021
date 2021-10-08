@@ -74,10 +74,7 @@ export default {
         // Création de l'image de profil
         let cardUserPic = document.createElement("img");
         cardUserPic.setAttribute("class", "commentuserpic");
-        cardUserPic.setAttribute(
-          "src",
-          post.picture
-        );
+        cardUserPic.setAttribute("src", post.picture);
 
         function capitalizeFirstLetter(string) {
           return string.charAt(0).toUpperCase() + string.slice(1);
@@ -86,10 +83,7 @@ export default {
         // Creation du nom d'utilisateur
         let cardUserName = document.createElement("a");
         cardUserName.setAttribute("class", "commentusername");
-        cardUserName.setAttribute(
-          "href",
-          "http://localhost:8080/#/Profile?id=" + post.user_id
-        );
+        cardUserName.setAttribute("href", "http://localhost:8080/#/Profile?id=" + post.user_id);
         let firstName = capitalizeFirstLetter(post.first_name);
         let lastName = capitalizeFirstLetter(post.last_name);
         cardUserName.innerText = firstName + " " + lastName;

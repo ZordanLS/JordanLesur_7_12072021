@@ -22,6 +22,7 @@ exports.create = (req, res) => {
     // Create a Post
     const post = {
       content: req.body.postcontent,
+      picture: "",
       user_id: userIdDecoded,
     };
 
@@ -32,8 +33,7 @@ exports.create = (req, res) => {
       })
       .catch((err) => {
         res.status(500).send({
-          message:
-            err.message || "Some error occurred while creating the Post.",
+          message: err.message || "Some error occurred while creating the Post.",
         });
       });
   });
@@ -42,10 +42,9 @@ exports.create = (req, res) => {
 // Retrieve all Posts from the database.
 exports.findAll = (req, res) => {
   db.sequelize
-    .query(
-      "SELECT A.*, B.first_name, B.last_name, B.email, B.picture FROM posts A INNER JOIN users B ON A.user_id = B.id order by A.createdAt DESC",
-      { type: QueryTypes.SELECT }
-    )
+    .query("SELECT A.*, B.first_name, B.last_name, B.email, B.picture FROM posts A INNER JOIN users B ON A.user_id = B.id order by A.createdAt DESC", {
+      type: QueryTypes.SELECT,
+    })
     // SELECT A.*, B.first_name, B.last_name, B.email, B.picture, C.id AS comment_id FROM posts A INNER JOIN users B ON A.user_id = B.id INNER JOIN comments C ON A.id = C.post_id order by A.createdAt DESC
     .then((data) => {
       res.send(data);

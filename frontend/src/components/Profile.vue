@@ -13,8 +13,8 @@ import ProfileFeed from "@/components/ProfileFeed.vue";
 
 export default {
   name: "Profile",
-    components: {
-    ProfileFeed
+  components: {
+    ProfileFeed,
   },
   props: {
     msg: String,
@@ -159,15 +159,14 @@ span.psw {
 }
 
 #profile {
-display: flex;
-justify-content: space-around;
+  display: flex;
+  justify-content: space-around;
 }
 
 .rightside {
-display: flex;
-align-items: center;
-justify-content: center;
-font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
 }
-
 </style>

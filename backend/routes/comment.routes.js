@@ -12,6 +12,5 @@ module.exports = (app) => {
   // Delete a Post with id
   router.delete("/:id", comments.delete);
 
-
   app.use("/api/comments", router);
 };

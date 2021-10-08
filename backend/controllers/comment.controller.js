@@ -6,7 +6,6 @@ const Op = db.Sequelize.Op;
 const jwt = require("jsonwebtoken");
 const { QueryTypes } = require("sequelize");
 
-
 // Create and Save a new Comment
 exports.create = (req, res) => {
   // Validate request
@@ -16,29 +15,28 @@ exports.create = (req, res) => {
     });
     return;
   }
-  
+
   let userToken = req.body.usertoken;
   jwt.verify(userToken, "RANDOM_TOKEN_SECRET", function (err, tokeninfo) {
     let userIdDecoded = tokeninfo.userId;
-    
+
     // Create a Comment
     const comment = {
       content: req.body.commentcontent,
       user_id: userIdDecoded,
-      post_id: req.body.post_id
+      post_id: req.body.post_id,
     };
-    
+
     // Save Comment in the database
     Comment.create(comment)
-    .then((data) => {
-      res.send(data);
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message:
-        err.message || "Some error occurred while creating the comment.",
+      .then((data) => {
+        res.send(data);
+      })
+      .catch((err) => {
+        res.status(500).send({
+          message: err.message || "Some error occurred while creating the comment.",
+        });
       });
-    });
   });
 };
 
@@ -128,4 +126,3 @@ exports.delete = (req, res) => {
       });
     });
 };
-

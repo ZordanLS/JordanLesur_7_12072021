@@ -12,6 +12,7 @@
           required
           maxlength="255"
         />
+        <input type="file" id="postpicture" name="postpicture" />
         <button id="postbutton" type="button">Publier !</button>
       </div>
     </form>
@@ -31,14 +32,14 @@ export default {
       let postFormData = new FormData(postForm);
       let postData = {
         postcontent: postFormData.get("postcontent"),
+        postimage: postFormData.get("postpicture"),
         usertoken: localStorage.getItem("groupomaniatoken"),
       };
       fetch("http://localhost:3000/api/posts", {
         method: "POST",
         body: JSON.stringify(postData),
         headers: { "Content-Type": "application/json" },
-      })
-        .then((res) => res.json());
+      }).then((res) => res.json());
       location.reload();
     }
     let postButton = document.getElementById("postbutton");
@@ -92,7 +93,7 @@ button {
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
-  margin-left: 30rem;
+  margin-left: 14rem;
   border: none;
   cursor: pointer;
   width: 20rem;

@@ -73,10 +73,7 @@ export default {
         // Création de l'image de profil
         let cardUserPic = document.createElement("img");
         cardUserPic.setAttribute("class", "userpic");
-        cardUserPic.setAttribute(
-          "src",
-          post.picture
-        );
+        cardUserPic.setAttribute("src", post.picture);
 
         function capitalizeFirstLetter(string) {
           return string.charAt(0).toUpperCase() + string.slice(1);
@@ -85,10 +82,7 @@ export default {
         // Creation du nom d'utilisateur
         let cardUserName = document.createElement("a");
         cardUserName.setAttribute("class", "username");
-        cardUserName.setAttribute(
-          "href",
-          "http://localhost:8080/#/Profile?id=" + post.user_id
-        );
+        cardUserName.setAttribute("href", "http://localhost:8080/#/Profile?id=" + post.user_id);
         let firstName = capitalizeFirstLetter(post.first_name);
         let lastName = capitalizeFirstLetter(post.last_name);
         cardUserName.innerText = firstName + " " + lastName;
@@ -110,10 +104,7 @@ export default {
         //Création du lien vers le post
         let postLink = document.createElement("a");
         postLink.setAttribute("class", "postlink");
-        postLink.setAttribute(
-          "href",
-          "http://localhost:8080/#/Post?id=" + post.id
-        );
+        postLink.setAttribute("href", "http://localhost:8080/#/Post?id=" + post.id);
         postLink.innerText = "Ouvrir le post !";
 
         // Création de la structure parent/enfants de la page des produits
@@ -125,7 +116,6 @@ export default {
         card.appendChild(cardBody);
         cardBody.appendChild(cardDescription);
         cardBody.appendChild(postLink);
-
       });
     }
   },

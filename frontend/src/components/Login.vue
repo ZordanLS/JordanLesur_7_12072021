@@ -18,7 +18,10 @@
       </div>
 
       <div class="container">
-        <span class="psw">Pas encore inscrit ? <router-link to="/Signup">Créez votre compte</router-link> </span>
+        <span class="psw"
+          >Pas encore inscrit ?
+          <router-link to="/Signup">Créez votre compte</router-link>
+        </span>
       </div>
     </form>
   </div>
@@ -34,7 +37,11 @@ export default {
         email: loginFormData.get("email"),
         password: loginFormData.get("password"),
       };
-      fetch("http://localhost:3000/api/users/login", { method: "POST", body: JSON.stringify(loginData), headers: { "Content-Type": "application/json" } })
+      fetch("http://localhost:3000/api/users/login", {
+        method: "POST",
+        body: JSON.stringify(loginData),
+        headers: { "Content-Type": "application/json" },
+      })
         .then((res) => res.json())
         .then((json) => {
           console.log(json);
@@ -42,7 +49,7 @@ export default {
           localStorage.setItem("groupomaniauserid", json.userId);
         })
         .then(() => {
-          window.location.replace("#")
+          window.location.replace("#");
         });
     }
     let loginButton = document.getElementById("loginbutton");

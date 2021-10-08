@@ -7,13 +7,12 @@ export default {
 </script>
 
 <template>
-    <nav class="">
-      <div class="">
-      <img src="../assets/icon-left-font-monochrome-black.png">
-        <a class="" href="#">Groupomania</a>
-      </div>
-    </nav>
+  <nav class="">
+    <div class="">
+      <img src="../assets/icon-left-font-monochrome-black.png" />
+      <a class="" href="#">Groupomania</a>
+    </div>
+  </nav>
 </template>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

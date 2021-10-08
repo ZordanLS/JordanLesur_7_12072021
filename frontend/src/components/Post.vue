@@ -96,18 +96,12 @@ export default {
         // Création de l'image de profil
         let cardUserPic = document.createElement("img");
         cardUserPic.setAttribute("class", "userpic");
-        cardUserPic.setAttribute(
-          "src",
-          post.picture
-        );
+        cardUserPic.setAttribute("src", post.picture);
 
         // Creation du nom d'utilisateur
         let cardUserName = document.createElement("a");
         cardUserName.setAttribute("class", "username");
-        cardUserName.setAttribute(
-          "href",
-          "http://localhost:8080/#/Profile?id=" + post.user_id
-        );
+        cardUserName.setAttribute("href", "http://localhost:8080/#/Profile?id=" + post.user_id);
 
         let firstName = capitalizeFirstLetter(post.first_name);
         let lastName = capitalizeFirstLetter(post.last_name);
@@ -154,10 +148,7 @@ export default {
       location.reload();
     }
     let commentButton = document.getElementById("commentbutton");
-    commentButton.addEventListener(
-      "click",
-      comment.bind(event, this.$route.query.id)
-    );
+    commentButton.addEventListener("click", comment.bind(event, this.$route.query.id));
   },
 };
 </script>

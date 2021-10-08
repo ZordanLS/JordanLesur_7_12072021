@@ -16,11 +16,10 @@
 <script>
 export default {
   mounted() {
-
     let userId = localStorage.groupomaniauserid;
     let profileLink = document.getElementById("profilelink");
     profileLink.setAttribute("href", "http://localhost:8080/#/Profile?id=" + userId);
-    
+
     function logout() {
       localStorage.removeItem("groupomaniauserid");
       localStorage.removeItem("groupomaniatoken");
@@ -28,7 +27,6 @@ export default {
     }
     let logoutButton = document.getElementById("logoutbutton");
     logoutButton.addEventListener("click", logout);
-
   },
 };
 </script>

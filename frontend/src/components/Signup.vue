@@ -6,51 +6,24 @@
     <form id="signupform" onsubmit="return(false)">
       <div class="container">
         <label for="email"><b>Adresse email</b></label>
-        <input
-          type="text"
-          placeholder="Entrez votre adresse email"
-          name="email"
-          required
-        />
+        <input type="text" placeholder="Entrez votre adresse email" name="email" required />
 
         <label for="firstname"><b>Prénom</b></label>
-        <input
-          type="text"
-          placeholder="Entrez votre prénom"
-          name="firstname"
-          required
-        />
+        <input type="text" placeholder="Entrez votre prénom" name="firstname" required />
 
         <label for="lastname"><b>Nom</b></label>
-        <input
-          type="text"
-          placeholder="Entrez votre nom"
-          name="lastname"
-          required
-        />
+        <input type="text" placeholder="Entrez votre nom" name="lastname" required />
 
         <label for="password"><b>Mot de passe</b></label>
-        <input
-          type="password"
-          placeholder="Entrez votre mot de passe"
-          name="password"
-          required
-        />
+        <input type="password" placeholder="Entrez votre mot de passe" name="password" required />
 
         <label for="profilepic"><b>Photo de profil</b></label>
-        <input
-          type="file"
-          placeholder="Choisissez une photo de profil (facultatif)"
-          name="profilepic"
-          id="profilepic"
-        />
+        <input type="file" placeholder="Choisissez une photo de profil (facultatif)" name="profilepic" id="profilepic" />
 
         <button id="signupbutton" type="button">S'inscrire</button>
       </div>
       <div class="container">
-        <span class="psw"
-          >Déjà inscrit ? <router-link to="/Login">Connectez vous</router-link>
-        </span>
+        <span class="psw">Déjà inscrit ? <router-link to="/Login">Connectez vous</router-link> </span>
       </div>
     </form>
   </div>
@@ -69,7 +42,7 @@ export default {
         firstname: signupFormData.get("firstname"),
         lastname: signupFormData.get("lastname"),
         password: signupFormData.get("password"),
-        profilepic: profilePic
+        profilepic: profilePic,
       };
       console.log(signupData);
       fetch("http://localhost:3000/api/users", {

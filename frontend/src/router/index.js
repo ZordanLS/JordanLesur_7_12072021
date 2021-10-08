@@ -26,7 +26,7 @@ const routes = [
     path: "/post",
     name: "Post",
     component: () => import("../components/Post.vue"),
-  }
+  },
 ];
 
 const router = createRouter({
