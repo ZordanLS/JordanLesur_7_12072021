@@ -1,21 +1,18 @@
 <template>
   <div>
-    <div class="nav-container">
-      <div class="nav">
-        <router-link to="/">Accueil</router-link>
-      </div>
-      <div class="nav">
-        <a id="profilelink"> Mon profil</a>
-        <a href="#" id="logoutbutton"> Déconnexion</a>
-      </div>
-    </div>
+    <Navbar />
     <router-view />
   </div>
 </template>
 
 <script>
+import Navbar from "@/components/Navbar.vue";
 export default {
+  components: {
+    Navbar,
+  },
   mounted() {
+
     let userId = localStorage.groupomaniauserid;
     let profileLink = document.getElementById("profilelink");
     profileLink.setAttribute("href", "http://localhost:8080/#/Profile?id=" + userId);
