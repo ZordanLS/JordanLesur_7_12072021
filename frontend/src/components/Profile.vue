@@ -1,5 +1,6 @@
 <template>
   <main>
+    <Navbar />
     <div>
       <h1>Profil</h1>
       <div id="profile"></div>
@@ -9,11 +10,13 @@
 </template>
 
 <script>
+import Navbar from "@/components/Navbar.vue";
 import ProfileFeed from "@/components/ProfileFeed.vue";
 
 export default {
   name: "Profile",
   components: {
+    Navbar,
     ProfileFeed,
   },
   props: {

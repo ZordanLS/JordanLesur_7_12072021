@@ -4,11 +4,13 @@
         <router-link to="/">Accueil</router-link>
       </div>
       <div class="nav">
+        <!-- <router-link :to="{ name: 'Profile', query: { id: userId }}">Mon profil</router-link> -->
         <a id="profilelink"> Mon profil</a>
         <a href="#" id="logoutbutton"> Déconnexion</a>
       </div>
     </div>
 </template>
+
 
 <script>
 export default {

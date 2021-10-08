@@ -1,31 +1,10 @@
 <template>
   <div>
-    <Navbar />
     <router-view />
   </div>
 </template>
 
 <script>
-import Navbar from "@/components/Navbar.vue";
-export default {
-  components: {
-    Navbar,
-  },
-  mounted() {
-
-    let userId = localStorage.groupomaniauserid;
-    let profileLink = document.getElementById("profilelink");
-    profileLink.setAttribute("href", "http://localhost:8080/#/Profile?id=" + userId);
-
-    function logout() {
-      localStorage.removeItem("groupomaniauserid");
-      localStorage.removeItem("groupomaniatoken");
-      window.location.replace("#");
-    }
-    let logoutButton = document.getElementById("logoutbutton");
-    logoutButton.addEventListener("click", logout);
-  },
-};
 </script>
 
 <style lang="scss">

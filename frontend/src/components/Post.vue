@@ -1,5 +1,6 @@
 <template>
   <main>
+    <Navbar />
     <div>
       <div id="posts"></div>
       <form id="commentform">
@@ -23,10 +24,12 @@
 </template>
 
 <script>
+import Navbar from "@/components/Navbar.vue";
 import Comment from "@/components/Comment.vue";
 export default {
   name: "Post",
   components: {
+    Navbar,
     Comment,
   },
   props: {
