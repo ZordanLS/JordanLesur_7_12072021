@@ -92,7 +92,7 @@ export default {
         cardPostDate.setAttribute("class", "postdate");
         cardPostDate.innerText = postDateFormat(post.createdAt);
 
-        // Création de la div cardBody avec la classe card-body
+        // Création de la div cardBody avec la classe cardbody
         let cardBody = document.createElement("div");
         cardBody.setAttribute("class", "cardbody");
 
@@ -101,7 +101,22 @@ export default {
         cardDescription.setAttribute("class", "carddescription");
         cardDescription.innerText = post.content;
 
-        //Création du lien vers le post
+        // Création de la div cardBottom
+        let cardBottom = document.createElement("div");
+        cardBottom.setAttribute("class", "cardbottom");
+
+        // Création du nombre de commentaires
+        let commentCount = document.createElement("p");
+        commentCount.setAttribute("class", "commentcount");
+        if (post.comments_count === 0) {
+          commentCount.innerText = "Aucun commentaire";
+        } else if (post.comments_count > 1) {
+          commentCount.innerText = post.comments_count + " " + "commentaires";
+        } else if (post.comments_count < 2) {
+          commentCount.innerText = post.comments_count + " " + "commentaire";
+        }
+
+        // Création du lien vers le post
         let postLink = document.createElement("a");
         postLink.setAttribute("class", "postlink");
         postLink.setAttribute("href", "http://localhost:8080/#/Post?id=" + post.id);
@@ -115,7 +130,9 @@ export default {
         cardUser.appendChild(cardPostDate);
         card.appendChild(cardBody);
         cardBody.appendChild(cardDescription);
-        cardBody.appendChild(postLink);
+        card.appendChild(cardBottom);
+        cardBottom.appendChild(commentCount);
+        cardBottom.appendChild(postLink);
       });
     }
   },
@@ -202,6 +219,16 @@ span.psw {
   flex-direction: column;
 }
 
+.cardbottom {
+  display: flex;
+}
+
+.commentcount {
+  margin-left: 0.5rem;
+  margin-right: auto;
+  padding-bottom: 0.5rem;
+}
+
 .postdate {
   margin-left: auto;
   padding-right: 1rem;
@@ -214,6 +241,8 @@ span.psw {
 }
 
 .postlink {
+  margin: auto;
+  text-decoration: none;
   margin-right: 0.5rem;
   margin-left: auto;
   padding-bottom: 0.5rem;

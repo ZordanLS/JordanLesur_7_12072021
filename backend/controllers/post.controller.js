@@ -14,7 +14,6 @@ exports.create = (req, res) => {
     });
     return;
   }
-
   let userToken = req.body.usertoken;
   jwt.verify(userToken, "RANDOM_TOKEN_SECRET", function (err, tokeninfo) {
     let userIdDecoded = tokeninfo.userId;
@@ -42,10 +41,12 @@ exports.create = (req, res) => {
 // Retrieve all Posts from the database.
 exports.findAll = (req, res) => {
   db.sequelize
-    .query("SELECT A.*, B.first_name, B.last_name, B.email, B.picture FROM posts A INNER JOIN users B ON A.user_id = B.id order by A.createdAt DESC", {
-      type: QueryTypes.SELECT,
-    })
-    // SELECT A.*, B.first_name, B.last_name, B.email, B.picture, C.id AS comment_id FROM posts A INNER JOIN users B ON A.user_id = B.id INNER JOIN comments C ON A.id = C.post_id order by A.createdAt DESC
+    .query(
+      "SELECT A.*, B.first_name, B.last_name, B.email, B.picture, CASE WHEN C.comments_count IS NULL THEN 0 ELSE C.comments_count END as comments_count FROM posts A INNER JOIN users B ON A.user_id = B.id LEFT JOIN (SELECT post_id, count(id) AS comments_count FROM comments GROUP BY post_id) C ON A.id = C.post_id order by A.createdAt DESC",
+      {
+        type: QueryTypes.SELECT,
+      }
+    )
     .then((data) => {
       res.send(data);
     })
@@ -62,7 +63,7 @@ exports.findUsersPosts = (req, res) => {
 
   db.sequelize
     .query(
-      `SELECT A.*, B.first_name, B.last_name, B.email, B.picture FROM posts A INNER JOIN users B ON A.user_id = B.id WHERE A.user_id=${id} order by A.createdAt DESC`,
+      `SELECT A.*, B.first_name, B.last_name, B.email, B.picture, CASE WHEN C.comments_count IS NULL THEN 0 ELSE C.comments_count END as comments_count FROM posts A INNER JOIN users B ON A.user_id = B.id LEFT JOIN (SELECT post_id, count(id) AS comments_count FROM comments GROUP BY post_id) C ON A.id = C.post_id WHERE A.user_id=${id} order by A.createdAt DESC`,
       { type: QueryTypes.SELECT }
     )
     .then((data) => {
@@ -80,7 +81,7 @@ exports.findOne = (req, res) => {
   const id = req.params.id;
   db.sequelize
     .query(
-      `SELECT A.*, B.first_name, B.last_name, B.email, B.picture FROM posts A INNER JOIN users B ON A.user_id = B.id WHERE A.id=${id} order by A.createdAt DESC`,
+      `SELECT A.*, B.first_name, B.last_name, B.email, B.picture, CASE WHEN C.comments_count IS NULL THEN 0 ELSE C.comments_count END as comments_count FROM posts A INNER JOIN users B ON A.user_id = B.id LEFT JOIN (SELECT post_id, count(id) AS comments_count FROM comments GROUP BY post_id) C ON A.id = C.post_id WHERE A.id=${id} order by A.createdAt DESC`,
       { type: QueryTypes.SELECT }
     )
     .then((data) => {

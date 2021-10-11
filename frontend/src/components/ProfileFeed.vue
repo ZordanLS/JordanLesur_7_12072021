@@ -103,6 +103,21 @@ export default {
         cardDescription.setAttribute("class", "carddescription");
         cardDescription.innerText = post.content;
 
+        // Création de la div cardBottom
+        let cardBottom = document.createElement("div");
+        cardBottom.setAttribute("class", "cardbottom");
+
+        // Création du nombre de commentaires
+        let commentCount = document.createElement("p");
+        commentCount.setAttribute("class", "commentcount");
+        if (post.comments_count === 0) {
+          commentCount.innerText = "Aucun commentaire";
+        } else if (post.comments_count > 1) {
+          commentCount.innerText = post.comments_count + " " + "commentaires";
+        } else if (post.comments_count < 2) {
+          commentCount.innerText = post.comments_count + " " + "commentaire";
+        }
+
         //Création du lien vers le post
         let postLink = document.createElement("a");
         postLink.setAttribute("class", "postlink");
@@ -117,7 +132,9 @@ export default {
         cardUser.appendChild(cardPostDate);
         card.appendChild(cardBody);
         cardBody.appendChild(cardDescription);
-        cardBody.appendChild(postLink);
+        card.appendChild(cardBottom);
+        cardBottom.appendChild(commentCount);
+        cardBottom.appendChild(postLink);
       });
     }
   },

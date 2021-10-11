@@ -12,7 +12,7 @@
           required
           maxlength="255"
         />
-        <input type="file" id="postpicture" name="postpicture" />
+        <input type="file" id="postpicture" name1="postpicture" />
         <button id="postbutton" type="button">Publier !</button>
       </div>
     </form>
@@ -27,12 +27,15 @@ export default {
   },
   mounted() {
     function post() {
+      //let picture = document.getElementById("postpicture").files[0];
+      //let imageFormData = new FormData();
+      //imageFormData.append("picture", picture);
+      //console.log(imageFormData);
       let postForm = document.forms["postform"];
-      console.log(postForm);
       let postFormData = new FormData(postForm);
       let postData = {
         postcontent: postFormData.get("postcontent"),
-        postimage: postFormData.get("postpicture"),
+        //  postimage: postFormData.get("postpicture"),
         usertoken: localStorage.getItem("groupomaniatoken"),
       };
       fetch("http://localhost:3000/api/posts", {
