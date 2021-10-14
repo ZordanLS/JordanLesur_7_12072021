@@ -64,7 +64,7 @@ exports.findUsersPosts = (req, res) => {
 
   db.sequelize
     .query(
-      `SELECT A.*, B.first_name, B.last_name, B.email, B.picture, CASE WHEN C.comments_count IS NULL THEN 0 ELSE C.comments_count END as comments_count FROM posts A INNER JOIN users B ON A.user_id = B.id LEFT JOIN (SELECT post_id, count(id) AS comments_count FROM comments GROUP BY post_id) C ON A.id = C.post_id WHERE A.user_id=${id} order by A.createdAt DESC`,
+      `SELECT A.*, B.first_name, B.last_name, B.email, B.picture AS user_picture, CASE WHEN C.comments_count IS NULL THEN 0 ELSE C.comments_count END as comments_count FROM posts A INNER JOIN users B ON A.user_id = B.id LEFT JOIN (SELECT post_id, count(id) AS comments_count FROM comments GROUP BY post_id) C ON A.id = C.post_id WHERE A.user_id=${id} order by A.createdAt DESC`,
       { type: QueryTypes.SELECT }
     )
     .then((data) => {
@@ -82,7 +82,7 @@ exports.findOne = (req, res) => {
   const id = req.params.id;
   db.sequelize
     .query(
-      `SELECT A.*, B.first_name, B.last_name, B.email, B.picture, CASE WHEN C.comments_count IS NULL THEN 0 ELSE C.comments_count END as comments_count FROM posts A INNER JOIN users B ON A.user_id = B.id LEFT JOIN (SELECT post_id, count(id) AS comments_count FROM comments GROUP BY post_id) C ON A.id = C.post_id WHERE A.id=${id} order by A.createdAt DESC`,
+      `SELECT A.*, B.first_name, B.last_name, B.email, B.picture AS user_picture, CASE WHEN C.comments_count IS NULL THEN 0 ELSE C.comments_count END as comments_count FROM posts A INNER JOIN users B ON A.user_id = B.id LEFT JOIN (SELECT post_id, count(id) AS comments_count FROM comments GROUP BY post_id) C ON A.id = C.post_id WHERE A.id=${id} order by A.createdAt DESC`,
       { type: QueryTypes.SELECT }
     )
     .then((data) => {

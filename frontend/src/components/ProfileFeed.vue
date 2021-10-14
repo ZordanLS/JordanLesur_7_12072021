@@ -74,7 +74,7 @@ export default {
         // Création de l'image de profil
         let cardUserPic = document.createElement("img");
         cardUserPic.setAttribute("class", "userpic");
-        cardUserPic.setAttribute("src", post.picture);
+        cardUserPic.setAttribute("src", post.user_picture);
 
         function capitalizeFirstLetter(string) {
           return string.charAt(0).toUpperCase() + string.slice(1);
@@ -102,6 +102,11 @@ export default {
         let cardDescription = document.createElement("p");
         cardDescription.setAttribute("class", "carddescription");
         cardDescription.innerText = post.content;
+
+        // Création de l'image de post
+        let postContentPicture = document.createElement("img");
+        postContentPicture.setAttribute("class", "postcontentpic");
+        postContentPicture.setAttribute("src", post.picture);
 
         // Création de la div cardBottom
         let cardBottom = document.createElement("div");
@@ -131,6 +136,7 @@ export default {
         cardUser.appendChild(cardUserName);
         cardUser.appendChild(cardPostDate);
         card.appendChild(cardBody);
+        cardBody.appendChild(postContentPicture);
         cardBody.appendChild(cardDescription);
         card.appendChild(cardBottom);
         cardBottom.appendChild(commentCount);

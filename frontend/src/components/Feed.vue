@@ -101,11 +101,10 @@ export default {
         cardDescription.setAttribute("class", "carddescription");
         cardDescription.innerText = post.content;
 
-        // Création de la description
+        // Création de l'image de post
         let postContentPicture = document.createElement("img");
         postContentPicture.setAttribute("class", "postcontentpic");
         postContentPicture.setAttribute("src", post.picture);
-
 
         // Création de la div cardBottom
         let cardBottom = document.createElement("div");
@@ -254,4 +253,5 @@ span.psw {
   margin-left: auto;
   padding-bottom: 0.5rem;
 }
+
 </style>
