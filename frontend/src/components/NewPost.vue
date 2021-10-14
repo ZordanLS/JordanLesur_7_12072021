@@ -37,8 +37,7 @@ export default {
       fetch("http://localhost:3000/api/posts", {
         method: "POST",
         body: postData,
-      }).then((res) => res.json());
-      location.reload();
+      }).then((res) => res.json(location.reload()));
     }
     let postButton = document.getElementById("postbutton");
     postButton.addEventListener("click", post);
