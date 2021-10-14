@@ -17,14 +17,15 @@ exports.create = (req, res) => {
   let userToken = req.body.usertoken;
   jwt.verify(userToken, "RANDOM_TOKEN_SECRET", function (err, tokeninfo) {
     let userIdDecoded = tokeninfo.userId;
-
+    
     // Create a Post
     const post = {
       content: req.body.postcontent,
-      picture: "",
+      picture: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
       user_id: userIdDecoded,
     };
-
+    
+    console.log(post);
     // Save Post in the database
     Post.create(post)
       .then((data) => {

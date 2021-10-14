@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form id="postform">
+    <form id="postform" enctype="multipart/form-data">
       <div class="container">
         <textarea
           onfocus="this.style.height='250px'"
@@ -27,21 +27,16 @@ export default {
   },
   mounted() {
     function post() {
-      //let picture = document.getElementById("postpicture").files[0];
-      //let imageFormData = new FormData();
-      //imageFormData.append("picture", picture);
-      //console.log(imageFormData);
+      let picture = document.getElementById("postpicture").files[0];
       let postForm = document.forms["postform"];
       let postFormData = new FormData(postForm);
-      let postData = {
-        postcontent: postFormData.get("postcontent"),
-        //  postimage: postFormData.get("postpicture"),
-        usertoken: localStorage.getItem("groupomaniatoken"),
-      };
+      let postData = new FormData();
+      postData.append("image", picture);
+      postData.append("postcontent", postFormData.get("postcontent"));
+      postData.append("usertoken", localStorage.getItem("groupomaniatoken"));
       fetch("http://localhost:3000/api/posts", {
         method: "POST",
-        body: JSON.stringify(postData),
-        headers: { "Content-Type": "application/json" },
+        body: postData,
       }).then((res) => res.json());
       location.reload();
     }
