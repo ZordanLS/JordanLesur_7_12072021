@@ -5,6 +5,14 @@
 </template>
 
 <script>
+export default {
+  mounted() {
+    let fontAwesome = document.createElement("script");
+    fontAwesome.setAttribute("src", "https://kit.fontawesome.com/cc06608881.js");
+    fontAwesome.setAttribute("crossorigin", "anonymous");
+    document.head.appendChild(fontAwesome);
+  },
+};
 </script>
 
 <style lang="scss">
