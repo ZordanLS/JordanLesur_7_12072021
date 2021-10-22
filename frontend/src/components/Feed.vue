@@ -23,6 +23,18 @@ export default {
       .then(function(res) {
         if (res.ok) {
           return res.json();
+        } else {
+          switch (res.status) {
+            case 401: {
+              // Envoyer au login
+              window.location.href = "/#/Login";
+              break;
+            }
+            case 500: {
+              // Réessayer
+              break;
+            }
+          }
         }
       })
       .then(function(array) {
@@ -82,7 +94,7 @@ export default {
         // Creation du nom d'utilisateur
         let cardUserName = document.createElement("a");
         cardUserName.setAttribute("class", "username");
-        cardUserName.setAttribute("href", "http://localhost:8080/#/Profile?id=" + post.user_id);
+        cardUserName.setAttribute("href", "/#/Profile?id=" + post.user_id);
         let firstName = capitalizeFirstLetter(post.first_name);
         let lastName = capitalizeFirstLetter(post.last_name);
         cardUserName.innerText = firstName + " " + lastName;
@@ -100,11 +112,6 @@ export default {
         let cardDescription = document.createElement("p");
         cardDescription.setAttribute("class", "carddescription");
         cardDescription.innerText = post.content;
-
-        // Création de l'image de post
-        let postContentPicture = document.createElement("img");
-        postContentPicture.setAttribute("class", "postcontentpic");
-        postContentPicture.setAttribute("src", post.picture);
 
         // Création de la div cardBottom
         let cardBottom = document.createElement("div");
@@ -124,7 +131,7 @@ export default {
         // Création du lien vers le post
         let postLink = document.createElement("a");
         postLink.setAttribute("class", "postlink");
-        postLink.setAttribute("href", "http://localhost:8080/#/Post?id=" + post.id);
+        postLink.setAttribute("href", "/#/Post?id=" + post.id);
         postLink.innerText = "Ouvrir le post !";
 
         // Création de la structure parent/enfants de la page des produits
@@ -134,11 +141,18 @@ export default {
         cardUser.appendChild(cardUserName);
         cardUser.appendChild(cardPostDate);
         card.appendChild(cardBody);
-        cardBody.appendChild(postContentPicture);
         cardBody.appendChild(cardDescription);
         card.appendChild(cardBottom);
         cardBottom.appendChild(commentCount);
         cardBottom.appendChild(postLink);
+
+        if (post.picture != null) {
+          // Création de l'image de post
+          let postContentPicture = document.createElement("img");
+          postContentPicture.setAttribute("class", "postcontentpic");
+          postContentPicture.setAttribute("src", post.picture);
+          cardBody.appendChild(postContentPicture);
+        }
 
         // Création de la fonction de suppression de post
         function deletePost() {

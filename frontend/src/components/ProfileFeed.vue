@@ -141,6 +141,28 @@ export default {
         card.appendChild(cardBottom);
         cardBottom.appendChild(commentCount);
         cardBottom.appendChild(postLink);
+
+                // Création de la fonction de suppression de post
+        function deletePost() {
+          fetch(`http://localhost:3000/api/posts/${post.id}`, {
+            method: "DELETE",
+          }).then((res) => res.json(location.reload()));
+        }
+
+        //Création conditionnelle du bouton de suppression
+        let loggedUserId = localStorage.getItem("groupomaniauserid");
+        let deleteButton = document.createElement("button");
+        deleteButton.setAttribute("class", "deletebutton");
+        let deleteIcon = document.createElement("i");
+        deleteIcon.setAttribute("class", "far fa-trash-alt");
+        deleteButton.addEventListener("click", deletePost);
+
+        if (post.user_id === parseInt(loggedUserId)) {
+          cardUser.appendChild(deleteButton);
+          deleteButton.appendChild(deleteIcon);
+          console.log(loggedUserId);
+        }
+
       });
     }
   },

@@ -31,7 +31,9 @@ export default {
       let postForm = document.forms["postform"];
       let postFormData = new FormData(postForm);
       let postData = new FormData();
-      postData.append("image", picture);
+      if (document.getElementById("postpicture").files.length > 0) {
+        postData.append("image", picture);
+      }
       postData.append("postcontent", postFormData.get("postcontent"));
       postData.append("usertoken", localStorage.getItem("groupomaniatoken"));
       fetch("http://localhost:3000/api/posts", {

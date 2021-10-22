@@ -19,10 +19,14 @@ exports.create = (req, res) => {
     let userIdDecoded = tokeninfo.userId;
 
     // Create a Post
-    const post = {
+    let post = {
       content: req.body.postcontent,
-      picture: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
+      picture: null,
       user_id: userIdDecoded,
+    };
+
+    if (req.file != null) {
+      post.picture = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
     };
 
     console.log(post);

@@ -35,16 +35,13 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  // redirect to login page if not logged in and trying to access a restricted page
   const publicPages = ["/Login", "/Signup"];
   const authRequired = !publicPages.includes(to.path);
   const loggedIn = localStorage.getItem("groupomaniatoken");
 
   if (authRequired && !loggedIn) {
     return next("/Login");
-  }
-
-  next();
+  } else next();
 });
 
 export default router;
