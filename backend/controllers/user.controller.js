@@ -124,7 +124,7 @@ exports.login = (req, res, next) => {
           if (!valid) {
             return res.status(401).json({ error: "Mot de passe incorrect !" });
           }
-          user.token = jwt.sign({ userEmail: user.email, userId: user.id }, "RANDOM_TOKEN_SECRET", { expiresIn: "24h" });
+          user.token = jwt.sign({ userEmail: user.email, userId: user.id, userRole: user.role }, "RANDOM_TOKEN_SECRET", { expiresIn: "24h" });
           User.update(user.dataValues, {
             where: { id: user.id },
           })
@@ -134,6 +134,7 @@ exports.login = (req, res, next) => {
                 userEmail: user.email,
                 userId: user.id,
                 token: user.token,
+                role: user.role,
               });
             })
             .catch((err) => {

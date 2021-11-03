@@ -103,10 +103,13 @@ export default {
         cardDescription.setAttribute("class", "carddescription");
         cardDescription.innerText = post.content;
 
-        // Création de l'image de post
-        let postContentPicture = document.createElement("img");
-        postContentPicture.setAttribute("class", "postcontentpic");
-        postContentPicture.setAttribute("src", post.picture);
+        if (post.picture != null) {
+          // Création de l'image de post
+          let postContentPicture = document.createElement("img");
+          postContentPicture.setAttribute("class", "postcontentpic");
+          postContentPicture.setAttribute("src", post.picture);
+          cardBody.appendChild(postContentPicture);
+        }
 
         // Création de la div cardBottom
         let cardBottom = document.createElement("div");
@@ -136,13 +139,12 @@ export default {
         cardUser.appendChild(cardUserName);
         cardUser.appendChild(cardPostDate);
         card.appendChild(cardBody);
-        cardBody.appendChild(postContentPicture);
         cardBody.appendChild(cardDescription);
         card.appendChild(cardBottom);
         cardBottom.appendChild(commentCount);
         cardBottom.appendChild(postLink);
 
-                // Création de la fonction de suppression de post
+        // Création de la fonction de suppression de post
         function deletePost() {
           fetch(`http://localhost:3000/api/posts/${post.id}`, {
             method: "DELETE",
@@ -151,6 +153,7 @@ export default {
 
         //Création conditionnelle du bouton de suppression
         let loggedUserId = localStorage.getItem("groupomaniauserid");
+        let userRole = localStorage.getItem("groupomaniarole");
         let deleteButton = document.createElement("button");
         deleteButton.setAttribute("class", "deletebutton");
         let deleteIcon = document.createElement("i");
@@ -161,8 +164,10 @@ export default {
           cardUser.appendChild(deleteButton);
           deleteButton.appendChild(deleteIcon);
           console.log(loggedUserId);
+        } else if (parseInt(userRole) === 1) {
+          cardUser.appendChild(deleteButton);
+          deleteButton.appendChild(deleteIcon);
         }
-
       });
     }
   },

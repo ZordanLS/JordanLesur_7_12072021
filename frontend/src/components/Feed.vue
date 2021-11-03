@@ -163,6 +163,7 @@ export default {
 
         //Création conditionnelle du bouton de suppression
         let loggedUserId = localStorage.getItem("groupomaniauserid");
+        let userRole = localStorage.getItem("groupomaniarole");
         let deleteButton = document.createElement("button");
         deleteButton.setAttribute("class", "deletebutton");
         let deleteIcon = document.createElement("i");
@@ -172,7 +173,9 @@ export default {
         if (post.user_id === parseInt(loggedUserId)) {
           cardUser.appendChild(deleteButton);
           deleteButton.appendChild(deleteIcon);
-          console.log(loggedUserId);
+        } else if (parseInt(userRole) === 1) {
+          cardUser.appendChild(deleteButton);
+          deleteButton.appendChild(deleteIcon);
         }
       });
     }
