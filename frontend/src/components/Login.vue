@@ -48,7 +48,6 @@ export default {
           localStorage.setItem("groupomaniatoken", json.token);
           localStorage.setItem("groupomaniauserid", json.userId);
           localStorage.setItem("groupomaniarole", json.role);
-
         })
         .then(() => {
           window.location.replace("#");

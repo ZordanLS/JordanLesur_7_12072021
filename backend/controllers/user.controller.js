@@ -9,7 +9,14 @@ exports.create = async (req, res) => {
   // Validate request A REVERIFIER
   if (!req.body.email) {
     res.status(400).send({
-      message: "Content can not be empty!",
+      message: "Please enter an email",
+    });
+    return;
+  }
+  let pattern = /^[a-z]([\.\-\_]{0,}[a-z_0-9]|[a-z_0-9]\.[a-z_0-9])+@([a-z0-9]|[a-z0-9][\.\-][a-z0-9])+\.[a-z]{2,}$/i;
+  if (!pattern.test(req.body.email)) {
+    res.status(400).send({
+      message: "Please enter a valid email",
     });
     return;
   }

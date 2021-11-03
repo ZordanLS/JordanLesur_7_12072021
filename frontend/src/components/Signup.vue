@@ -17,6 +17,11 @@
         <label for="password"><b>Mot de passe</b></label>
         <input type="password" placeholder="Entrez votre mot de passe" name="password" required />
 
+        <label for="password"><b>Vérification du mot de passe</b></label>
+        <input type="password" placeholder="Entrez à nouveau votre mot de passe" name="confirmpassword" required />
+
+        <span class="texterror hidden" id="confirmpassworderror">Les mots de passe ne sont pas identiques<br /><br /></span>
+
         <label for="profilepic"><b>Photo de profil</b></label>
         <input type="file" placeholder="Choisissez une photo de profil (facultatif)" name="profilepic" id="profilepic" />
 
@@ -34,9 +39,13 @@ export default {
   mounted() {
     function signup() {
       let profilePic = document.getElementById("profilepic").files[0];
-      console.log(profilePic);
       let signupForm = document.forms["signupform"];
       let signupFormData = new FormData(signupForm);
+      document.getElementById("confirmpassworderror").className = "texterror hidden";
+      if (signupForm.password.value != signupForm.confirmpassword.value) {
+        document.getElementById("confirmpassworderror").className = "texterror";
+        return;
+      }
       let signupData = {
         email: signupFormData.get("email"),
         firstname: signupFormData.get("firstname"),
@@ -44,18 +53,22 @@ export default {
         password: signupFormData.get("password"),
         profilepic: profilePic,
       };
-      console.log(signupData);
       fetch("http://localhost:3000/api/users", {
         method: "POST",
         body: JSON.stringify(signupData),
         headers: { "Content-Type": "application/json" },
       })
-        .then((res) => res.json())
-        .then((json) => {
-          console.log(json);
+        .then((res) => {
+          if (!res.ok) {
+            res.json().then((res) => {
+              alert(res.message);
+            });
+            throw new Error();
+          }
         })
+        .then((res) => res.json())
         .then(() => {
-          //window.location.replace("/login");
+          window.location.replace("/login");
         });
     }
     let signupButton = document.getElementById("signupbutton");
@@ -145,5 +158,16 @@ span.psw {
   button {
     width: 60%;
   }
+}
+
+.texterror {
+  font-family: Arial;
+  font-size: 12px;
+  font-weight: bold;
+  color: red;
+}
+
+.hidden {
+  display: none;
 }
 </style>
