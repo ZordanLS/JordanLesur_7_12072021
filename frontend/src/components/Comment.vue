@@ -110,6 +110,33 @@ export default {
         cardUser.appendChild(cardPostDate);
         card.appendChild(cardBody);
         cardBody.appendChild(cardDescription);
+
+        // Création de la fonction de suppression de comment
+        function deleteComment() {
+          fetch(`http://localhost:3000/api/comments/${post.id}`, {
+            method: "DELETE",
+          }).then((res) => res.json(location.reload()));
+        }
+
+        //Création conditionnelle du bouton de suppression
+        let loggedUserId = localStorage.getItem("groupomaniauserid");
+        let userRole = localStorage.getItem("groupomaniarole");
+        let deleteButton = document.createElement("button");
+        deleteButton.setAttribute("class", "deletebutton");
+        let deleteIcon = document.createElement("i");
+        deleteIcon.setAttribute("class", "far fa-trash-alt");
+        deleteButton.addEventListener("click", deleteComment);
+
+        if (post.user_id === parseInt(loggedUserId)) {
+          cardUser.appendChild(deleteButton);
+          deleteButton.appendChild(deleteIcon);
+          console.log(loggedUserId);
+        } else if (parseInt(userRole) === 1) {
+          cardUser.appendChild(deleteButton);
+          deleteButton.appendChild(deleteIcon);
+        }
+
+
       });
     }
   },
