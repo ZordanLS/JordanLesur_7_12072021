@@ -146,8 +146,14 @@ export default {
 
         // Création de la fonction de suppression de post
         function deletePost() {
+          let body = JSON.stringify({ userid: post.user_id });
           fetch(`http://localhost:3000/api/posts/${post.id}`, {
             method: "DELETE",
+            headers: new Headers({
+              Authorization: "Basic " + localStorage.getItem("groupomaniatoken"),
+              "Content-Type": "application/json",
+            }),
+            body: body,
           }).then((res) => res.json(location.reload()));
         }
 

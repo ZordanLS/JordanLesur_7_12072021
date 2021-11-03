@@ -27,9 +27,8 @@ exports.create = (req, res) => {
 
     if (req.file != null) {
       post.picture = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
-    };
+    }
 
-    console.log(post);
     // Save Post in the database
     Post.create(post)
       .then((data) => {
@@ -102,6 +101,13 @@ exports.findOne = (req, res) => {
 // Delete a Post with the specified id in the request
 exports.delete = (req, res) => {
   const id = req.params.id;
+  let deleteUserToken = req.headers.authorization;
+  let clearDeleteUserToken = deleteUserToken.replace("Basic ", "");
+  jwt.verify(clearDeleteUserToken, "RANDOM_TOKEN_SECRET", function (err, tokeninfo) {
+  let userIdDecoded = tokeninfo.userId;
+  let userRoleDecoded = tokeninfo.userRole;
+
+if ((userRoleDecoded === 1) || (userIdDecoded === req.body.userid)) {
 
   Post.destroy({
     where: { id: id },
@@ -122,4 +128,6 @@ exports.delete = (req, res) => {
         message: "Could not delete Post with id=" + id,
       });
     });
+    }
+  })
 };
