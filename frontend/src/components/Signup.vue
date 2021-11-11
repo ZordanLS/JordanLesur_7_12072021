@@ -22,8 +22,10 @@
 
         <span class="texterror hidden" id="confirmpassworderror">Les mots de passe ne sont pas identiques<br /><br /></span>
 
+
         <label for="profilepic"><b>Photo de profil</b></label>
         <input type="file" placeholder="Choisissez une photo de profil (facultatif)" name="profilepic" id="profilepic" />
+
 
         <button id="signupbutton" type="button">S'inscrire</button>
       </div>
@@ -46,17 +48,21 @@ export default {
         document.getElementById("confirmpassworderror").className = "texterror";
         return;
       }
-      let signupData = {
-        email: signupFormData.get("email"),
-        firstname: signupFormData.get("firstname"),
-        lastname: signupFormData.get("lastname"),
-        password: signupFormData.get("password"),
-        profilepic: profilePic,
-      };
+      let signupData = new FormData();
+      signupData.append("email",signupFormData.get("email"));
+      signupData.append("firstname",signupFormData.get("firstname"));
+      signupData.append("lastname",signupFormData.get("lastname"));
+      signupData.append("password",signupFormData.get("password"));
+
+      if (document.getElementById("profilepic").files.length > 0) {
+        signupData.append("image", profilePic);
+      }
+
+
+      console.log(profilePic);
       fetch("http://localhost:3000/api/users", {
         method: "POST",
-        body: JSON.stringify(signupData),
-        headers: { "Content-Type": "application/json" },
+        body: signupData,
       })
         .then((res) => {
           if (!res.ok) {
@@ -66,7 +72,6 @@ export default {
             throw new Error();
           }
         })
-        .then((res) => res.json())
         .then(() => {
           window.location.replace("/login");
         });

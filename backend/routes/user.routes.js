@@ -1,11 +1,12 @@
 module.exports = (app) => {
   const users = require("../controllers/user.controller.js");
   const auth = require("../middleware/auth.js");
+  const multer = require("../middleware/multer-config");
 
   var router = require("express").Router();
 
   // Create a new User
-  router.post("/", users.create);
+  router.post("/", multer, users.create);
 
   // Retrieve a single User with id
   router.get("/:id", users.findOne);

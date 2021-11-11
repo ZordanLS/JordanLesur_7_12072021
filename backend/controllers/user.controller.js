@@ -31,10 +31,15 @@ exports.create = async (req, res) => {
     last_name: req.body.lastname,
     email: req.body.email,
     password: hash,
-    picture: req.body.profilepic,
+    picture: "http://localhost:3000/images/defaultuser.jpg",
     role: 0,
     token: "",
   };
+
+  if (req.file != null) {
+    user.picture = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
+  }
+
 
   // Save User in the database
   User.create(user)
