@@ -27,6 +27,12 @@ const routes = [
     name: "Post",
     component: () => import("../components/Post.vue"),
   },
+  {
+    path: "/updateprofile",
+    name: "Update Profile",
+    component: () => import("../components/UpdateProfile.vue"),
+  },
+
 ];
 
 const router = createRouter({

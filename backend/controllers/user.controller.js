@@ -1,5 +1,7 @@
 const db = require("../models");
 const User = db.users;
+const Post = db.posts;
+const Comment = db.comments;
 const Op = db.Sequelize.Op;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -70,10 +72,10 @@ exports.findOne = (req, res) => {
 
 // Update a User by the id in the request
 exports.update = (req, res) => {
-  const email = req.params.email;
+  const id = req.params.id;
 
   User.update(req.body, {
-    where: { email: email },
+    where: { id: id },
   })
     .then((num) => {
       if (num == 1) {
@@ -95,27 +97,41 @@ exports.update = (req, res) => {
 
 // Delete a User with the specified id in the request
 exports.delete = (req, res) => {
-  const email = req.params.email;
+  const id = req.params.id;
+  let deleteUserToken = req.headers.authorization;
+  let clearDeleteUserToken = deleteUserToken.replace("Basic ", "");
+  jwt.verify(clearDeleteUserToken, "RANDOM_TOKEN_SECRET", function (err, tokeninfo) {
+    let userIdDecoded = tokeninfo.userId;
+    let userRoleDecoded = tokeninfo.userRole;
 
-  User.destroy({
-    where: { email: email },
-  })
-    .then((num) => {
-      if (num == 1) {
-        res.send({
-          message: "User was deleted successfully!",
-        });
-      } else {
-        res.send({
-          message: `Cannot delete User with email=${email}. Maybe User was not found!`,
-        });
-      }
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message: "Could not delete User with email=" + email,
+    if (userRoleDecoded === 1 || userIdDecoded === req.body.userid) {
+      Comment.destroy({
+        where:{user_id: id}
       });
-    });
+      Post.destroy({
+        where:{user_id: id}
+      });
+      User.destroy({
+        where: { id: id },
+      })
+        .then((num) => {
+          if (num == 1) {
+            res.send({
+              message: "User was deleted successfully!",
+            });
+          } else {
+            res.send({
+              message: `Cannot delete User with id=${id}. Maybe User was not found!`,
+            });
+          }
+        })
+        .catch((err) => {
+          res.status(500).send({
+            message: "Could not delete User with id=" + id,
+          });
+        });
+    }
+  });
 };
 
 // Fonction de connection

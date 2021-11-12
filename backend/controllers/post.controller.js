@@ -1,6 +1,7 @@
 const db = require("../models");
 const Post = db.posts;
 const User = db.users;
+const Comment = db.comments
 const Op = db.Sequelize.Op;
 const jwt = require("jsonwebtoken");
 const { QueryTypes } = require("sequelize");
@@ -104,30 +105,32 @@ exports.delete = (req, res) => {
   let deleteUserToken = req.headers.authorization;
   let clearDeleteUserToken = deleteUserToken.replace("Basic ", "");
   jwt.verify(clearDeleteUserToken, "RANDOM_TOKEN_SECRET", function (err, tokeninfo) {
-  let userIdDecoded = tokeninfo.userId;
-  let userRoleDecoded = tokeninfo.userRole;
+    let userIdDecoded = tokeninfo.userId;
+    let userRoleDecoded = tokeninfo.userRole;
 
-if ((userRoleDecoded === 1) || (userIdDecoded === req.body.userid)) {
-
-  Post.destroy({
-    where: { id: id },
-  })
-    .then((num) => {
-      if (num == 1) {
-        res.send({
-          message: "Post was deleted successfully!",
-        });
-      } else {
-        res.send({
-          message: `Cannot delete Post with id=${id}. Maybe Post was not found!`,
-        });
-      }
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message: "Could not delete Post with id=" + id,
+    if (userRoleDecoded === 1 || userIdDecoded === req.body.userid) {
+      Comment.destroy({
+        where:{post_id: id}
       });
-    });
+      Post.destroy({
+        where: { id: id },
+      })
+        .then((num) => {
+          if (num == 1) {
+            res.send({
+              message: "Post was deleted successfully!",
+            });
+          } else {
+            res.send({
+              message: `Cannot delete Post with id=${id}. Maybe Post was not found!`,
+            });
+          }
+        })
+        .catch((err) => {
+          res.status(500).send({
+            message: "Could not delete Post with id=" + id,
+          });
+        });
     }
-  })
+  });
 };

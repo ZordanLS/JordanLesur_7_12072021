@@ -58,8 +58,6 @@ export default {
         signupData.append("image", profilePic);
       }
 
-
-      console.log(profilePic);
       fetch("http://localhost:3000/api/users", {
         method: "POST",
         body: signupData,

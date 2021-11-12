@@ -4,8 +4,8 @@
         <router-link to="/">Accueil</router-link>
       </div>
       <div class="nav">
-        <!-- <router-link :to="{ name: 'Profile', query: { id: userId }}">Mon profil</router-link> -->
-        <a id="profilelink"> Mon profil</a>
+        <a id="profilelink"> Mon profil </a>
+        <a id="updateprofilelink"> Modifier mon profil </a>
         <a href="#" id="logoutbutton"> Déconnexion</a>
       </div>
     </div>
@@ -23,6 +23,9 @@ export default {
     let userId = localStorage.groupomaniauserid;
     let profileLink = document.getElementById("profilelink");
     profileLink.setAttribute("href", "http://localhost:8080/#/Profile?id=" + userId);
+
+    let updateProfileLink = document.getElementById("updateprofilelink");
+    updateProfileLink.setAttribute("href", "http://localhost:8080/#/UpdateProfile?id=" + userId);
 
     function logout() {
       localStorage.removeItem("groupomaniauserid");
@@ -54,6 +57,7 @@ export default {
   a {
     font-weight: bold;
     color: #2c3e50;
+    padding: 0.2rem;
 
     &.router-link-exact-active {
       color: #ff7070;

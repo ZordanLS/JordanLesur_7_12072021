@@ -270,8 +270,6 @@ span.psw {
 
 .userpic {
   max-height: 3.5rem;
-  border-radius: 50%;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.7);
 }
 
 .cardbody {
