@@ -42,7 +42,6 @@ exports.create = async (req, res) => {
     user.picture = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
   }
 
-
   // Save User in the database
   User.create(user)
     .then((data) => {
@@ -71,28 +70,48 @@ exports.findOne = (req, res) => {
 };
 
 // Update a User by the id in the request
-exports.update = (req, res) => {
-  const id = req.params.id;
+exports.update = async (req, res) => {
+  const id = req.body.id;
 
-  User.update(req.body, {
-    where: { id: id },
-  })
-    .then((num) => {
-      if (num == 1) {
-        res.send({
-          message: "User was updated successfully.",
+  const user = {
+    first_name: req.body.firstname,
+    last_name: req.body.lastname,
+  };
+
+  if (req.body.password != null) {
+    let hash = await bcrypt.hash(req.body.password, 10);
+    user.password = hash;
+  }
+  if (req.file != null) {
+    user.picture = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
+  }
+
+  let updateUserToken = req.headers.authorization;
+  let clearUpdateUserToken = updateUserToken.replace("Basic ", "");
+  jwt.verify(clearUpdateUserToken, "RANDOM_TOKEN_SECRET", function (err, tokeninfo) {
+    let userIdDecoded = tokeninfo.userId;
+    if (userIdDecoded == req.body.id) {
+      User.update(user, {
+        where: { id: id },
+      })
+        .then((num) => {
+          if (num == 1) {
+            res.send({
+              message: "User was updated successfully.",
+            });
+          } else {
+            res.send({
+              message: `Cannot update User with id=${id}. Maybe User was not found or req.body is empty!`,
+            });
+          }
+        })
+        .catch((err) => {
+          res.status(500).send({
+            message: "Error updating User with id=" + id,
+          });
         });
-      } else {
-        res.send({
-          message: `Cannot update User with email=${email}. Maybe User was not found or req.body is empty!`,
-        });
-      }
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message: "Error updating User with email=" + email,
-      });
-    });
+    }
+  });
 };
 
 // Delete a User with the specified id in the request
@@ -106,10 +125,10 @@ exports.delete = (req, res) => {
 
     if (userRoleDecoded === 1 || userIdDecoded === req.body.userid) {
       Comment.destroy({
-        where:{user_id: id}
+        where: { user_id: id },
       });
       Post.destroy({
-        where:{user_id: id}
+        where: { user_id: id },
       });
       User.destroy({
         where: { id: id },

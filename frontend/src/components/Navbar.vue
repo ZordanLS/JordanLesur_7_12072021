@@ -5,7 +5,6 @@
       </div>
       <div class="nav">
         <a id="profilelink"> Mon profil </a>
-        <a id="updateprofilelink"> Modifier mon profil </a>
         <a href="#" id="logoutbutton"> Déconnexion</a>
       </div>
     </div>
@@ -22,10 +21,7 @@ export default {
 
     let userId = localStorage.groupomaniauserid;
     let profileLink = document.getElementById("profilelink");
-    profileLink.setAttribute("href", "http://localhost:8080/#/Profile?id=" + userId);
-
-    let updateProfileLink = document.getElementById("updateprofilelink");
-    updateProfileLink.setAttribute("href", "http://localhost:8080/#/UpdateProfile?id=" + userId);
+    profileLink.setAttribute("href", "#/Profile?id=" + userId);
 
     function logout() {
       localStorage.removeItem("groupomaniauserid");

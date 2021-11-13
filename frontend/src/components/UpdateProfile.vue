@@ -8,16 +8,16 @@
     <form id="updateform" onsubmit="return(false)">
       <div class="container">
         <label for="firstname"><b>Prénom</b></label>
-        <input type="text" placeholder="Entrez votre prénom" name="firstname" required />
+        <input type="text" placeholder="Entrez votre prénom" name="firstname" />
 
         <label for="lastname"><b>Nom</b></label>
-        <input type="text" placeholder="Entrez votre nom" name="lastname" required />
+        <input type="text" placeholder="Entrez votre nom" name="lastname" />
 
-        <label for="password"><b>Mot de passe</b></label>
-        <input type="password" placeholder="Entrez votre mot de passe" name="password" required />
+        <label for="password"><b>Nouveau mot de passe</b></label>
+        <input type="password" placeholder="Entrez votre nouveau mot de passe" name="password" />
 
-        <label for="password"><b>Vérification du mot de passe</b></label>
-        <input type="password" placeholder="Entrez à nouveau votre mot de passe" name="confirmpassword" required />
+        <label for="password"><b>Vérification du nouveau mot de passe</b></label>
+        <input type="password" placeholder="Entrez à nouveau votre mot de passe" name="confirmpassword" />
 
         <span class="texterror hidden" id="confirmpassworderror">Les mots de passe ne sont pas identiques<br /><br /></span>
 
@@ -32,7 +32,6 @@
 
 <script>
 import Navbar from "@/components/Navbar.vue";
-
 export default {
   name: "Update Profile",
   components: {
@@ -41,6 +40,7 @@ export default {
   props: {
     msg: String,
   },
+
   mounted() {
     fetch(`http://localhost:3000/api/users/${this.$route.query.id}`, {
       method: "GET",
@@ -56,43 +56,6 @@ export default {
       .then(function(user) {
         injectHtml(user);
       });
-
-    function update() {
-      let updateProfilePic = document.getElementById("profilepic").files[0];
-      let updateForm = document.forms["updateform"];
-      let updateFormData = new FormData(updateForm);
-      document.getElementById("confirmpassworderror").className = "texterror hidden";
-      if (updateForm.password.value != updateForm.confirmpassword.value) {
-        document.getElementById("confirmpassworderror").className = "texterror";
-        return;
-      }
-      let updateData = new FormData();
-      updateData.append("email", updateFormData.get("email"));
-      updateData.append("firstname", updateFormData.get("firstname"));
-      updateData.append("lastname", updateFormData.get("lastname"));
-      updateData.append("password", updateFormData.get("password"));
-
-      if (document.getElementById("profilepic").files.length > 0) {
-        updateData.append("image", updateProfilePic);
-      }
-      fetch("http://localhost:3000/api/users", {
-        method: "PUT",
-        body: updateData,
-      })
-        .then((res) => {
-          if (!res.ok) {
-            res.json().then((res) => {
-              alert(res.message);
-            });
-            throw new Error();
-          }
-        })
-        .then(() => {
-          window.location.replace("/login");
-        });
-    }
-    let signupButton = document.getElementById("signupbutton");
-    signupButton.addEventListener("click", update);
 
     function injectHtml(user) {
       function capitalizeFirstLetter(string) {
@@ -129,11 +92,57 @@ export default {
       leftSide.appendChild(userNameContainer);
       rightSide.appendChild(userMail);
     }
+
+    function update() {
+      let updateProfilePic = document.getElementById("profilepic").files[0];
+      let updateForm = document.forms["updateform"];
+      let updateFormData = new FormData(updateForm);
+      document.getElementById("confirmpassworderror").className = "texterror hidden";
+      if (updateForm.password.value != updateForm.confirmpassword.value) {
+        document.getElementById("confirmpassworderror").className = "texterror";
+        return;
+      }
+      let userId = localStorage.getItem("groupomaniauserid");
+      let updateData = new FormData();
+      updateData.append("id", userId);
+      if (updateFormData.get("firstname").length > 0) {
+        updateData.append("firstname", updateFormData.get("firstname"));
+      }
+      if (updateFormData.get("lastname").length > 0) {
+        updateData.append("lastname", updateFormData.get("lastname"));
+      }
+      if (updateFormData.get("password").length > 0) {
+        updateData.append("password", updateFormData.get("password"));
+      }
+      if (document.getElementById("profilepic").files.length > 0) {
+        updateData.append("image", updateProfilePic);
+      }
+      fetch(`http://localhost:3000/api/users/${userId}`, {
+        method: "PUT",
+        body: updateData,
+        headers: new Headers({
+          Authorization: "Basic " + localStorage.getItem("groupomaniatoken"),
+        }),
+      })
+        .then((res) => {
+          if (!res.ok) {
+            res.json().then((res) => {
+              alert(res.message);
+            });
+            throw new Error();
+          }
+        })
+        .then(() => {
+          window.location.replace("/profile?id=29");
+        });
+    }
+    let signupButton = document.getElementById("updatebutton");
+    signupButton.addEventListener("click", update);
   },
 };
 </script>
 
-<style>
+<style scoped>
 input[type="file"],
 input[type="text"],
 input[type="password"] {
@@ -160,7 +169,6 @@ button {
 button:hover {
   opacity: 0.8;
 }
-
 h1 {
   text-align: left;
   margin: 40px 0 0;
@@ -228,11 +236,8 @@ span.psw {
 .carduser {
   display: flex;
 }
-
-.profileuserpic {
-  max-height: 10rem;
-}
-
+</style>
+<style>
 .postdate {
   margin-left: auto;
   padding-right: 1rem;
@@ -254,5 +259,8 @@ span.psw {
   align-items: center;
   justify-content: center;
   font-size: 1.8rem;
+}
+.profileuserpic {
+  max-height: 10rem;
 }
 </style>

@@ -72,6 +72,15 @@ export default {
       leftSide.appendChild(userPic);
       leftSide.appendChild(userNameContainer);
       rightSide.appendChild(userMail);
+
+      let userId = localStorage.getItem("groupomaniauserid");
+
+      if (userId == user.id) {
+        let updateProfileLink = document.createElement("a");
+        updateProfileLink.setAttribute("href", "#/UpdateProfile?id=" + userId);
+        updateProfileLink.innerText = "Modifier mon profil";
+        leftSide.appendChild(updateProfileLink);
+      }
     }
   },
 };

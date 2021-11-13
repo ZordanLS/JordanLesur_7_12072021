@@ -169,7 +169,6 @@ export default {
         if (post.user_id === parseInt(loggedUserId)) {
           cardUser.appendChild(deleteButton);
           deleteButton.appendChild(deleteIcon);
-          console.log(loggedUserId);
         } else if (parseInt(userRole) === 1) {
           cardUser.appendChild(deleteButton);
           deleteButton.appendChild(deleteIcon);
