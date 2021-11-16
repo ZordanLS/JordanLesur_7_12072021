@@ -112,6 +112,14 @@ export default {
         cardBody.appendChild(cardDescription);
 
         // Création de la fonction de suppression de comment
+
+        function askDelete() {
+          if (!window.confirm("Are you sure?")) {
+            return;
+          }
+          deleteComment();
+        }
+
         function deleteComment() {
           fetch(`http://localhost:3000/api/comments/${post.id}`, {
             method: "DELETE",
@@ -125,7 +133,7 @@ export default {
         deleteButton.setAttribute("class", "deletebutton");
         let deleteIcon = document.createElement("i");
         deleteIcon.setAttribute("class", "far fa-trash-alt");
-        deleteButton.addEventListener("click", deleteComment);
+        deleteButton.addEventListener("click", askDelete);
 
         if (post.user_id === parseInt(loggedUserId)) {
           cardUser.appendChild(deleteButton);
@@ -135,8 +143,6 @@ export default {
           cardUser.appendChild(deleteButton);
           deleteButton.appendChild(deleteIcon);
         }
-
-
       });
     }
   },

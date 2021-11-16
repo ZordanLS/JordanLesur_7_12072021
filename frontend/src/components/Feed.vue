@@ -155,6 +155,14 @@ export default {
         }
 
         // Création de la fonction de suppression de post
+
+        function askDelete() {
+          if (!window.confirm("Are you sure?")) {
+            return;
+          }
+          deletePost();
+        }
+
         function deletePost() {
           let body = JSON.stringify({ userid: post.user_id });
           fetch(`http://localhost:3000/api/posts/${post.id}`, {
@@ -174,7 +182,7 @@ export default {
         deleteButton.setAttribute("class", "deletebutton");
         let deleteIcon = document.createElement("i");
         deleteIcon.setAttribute("class", "far fa-trash-alt");
-        deleteButton.addEventListener("click", deletePost);
+        deleteButton.addEventListener("click", askDelete);
 
         if (post.user_id === parseInt(loggedUserId)) {
           cardUser.appendChild(deleteButton);
