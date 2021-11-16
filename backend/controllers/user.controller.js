@@ -34,7 +34,7 @@ exports.create = async (req, res) => {
     last_name: req.body.lastname,
     email: req.body.email,
     password: hash,
-    picture: "http://localhost:3000/images/defaultuser.jpg",
+    picture: "http://localhost:3000/assets/defaultuser.jpg",
     role: 0,
     token: "",
   };

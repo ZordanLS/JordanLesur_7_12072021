@@ -114,7 +114,7 @@ export default {
         // Création de la fonction de suppression de comment
 
         function askDelete() {
-          if (!window.confirm("Are you sure?")) {
+          if (!window.confirm("Voulez-vous supprimer ce commentaire ?")) {
             return;
           }
           deleteComment();

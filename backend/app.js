@@ -27,6 +27,7 @@ require("./routes/post.routes")(app);
 require("./routes/comment.routes")(app);
 
 app.use("/images", express.static(path.join(__dirname, "images")));
+app.use("/assets", express.static(path.join(__dirname, "assets")));
 
 const db = require("./models");
 //db.sequelize.sync();

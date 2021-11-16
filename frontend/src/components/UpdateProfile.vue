@@ -91,6 +91,40 @@ export default {
       leftSide.appendChild(userPic);
       leftSide.appendChild(userNameContainer);
       rightSide.appendChild(userMail);
+
+      // Création de la fonction de suppression de compte
+
+      function askDelete() {
+        if (!window.confirm("Voulez-vous vraiment supprimer votre compte ?")) {
+          return;
+        }
+        deleteUser();
+      }
+
+      function deleteUser() {
+        let body = JSON.stringify({ userid: user.id });
+        fetch(`http://localhost:3000/api/users/${user.id}`, {
+          method: "DELETE",
+          headers: new Headers({
+            Authorization: "Basic " + localStorage.getItem("groupomaniatoken"),
+            "Content-Type": "application/json",
+          }),
+          body: body,
+        }).then((res) => res.json(localStorage.removeItem("groupomaniauserid"), localStorage.removeItem("groupomaniatoken"), window.location.replace("#")));
+      }
+
+      //Création conditionnelle du bouton de suppression
+      let loggedUserId = localStorage.getItem("groupomaniauserid");
+      let deleteButton = document.createElement("button");
+      deleteButton.setAttribute("class", "deletebutton");
+      let deleteIcon = document.createElement("i");
+      deleteIcon.setAttribute("class", "far fa-trash-alt");
+      deleteButton.addEventListener("click", askDelete);
+
+      if (user.id === parseInt(loggedUserId)) {
+        rightSide.appendChild(deleteButton);
+        deleteButton.appendChild(deleteIcon);
+      }
     }
 
     function update() {
@@ -262,5 +296,9 @@ span.psw {
 }
 .profileuserpic {
   max-height: 10rem;
+}
+
+.deletebutton {
+  margin-left: 0.5rem;
 }
 </style>

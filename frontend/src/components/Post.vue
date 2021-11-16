@@ -161,7 +161,7 @@ export default {
         // Création de la fonction de suppression de post
 
         function askDelete() {
-          if (!window.confirm("Are you sure?")) {
+          if (!window.confirm("Voulez-vous supprimer ce post ?")) {
             return;
           }
           deletePost();
