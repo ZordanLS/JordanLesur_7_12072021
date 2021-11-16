@@ -1,10 +1,11 @@
 const db = require("../models");
 const Post = db.posts;
 const User = db.users;
-const Comment = db.comments
+const Comment = db.comments;
 const Op = db.Sequelize.Op;
 const jwt = require("jsonwebtoken");
 const { QueryTypes } = require("sequelize");
+const fs = require("fs");
 
 // Create and Save a new Post
 exports.create = (req, res) => {
@@ -110,27 +111,36 @@ exports.delete = (req, res) => {
 
     if (userRoleDecoded === 1 || userIdDecoded === req.body.userid) {
       Comment.destroy({
-        where:{post_id: id}
+        where: { post_id: id },
       });
-      Post.destroy({
+      Post.findOne({
         where: { id: id },
       })
-        .then((num) => {
-          if (num == 1) {
-            res.send({
-              message: "Post was deleted successfully!",
+        .then((post) => {
+          let filename = post.picture.split("http://localhost:3000/images/")[1];
+          console.log(filename);
+          fs.unlink(`images/${filename}`, () => {});
+          Post.destroy({
+            where: { id: id },
+          })
+            .then((num) => {
+              if (num == 1) {
+                res.send({
+                  message: "Post was deleted successfully!",
+                });
+              } else {
+                res.send({
+                  message: `Cannot delete Post with id=${id}. Maybe Post was not found!`,
+                });
+              }
+            })
+            .catch((err) => {
+              res.status(500).send({
+                message: "Could not delete Post with id=" + id,
+              });
             });
-          } else {
-            res.send({
-              message: `Cannot delete Post with id=${id}. Maybe Post was not found!`,
-            });
-          }
         })
-        .catch((err) => {
-          res.status(500).send({
-            message: "Could not delete Post with id=" + id,
-          });
-        });
+        .catch((error) => res.status(500).json({ error }));
     }
   });
 };

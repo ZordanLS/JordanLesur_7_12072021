@@ -5,6 +5,7 @@ const Comment = db.comments;
 const Op = db.Sequelize.Op;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const fs = require("fs");
 
 // Create and Save a new User
 exports.create = async (req, res) => {
@@ -130,25 +131,35 @@ exports.delete = (req, res) => {
       Post.destroy({
         where: { user_id: id },
       });
-      User.destroy({
+      User.findOne({
         where: { id: id },
       })
-        .then((num) => {
-          if (num == 1) {
-            res.send({
-              message: "User was deleted successfully!",
+        .then((user) => {
+          let filename = user.picture.split("http://localhost:3000/images/")[1];
+          console.log(filename);
+          fs.unlink(`images/${filename}`, () => {});
+
+          User.destroy({
+            where: { id: id },
+          })
+            .then((num) => {
+              if (num == 1) {
+                res.send({
+                  message: "User was deleted successfully!",
+                });
+              } else {
+                res.send({
+                  message: `Cannot delete User with id=${id}. Maybe User was not found!`,
+                });
+              }
+            })
+            .catch((err) => {
+              res.status(500).send({
+                message: "Could not delete User with id=" + id,
+              });
             });
-          } else {
-            res.send({
-              message: `Cannot delete User with id=${id}. Maybe User was not found!`,
-            });
-          }
         })
-        .catch((err) => {
-          res.status(500).send({
-            message: "Could not delete User with id=" + id,
-          });
-        });
+        .catch((error) => res.status(500).json({ error }));
     }
   });
 };
