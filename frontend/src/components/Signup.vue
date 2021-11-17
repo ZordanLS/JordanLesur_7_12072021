@@ -23,7 +23,6 @@
         <span class="texterror hidden" id="confirmpassworderror">Les mots de passe ne sont pas identiques<br /><br /></span>
 
         <label for="profilepic"><b>Photo de profil (facultatif)</b></label>
-        <label for="profilepic"><img src=""/></label>
         <input type="file" name="profilepic" id="profilepic" />
 
         <button id="signupbutton" type="button">S'inscrire</button>
@@ -169,9 +168,5 @@ span.psw {
   font-size: 12px;
   font-weight: bold;
   color: red;
-}
-
-.hidden {
-  display: none;
 }
 </style>

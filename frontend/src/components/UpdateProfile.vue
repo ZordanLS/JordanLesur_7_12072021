@@ -94,19 +94,19 @@ export default {
 
       // Création de la fonction de suppression de compte
 
-        function askDelete(ev) {
-          let e = ev.target;
-          function resetDeleteIcon() {
-            e.className = "far fa-trash-alt";
-            e.parentElement.onclick = askDelete;
-          }
-          if (e.tagName == "BUTTON") {
-            e = e.children[0];
-          }
-          e.className = "fas fa-check";
-          window.setTimeout(resetDeleteIcon, 2000);
-          e.parentElement.onclick = deleteUser;
+      function askDelete(ev) {
+        let e = ev.target;
+        function resetDeleteIcon() {
+          e.className = "far fa-trash-alt";
+          e.parentElement.onclick = askDelete;
         }
+        if (e.tagName == "BUTTON") {
+          e = e.children[0];
+        }
+        e.className = "fas fa-check";
+        window.setTimeout(resetDeleteIcon, 2000);
+        e.parentElement.onclick = deleteUser;
+      }
 
       function deleteUser() {
         let body = JSON.stringify({ userid: user.id });
@@ -311,5 +311,11 @@ span.psw {
   margin-left: 0.5rem;
   border-radius: 30px;
   font-size: 1.2rem;
+}
+.texterror {
+  font-family: Arial;
+  font-size: 12px;
+  font-weight: bold;
+  color: red;
 }
 </style>

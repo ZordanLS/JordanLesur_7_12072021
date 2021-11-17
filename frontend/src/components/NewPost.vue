@@ -14,7 +14,7 @@
           maxlength="255"
         />
       </div>
-      <div class="container">
+      <div class="uploadcontainer">
         <input type="file" id="postpicture" name1="postpicture" />
         <button id="postbutton" type="button">Publier !</button>
       </div>
@@ -92,9 +92,8 @@ input[type="password"] {
 button {
   background-color: #ff7070;
   color: white;
-  padding: 14px 20px;
+  padding: none;
   margin: 8px 0;
-  margin-left: 14rem;
   border: none;
   cursor: pointer;
   width: 20rem;
@@ -143,5 +142,12 @@ span.psw {
   button {
     width: 60%;
   }
+}
+.uploadcontainer {
+  display: flex;
+  justify-content: center;
+}
+input[type="file"] {
+  padding-top: 1.2rem;
 }
 </style>
