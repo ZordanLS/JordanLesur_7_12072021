@@ -40,27 +40,6 @@ exports.create = (req, res) => {
   });
 };
 
-/*
-
-// Retrieve all Posts from the database.
-exports.findAll = (req, res) => {
-  db.sequelize
-  .query(
-    "SELECT A.*, B.first_name, B.last_name, B.email, B.picture FROM posts A INNER JOIN users B ON A.user_id = B.id order by A.createdAt DESC",
-    { type: QueryTypes.SELECT }
-    )
-    .then((data) => {
-      res.send(data);
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message: err.message || "Some error occurred while retrieving posts.",
-      });
-    });
-};
-
-*/
-
 // Retrieve all Comments from one post.
 exports.findPostsComments = (req, res) => {
   let id = req.params.id;
@@ -80,28 +59,6 @@ exports.findPostsComments = (req, res) => {
     });
 };
 
-/*
-
-// Find a single Post with an id
-exports.findOne = (req, res) => {
-  const id = req.params.id;
-  db.sequelize
-    .query(
-      `SELECT A.*, B.first_name, B.last_name, B.email, B.picture FROM posts A INNER JOIN users B ON A.user_id = B.id WHERE A.id=${id} order by A.createdAt DESC`,
-      { type: QueryTypes.SELECT }
-    )
-    .then((data) => {
-      res.send(data);
-      console.log(data);
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message: "Error retrieving Post with id=" + id,
-      });
-    });
-  };
-  
-  */
 // Delete a Comment with the specified id in the request
 exports.delete = (req, res) => {
   const id = req.params.id;

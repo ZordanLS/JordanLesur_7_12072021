@@ -44,7 +44,6 @@ export default {
       })
         .then((res) => res.json())
         .then((json) => {
-          console.log(json);
           localStorage.setItem("groupomaniatoken", json.token);
           localStorage.setItem("groupomaniauserid", json.userId);
           localStorage.setItem("groupomaniarole", json.role);
