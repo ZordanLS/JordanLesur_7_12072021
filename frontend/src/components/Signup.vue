@@ -22,10 +22,8 @@
 
         <span class="texterror hidden" id="confirmpassworderror">Les mots de passe ne sont pas identiques<br /><br /></span>
 
-
-        <label for="profilepic"><b>Photo de profil</b></label>
-        <input type="file" placeholder="Choisissez une photo de profil (facultatif)" name="profilepic" id="profilepic" />
-
+        <label for="profilepic"><b>Photo de profil (facultatif)</b></label>
+        <input type="file" name="profilepic" id="profilepic" />
 
         <button id="signupbutton" type="button">S'inscrire</button>
       </div>
@@ -49,10 +47,10 @@ export default {
         return;
       }
       let signupData = new FormData();
-      signupData.append("email",signupFormData.get("email"));
-      signupData.append("firstname",signupFormData.get("firstname"));
-      signupData.append("lastname",signupFormData.get("lastname"));
-      signupData.append("password",signupFormData.get("password"));
+      signupData.append("email", signupFormData.get("email"));
+      signupData.append("firstname", signupFormData.get("firstname"));
+      signupData.append("lastname", signupFormData.get("lastname"));
+      signupData.append("password", signupFormData.get("password"));
 
       if (document.getElementById("profilepic").files.length > 0) {
         signupData.append("image", profilePic);
@@ -118,7 +116,6 @@ input[type="password"] {
   border: 1px solid #ccc;
   box-sizing: border-box;
 }
-
 button {
   background-color: #ff7070;
   color: white;
@@ -154,7 +151,10 @@ span.psw {
 
 @media screen and (max-width: 550px) {
   input[type="text"],
-  input[type="password"] {
+  input[type="password"],
+  input[type="file"]
+
+   {
     width: 90%;
   }
 

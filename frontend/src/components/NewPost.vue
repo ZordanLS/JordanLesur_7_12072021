@@ -3,6 +3,7 @@
     <form id="postform" enctype="multipart/form-data">
       <div class="container">
         <textarea
+          class="newposttext"
           onfocus="this.style.height='250px'"
           onblur="if(this.value==''){this.style.height=''}"
           id="postcontent"
@@ -12,6 +13,8 @@
           required
           maxlength="255"
         />
+      </div>
+      <div class="container">
         <input type="file" id="postpicture" name1="postpicture" />
         <button id="postbutton" type="button">Publier !</button>
       </div>
@@ -73,7 +76,6 @@ a {
   height: 20vh;
   overflow: hidden;
 }
-#postcontent,
 input[type="text"],
 input[type="password"] {
   width: 50rem;
@@ -119,6 +121,15 @@ img.avatar {
 span.psw {
   float: right;
   padding-top: 16px;
+}
+.newposttext {
+  width: 49rem;
+  max-width: 80%;
+  height: 3rem;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  -webkit-font-smoothing: antialiased;
+  padding: 15px;
 }
 
 @media screen and (max-width: 550px) {
