@@ -55,6 +55,7 @@ export default {
   height: 3rem;
   background-color: white;
   filter : drop-shadow(0px 1px 5px grey);
+  z-index: 1;
 }
 .nav {
   display: flex;
