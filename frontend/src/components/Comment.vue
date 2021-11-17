@@ -204,6 +204,10 @@ span.psw {
   width: 50rem;
   margin-right: auto;
   margin-left: auto;
+  border: 2px solid;
+  border-color: #ff7070;
+  border-radius: 30px;
+  overflow: hidden;
 }
 
 .commentusername {

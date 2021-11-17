@@ -257,10 +257,12 @@ span.psw {
 .card {
   border: solid;
   border-color: #ff7070;
+  border-radius: 30px;
   margin: 3rem;
   width: 50rem;
   margin-right: auto;
   margin-left: auto;
+  overflow: hidden;
 }
 
 .username {
@@ -277,7 +279,12 @@ span.psw {
 }
 
 .userpic {
-  max-height: 3.5rem;
+  height: 3.5rem;
+  width: 3.5rem;
+  object-fit: cover;
+  object-position: center;
+  border-bottom-right-radius: 30px;
+
 }
 
 .cardbody {
@@ -293,12 +300,14 @@ span.psw {
   margin-left: 0.5rem;
   margin-right: auto;
   padding-bottom: 0.5rem;
+  font-weight: bold;
 }
 
 .postdate {
   margin-left: auto;
   padding-right: 1rem;
   padding-top: 0.3rem;
+  font-weight: bold;
 }
 
 .carddescription {
@@ -312,5 +321,10 @@ span.psw {
   margin-right: 0.5rem;
   margin-left: auto;
   padding-bottom: 0.5rem;
+  font-weight: bold;
+}
+.deletebutton {
+    border-bottom-left-radius: 30px;
+    font-size: 1.2rem;
 }
 </style>

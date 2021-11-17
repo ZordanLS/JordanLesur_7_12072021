@@ -98,6 +98,7 @@ button {
   border: none;
   cursor: pointer;
   width: 20rem;
+  border-radius: 30px;
 }
 
 button:hover {
@@ -115,7 +116,7 @@ img.avatar {
 }
 
 .container {
-  padding: 16px;
+  padding-top: 10px;
 }
 
 span.psw {
@@ -130,6 +131,7 @@ span.psw {
   font-size: 1rem;
   -webkit-font-smoothing: antialiased;
   padding: 15px;
+  border-radius: 30px;
 }
 
 @media screen and (max-width: 550px) {

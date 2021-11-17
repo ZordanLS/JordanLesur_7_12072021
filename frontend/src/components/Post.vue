@@ -6,6 +6,7 @@
       <form id="commentform">
         <div class="container">
           <textarea
+            class="newcommenttext"
             onfocus="this.style.height='150px'"
             onblur="if(this.value==''){this.style.height=''}"
             id="commentcontent"
@@ -244,6 +245,7 @@ input[type="password"] {
   border: none;
   cursor: pointer;
   width: 12rem;
+  border-radius: 30px;
 }
 
 #commentbutton:hover {
@@ -328,5 +330,15 @@ span.psw {
   margin-left: auto;
   padding-right: 1rem;
   padding-top: 0.3rem;
+}
+.newcommenttext {
+  width: 49rem;
+  max-width: 80%;
+  height: 3rem;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  -webkit-font-smoothing: antialiased;
+  padding: 15px;
+  border-radius: 30px;
 }
 </style>

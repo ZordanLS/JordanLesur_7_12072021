@@ -84,9 +84,14 @@ exports.update = async (req, res) => {
     user.password = hash;
   }
   if (req.file != null) {
+    User.findOne({
+      where: { id: id },
+    }).then((user) => {
+      let oldpicture = user.picture.split("http://localhost:3000/images/")[1];
+      fs.unlink(`images/${oldpicture}`, () => {});
+    });
     user.picture = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
   }
-
   let updateUserToken = req.headers.authorization;
   let clearUpdateUserToken = updateUserToken.replace("Basic ", "");
   jwt.verify(clearUpdateUserToken, "RANDOM_TOKEN_SECRET", function (err, tokeninfo) {
@@ -95,8 +100,8 @@ exports.update = async (req, res) => {
       User.update(user, {
         where: { id: id },
       })
-        .then((num) => {
-          if (num == 1) {
+      .then((num) => {
+        if (num == 1) {
             res.send({
               message: "User was updated successfully.",
             });
@@ -136,7 +141,6 @@ exports.delete = (req, res) => {
       })
         .then((user) => {
           let filename = user.picture.split("http://localhost:3000/images/")[1];
-          console.log(filename);
           fs.unlink(`images/${filename}`, () => {});
 
           User.destroy({

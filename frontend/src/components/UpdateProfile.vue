@@ -116,7 +116,7 @@ export default {
       //Création conditionnelle du bouton de suppression
       let loggedUserId = localStorage.getItem("groupomaniauserid");
       let deleteButton = document.createElement("button");
-      deleteButton.setAttribute("class", "deletebutton");
+      deleteButton.setAttribute("class", "profiledeletebutton");
       let deleteIcon = document.createElement("i");
       deleteIcon.setAttribute("class", "far fa-trash-alt");
       deleteButton.addEventListener("click", askDelete);
@@ -188,6 +188,7 @@ input[type="password"] {
   display: flex;
   border: 1px solid #ccc;
   box-sizing: border-box;
+  border-radius: 30px;
 }
 
 button {
@@ -198,6 +199,7 @@ button {
   border: none;
   cursor: pointer;
   width: 20rem;
+  border-radius: 30px;
 }
 
 button:hover {
@@ -298,7 +300,9 @@ span.psw {
   max-height: 10rem;
 }
 
-.deletebutton {
+.profiledeletebutton {
   margin-left: 0.5rem;
+  border-radius: 30px;
+  font-size: 1.2rem;
 }
 </style>

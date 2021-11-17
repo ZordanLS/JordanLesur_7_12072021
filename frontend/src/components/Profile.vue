@@ -102,6 +102,8 @@ li {
 }
 a {
   color: #ff7070;
+  text-decoration: none;
+  font-weight: bold;
 }
 .imgcontainer {
   height: 15vh;
@@ -156,7 +158,11 @@ span.psw {
 }
 
 .profileuserpic {
-  max-height: 10rem;
+  height: 10rem;
+  width: 10rem;
+  border-radius: 10px;
+  object-fit: cover;
+  object-position: center;
 }
 
 .postdate {

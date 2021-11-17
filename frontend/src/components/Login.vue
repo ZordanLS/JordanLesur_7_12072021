@@ -95,6 +95,7 @@ input[type="password"] {
   display: flex;
   border: 1px solid #ccc;
   box-sizing: border-box;
+  border-radius: 30px;
 }
 
 button {
@@ -105,6 +106,7 @@ button {
   margin: 8px auto;
   cursor: pointer;
   width: 20rem;
+  border-radius: 30px;
 }
 
 button:hover {

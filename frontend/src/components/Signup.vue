@@ -115,6 +115,7 @@ input[type="password"] {
   display: flex;
   border: 1px solid #ccc;
   box-sizing: border-box;
+  border-radius: 30px;
 }
 button {
   background-color: #ff7070;
@@ -124,6 +125,7 @@ button {
   border: none;
   cursor: pointer;
   width: 20rem;
+  border-radius: 30px;
 }
 
 button:hover {
@@ -152,9 +154,7 @@ span.psw {
 @media screen and (max-width: 550px) {
   input[type="text"],
   input[type="password"],
-  input[type="file"]
-
-   {
+  input[type="file"] {
     width: 90%;
   }
 
