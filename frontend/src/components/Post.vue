@@ -161,11 +161,18 @@ export default {
 
         // Création de la fonction de suppression de post
 
-        function askDelete() {
-          if (!window.confirm("Voulez-vous supprimer ce post ?")) {
-            return;
+        function askDelete(ev) {
+          let e = ev.target;
+          function resetDeleteIcon() {
+            e.className = "far fa-trash-alt";
+            e.parentElement.onclick = askDelete;
           }
-          deletePost();
+          if (e.tagName == "BUTTON") {
+            e = e.children[0];
+          }
+          e.className = "fas fa-check";
+          window.setTimeout(resetDeleteIcon, 2000);
+          e.parentElement.onclick = deletePost;
         }
 
         function deletePost() {
@@ -187,7 +194,7 @@ export default {
         deleteButton.setAttribute("class", "deletebutton");
         let deleteIcon = document.createElement("i");
         deleteIcon.setAttribute("class", "far fa-trash-alt");
-        deleteButton.addEventListener("click", askDelete);
+        deleteButton.onclick = askDelete;
 
         if (post.user_id === parseInt(loggedUserId)) {
           cardUser.appendChild(deleteButton);

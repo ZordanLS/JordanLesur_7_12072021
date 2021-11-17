@@ -5,7 +5,7 @@
       <h1>Profil</h1>
       <div id="profile"></div>
     </div>
-    <form id="updateform" onsubmit="return(false)">
+    <form id="updateform" onsubmit="return(false)" autocomplete="off">
       <div class="container">
         <label for="firstname"><b>Prénom</b></label>
         <input type="text" placeholder="Entrez votre prénom" name="firstname" />
@@ -94,12 +94,19 @@ export default {
 
       // Création de la fonction de suppression de compte
 
-      function askDelete() {
-        if (!window.confirm("Voulez-vous vraiment supprimer votre compte ?")) {
-          return;
+        function askDelete(ev) {
+          let e = ev.target;
+          function resetDeleteIcon() {
+            e.className = "far fa-trash-alt";
+            e.parentElement.onclick = askDelete;
+          }
+          if (e.tagName == "BUTTON") {
+            e = e.children[0];
+          }
+          e.className = "fas fa-check";
+          window.setTimeout(resetDeleteIcon, 2000);
+          e.parentElement.onclick = deleteUser;
         }
-        deleteUser();
-      }
 
       function deleteUser() {
         let body = JSON.stringify({ userid: user.id });
@@ -119,7 +126,7 @@ export default {
       deleteButton.setAttribute("class", "profiledeletebutton");
       let deleteIcon = document.createElement("i");
       deleteIcon.setAttribute("class", "far fa-trash-alt");
-      deleteButton.addEventListener("click", askDelete);
+      deleteButton.onclick = askDelete;
 
       if (user.id === parseInt(loggedUserId)) {
         rightSide.appendChild(deleteButton);

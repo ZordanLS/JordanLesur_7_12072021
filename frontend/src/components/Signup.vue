@@ -3,7 +3,7 @@
     <div class="imgcontainer">
       <img src="../assets/icon-above-font.png" alt="Groupomania" class="logo" />
     </div>
-    <form id="signupform" onsubmit="return(false)">
+    <form id="signupform" onsubmit="return(false)" autocomplete="off">
       <div class="container">
         <label for="email"><b>Adresse email</b></label>
         <input type="text" placeholder="Entrez votre adresse email" name="email" required />
@@ -23,6 +23,7 @@
         <span class="texterror hidden" id="confirmpassworderror">Les mots de passe ne sont pas identiques<br /><br /></span>
 
         <label for="profilepic"><b>Photo de profil (facultatif)</b></label>
+        <label for="profilepic"><img src=""/></label>
         <input type="file" name="profilepic" id="profilepic" />
 
         <button id="signupbutton" type="button">S'inscrire</button>

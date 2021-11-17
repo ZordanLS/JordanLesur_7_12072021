@@ -156,11 +156,18 @@ export default {
 
         // Création de la fonction de suppression de post
 
-        function askDelete() {
-          if (!window.confirm("Voulez-vous supprimer ce post ?")) {
-            return;
+        function askDelete(ev) {
+          let e = ev.target;
+          function resetDeleteIcon() {
+            e.className = "far fa-trash-alt";
+            e.parentElement.onclick = askDelete;
           }
-          deletePost();
+          if (e.tagName == "BUTTON") {
+            e = e.children[0];
+          }
+          e.className = "fas fa-check";
+          window.setTimeout(resetDeleteIcon, 2000);
+          e.parentElement.onclick = deletePost;
         }
 
         function deletePost() {
@@ -182,7 +189,8 @@ export default {
         deleteButton.setAttribute("class", "deletebutton");
         let deleteIcon = document.createElement("i");
         deleteIcon.setAttribute("class", "far fa-trash-alt");
-        deleteButton.addEventListener("click", askDelete);
+        deleteIcon.setAttribute("id", "deleteicon");
+        deleteButton.onclick = askDelete;
 
         if (post.user_id === parseInt(loggedUserId)) {
           cardUser.appendChild(deleteButton);
@@ -284,7 +292,6 @@ span.psw {
   object-fit: cover;
   object-position: center;
   border-bottom-right-radius: 30px;
-
 }
 
 .cardbody {
@@ -324,7 +331,7 @@ span.psw {
   font-weight: bold;
 }
 .deletebutton {
-    border-bottom-left-radius: 30px;
-    font-size: 1.2rem;
+  border-bottom-left-radius: 30px;
+  font-size: 1.2rem;
 }
 </style>

@@ -117,8 +117,10 @@ exports.delete = (req, res) => {
         where: { id: id },
       })
         .then((post) => {
+          if (post.picture != null) {
           let filename = post.picture.split("http://localhost:3000/images/")[1];
           fs.unlink(`images/${filename}`, () => {});
+          }
           Post.destroy({
             where: { id: id },
           })
