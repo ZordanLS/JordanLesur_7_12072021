@@ -131,20 +131,13 @@ span.psw {
   input[type="password"] {
     width: 90%;
   }
-
-  button {
-    width: 60%;
+}
+@media screen and (max-width: 870px) {
+  .card {
+    width: 90%;
   }
 }
 
-.usercard {
-  display: flex;
-  flex-direction: row;
-  margin: 3rem;
-  width: 50rem;
-  margin-right: auto;
-  margin-left: auto;
-}
 
 .username {
   text-align: left;
@@ -178,6 +171,7 @@ span.psw {
 
 #profile {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
 }
 
@@ -185,6 +179,12 @@ span.psw {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.8rem;
+  font-size: 2vmax;
 }
+.deletebutton {
+  border-bottom-left-radius: 30px;
+  font-size: 1.2rem;
+  height: 3.5rem;
+}
+
 </style>

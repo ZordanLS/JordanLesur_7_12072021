@@ -250,12 +250,12 @@ span.psw {
 }
 
 @media screen and (max-width: 550px) {
+  input[type="file"],
   input[type="text"],
   input[type="password"] {
     width: 90%;
   }
-
-  button {
+  #updatebutton {
     width: 60%;
   }
 }
@@ -294,14 +294,16 @@ span.psw {
 
 #profile {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
 }
 
 .rightside {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  font-size: 1.8rem;
+  font-size: 2vmax;
 }
 .profileuserpic {
   max-height: 10rem;

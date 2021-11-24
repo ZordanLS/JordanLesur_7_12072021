@@ -256,10 +256,6 @@ span.psw {
   input[type="password"] {
     width: 90%;
   }
-
-  button {
-    width: 60%;
-  }
 }
 
 .card {
@@ -271,6 +267,12 @@ span.psw {
   margin-right: auto;
   margin-left: auto;
   overflow: hidden;
+}
+
+@media screen and (max-width: 870px) {
+  .card {
+    width: 90%;
+  }
 }
 
 .username {
@@ -330,8 +332,10 @@ span.psw {
   padding-bottom: 0.5rem;
   font-weight: bold;
 }
+
 .deletebutton {
   border-bottom-left-radius: 30px;
   font-size: 1.2rem;
+  height: 3.5rem;
 }
 </style>

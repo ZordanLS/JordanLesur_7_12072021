@@ -33,14 +33,10 @@ body {
   height: 3rem;
 }
 .nav {
-  padding: 10px 30px;
+  padding: 10px 10px;
   a {
     font-weight: bold;
     color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #ff7070;
-    }
   }
 }
 </style>

@@ -138,13 +138,10 @@ span.psw {
   input[type="password"] {
     width: 90%;
   }
-
-  button {
-    width: 60%;
-  }
 }
 .uploadcontainer {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
 }
 input[type="file"] {

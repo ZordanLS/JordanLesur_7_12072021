@@ -1,7 +1,8 @@
 <template>
   <div id="navcontainer" class="nav-container">
     <div class="nav">
-      <router-link to="/"><img src="../assets/header-logo.png" alt="Logo Groupomania" class="headerlogo"/></router-link>
+      <router-link to="/"><img src="../assets/header-logo.png" alt="Logo Groupomania" class="headerlogo" id="logobig"/></router-link>
+      <router-link to="/"><img src="../assets/icon.png" alt="Logo Groupomania" class="headerlogo" id="logosmall"/></router-link>
     </div>
     <div class="nav">
       <a id="profilelink"><i class="fas fa-user iconlink" /><span class="textlink">Mon profil</span></a>
@@ -54,12 +55,11 @@ export default {
   justify-content: space-between;
   height: 3rem;
   background-color: white;
-  filter : drop-shadow(0px 1px 5px grey);
+  filter: drop-shadow(0px 1px 5px grey);
   z-index: 1;
 }
 .nav {
   display: flex;
-  padding: 10px 30px;
   a {
     display: flex;
     white-space: nowrap;
@@ -73,6 +73,9 @@ export default {
     display: none;
   }
 }
+    #logosmall {
+          display: none;
+    }
 @media screen and (max-width: 545px) {
   .nav {
     .iconlink {
@@ -82,6 +85,14 @@ export default {
     }
   }
   .textlink {
+    display: none;
+  }
+}
+@media screen and (max-width: 390px) {
+  #logosmall {
+    display: flex;
+  }
+  #logobig {
     display: none;
   }
 }

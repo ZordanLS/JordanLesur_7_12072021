@@ -237,10 +237,6 @@ span.psw {
   input[type="password"] {
     width: 90%;
   }
-
-  button {
-    width: 60%;
-  }
 }
 
 .card {
