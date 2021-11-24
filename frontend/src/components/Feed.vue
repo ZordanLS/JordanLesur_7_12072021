@@ -117,6 +117,10 @@ export default {
         let cardBottom = document.createElement("div");
         cardBottom.setAttribute("class", "cardbottom");
 
+        // Création de la div postInfoContainer
+        let postInfoContainer = document.createElement("div");
+        postInfoContainer.setAttribute("class", "postinfocontainer");
+
         // Création du nombre de commentaires
         let commentCount = document.createElement("p");
         commentCount.setAttribute("class", "commentcount");
@@ -138,8 +142,9 @@ export default {
         container.appendChild(card);
         card.appendChild(cardUser);
         cardUser.appendChild(cardUserPic);
-        cardUser.appendChild(cardUserName);
-        cardUser.appendChild(cardPostDate);
+        cardUser.appendChild(postInfoContainer);
+        postInfoContainer.appendChild(cardUserName);
+        postInfoContainer.appendChild(cardPostDate);
         card.appendChild(cardBody);
         cardBody.appendChild(cardDescription);
         card.appendChild(cardBottom);
@@ -337,5 +342,10 @@ span.psw {
   border-bottom-left-radius: 30px;
   font-size: 1.2rem;
   height: 3.5rem;
+}
+.postinfocontainer {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
 }
 </style>

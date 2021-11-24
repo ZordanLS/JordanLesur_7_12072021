@@ -102,12 +102,17 @@ export default {
         cardDescription.setAttribute("class", "commentcarddescription");
         cardDescription.innerText = post.content;
 
+        // Création de la div postInfoContainer
+        let commentInfoContainer = document.createElement("div");
+        commentInfoContainer.setAttribute("class", "commentinfocontainer");
+
         // Création de la structure parent/enfants de la page des produits
         container.appendChild(card);
         card.appendChild(cardUser);
         cardUser.appendChild(cardUserPic);
-        cardUser.appendChild(cardUserName);
-        cardUser.appendChild(cardPostDate);
+        cardUser.appendChild(commentInfoContainer);
+        commentInfoContainer.appendChild(cardUserName);
+        commentInfoContainer.appendChild(cardPostDate);
         card.appendChild(cardBody);
         cardBody.appendChild(cardDescription);
 
@@ -212,6 +217,12 @@ span.psw {
   overflow: hidden;
 }
 
+@media screen and (max-width: 870px) {
+  .commentcard {
+    width: 90%;
+  }
+}
+
 .commentusername {
   text-decoration: none;
   text-align: left;
@@ -250,5 +261,11 @@ span.psw {
   margin-right: 0.5rem;
   margin-left: auto;
   padding-bottom: 0.5rem;
+}
+
+.commentinfocontainer {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
 }
 </style>

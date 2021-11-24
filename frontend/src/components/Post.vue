@@ -137,6 +137,10 @@ export default {
         let cardBottom = document.createElement("div");
         cardBottom.setAttribute("class", "cardbottom");
 
+        // Création de la div postInfoContainer
+        let postInfoContainer = document.createElement("div");
+        postInfoContainer.setAttribute("class", "postinfocontainer");
+
         // Création du nombre de commentaires
         let commentCount = document.createElement("p");
         commentCount.setAttribute("class", "commentcount");
@@ -148,12 +152,13 @@ export default {
           commentCount.innerText = post.comments_count + " " + "commentaire";
         }
 
-        // Création de la structure parent/enfants de la page des produits
+        // Création de la structure parent/enfants de la carte du post
         container.appendChild(card);
         card.appendChild(cardUser);
         cardUser.appendChild(cardUserPic);
-        cardUser.appendChild(cardUserName);
-        cardUser.appendChild(cardPostDate);
+        cardUser.appendChild(postInfoContainer);
+        postInfoContainer.appendChild(cardUserName);
+        postInfoContainer.appendChild(cardPostDate);
         card.appendChild(cardBody);
         cardBody.appendChild(cardDescription);
         card.appendChild(cardBottom);
@@ -247,7 +252,7 @@ input[type="password"] {
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
-  margin-left: 30rem;
+  margin-left: 50%;
   border: none;
   cursor: pointer;
   width: 12rem;
@@ -300,6 +305,9 @@ span.psw {
   input[type="password"] {
     width: 90%;
   }
+  #commentbutton {
+    width: 35%;
+  }
 }
 @media screen and (max-width: 870px) {
   .card {
@@ -344,5 +352,9 @@ span.psw {
   font-size: 1.2rem;
   height: 3.5rem;
 }
-
+.postinfocontainer {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
 </style>
