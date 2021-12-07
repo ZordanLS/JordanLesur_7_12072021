@@ -8,16 +8,16 @@
     <form id="updateform" onsubmit="return(false)" autocomplete="off">
       <div class="container">
         <label for="firstname"><b>Prénom</b></label>
-        <input type="text" placeholder="Entrez votre prénom" name="firstname" />
+        <input type="text" id="firstname" placeholder="Entrez votre prénom" name="firstname" />
 
-        <label for="lastname"><b>Nom</b></label>
-        <input type="text" placeholder="Entrez votre nom" name="lastname" />
+        <label for="lastname"><b>Nom de famille</b></label>
+        <input type="text" id="lastname" placeholder="Entrez votre nom" name="lastname" />
 
         <label for="password"><b>Nouveau mot de passe</b></label>
-        <input type="password" placeholder="Entrez votre nouveau mot de passe" name="password" />
+        <input type="password" id="password" placeholder="Entrez votre nouveau mot de passe" name="password" />
 
-        <label for="password"><b>Vérification du nouveau mot de passe</b></label>
-        <input type="password" placeholder="Entrez à nouveau votre mot de passe" name="confirmpassword" />
+        <label for="confirmpassword"><b>Vérification du nouveau mot de passe</b></label>
+        <input type="password" id="confirmpassword" placeholder="Entrez à nouveau votre mot de passe" name="confirmpassword" />
 
         <span class="texterror hidden" id="confirmpassworderror">Les mots de passe ne sont pas identiques<br /><br /></span>
 
@@ -71,6 +71,7 @@ export default {
       // Création de l'image de profil
       let userPic = document.createElement("img");
       userPic.setAttribute("class", "profileuserpic");
+      userPic.setAttribute("alt", "User profile pic");
       userPic.setAttribute("src", user.picture);
 
       // Création du nom d'utilisateur
@@ -124,6 +125,7 @@ export default {
       let loggedUserId = localStorage.getItem("groupomaniauserid");
       let deleteButton = document.createElement("button");
       deleteButton.setAttribute("class", "profiledeletebutton");
+      deleteButton.setAttribute("aria-label", "Bouton de suppression du compte");
       let deleteIcon = document.createElement("i");
       deleteIcon.setAttribute("class", "far fa-trash-alt");
       deleteButton.onclick = askDelete;
@@ -199,7 +201,7 @@ input[type="password"] {
 }
 
 button {
-  background-color: #ff7070;
+  background-color: #df7070;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -207,6 +209,8 @@ button {
   cursor: pointer;
   width: 20rem;
   border-radius: 30px;
+  font-size: 14pt;
+  font-weight: bold;
 }
 
 button:hover {
@@ -226,7 +230,7 @@ li {
   margin: 0 10px;
 }
 a {
-  color: #ff7070;
+  color: #df7070;
 }
 .imgcontainer {
   height: 15vh;
@@ -314,9 +318,12 @@ span.psw {
   border-radius: 30px;
   font-size: 1.2rem;
 }
+.hidden {
+  display: none;
+}
 .texterror {
   font-family: Arial;
-  font-size: 12px;
+  font-size: 14pt;
   font-weight: bold;
   color: red;
 }

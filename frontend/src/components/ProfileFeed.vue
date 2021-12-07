@@ -1,10 +1,8 @@
 <template>
-  <main>
     <div>
-      <h1>Ses posts :</h1>
+      <h2>Ses posts :</h2>
       <div id="profileposts"></div>
     </div>
-  </main>
 </template>
 
 <script>
@@ -74,6 +72,7 @@ export default {
         // Création de l'image de profil
         let cardUserPic = document.createElement("img");
         cardUserPic.setAttribute("class", "userpic");
+        cardUserPic.setAttribute("alt", "User profile picture");
         cardUserPic.setAttribute("src", post.user_picture);
 
         function capitalizeFirstLetter(string) {
@@ -125,6 +124,7 @@ export default {
         //Création du lien vers le post
         let postLink = document.createElement("a");
         postLink.setAttribute("class", "postlink");
+        postLink.setAttribute("aria-label", "Lien vers le post " + post.id);
         postLink.setAttribute("href", "http://localhost:8080/#/Post?id=" + post.id);
         postLink.innerText = "Ouvrir le post !";
 
@@ -145,6 +145,7 @@ export default {
           // Création de l'image de post
           let postContentPicture = document.createElement("img");
           postContentPicture.setAttribute("class", "postcontentpic");
+          postContentPicture.setAttribute("alt", "Picture of the post");
           postContentPicture.setAttribute("src", post.picture);
           cardBody.appendChild(postContentPicture);
         }
@@ -182,6 +183,7 @@ export default {
         let userRole = localStorage.getItem("groupomaniarole");
         let deleteButton = document.createElement("button");
         deleteButton.setAttribute("class", "deletebutton");
+        deleteButton.setAttribute("aria-label", "Suppression du post");
         let deleteIcon = document.createElement("i");
         deleteIcon.setAttribute("class", "far fa-trash-alt");
         deleteButton.onclick = askDelete;
@@ -200,11 +202,6 @@ export default {
 </script>
 
 <style>
-h1 {
-  text-align: left;
-  margin: 40px 0 0;
-  margin-left: 3rem;
-}
 ul {
   list-style-type: none;
   padding: 0;
@@ -214,7 +211,7 @@ li {
   margin: 0 10px;
 }
 a {
-  color: #ff7070;
+  color: #df7070;
 }
 .imgcontainer {
   height: 15vh;
@@ -246,7 +243,7 @@ span.psw {
 
 .card {
   border: solid;
-  border-color: #ff7070;
+  border-color: #df7070;
   margin: 3rem;
   width: 50rem;
   margin-right: auto;

@@ -52,6 +52,7 @@ export default {
       // Création de l'image de profil
       let userPic = document.createElement("img");
       userPic.setAttribute("class", "profileuserpic");
+      userPic.setAttribute("alt", "User profile picture");
       userPic.setAttribute("src", user.picture);
 
       // Création du nom d'utilisateur
@@ -101,9 +102,10 @@ li {
   margin: 0 10px;
 }
 a {
-  color: #ff7070;
+  color: #df7070;
   text-decoration: none;
   font-weight: bold;
+  font-size: 14pt;
 }
 .imgcontainer {
   height: 15vh;
