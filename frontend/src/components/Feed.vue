@@ -85,6 +85,7 @@ export default {
         // Création de l'image de profil
         let cardUserPic = document.createElement("img");
         cardUserPic.setAttribute("class", "userpic");
+        cardUserPic.setAttribute("alt", "User profile picture");
         cardUserPic.setAttribute("src", post.user_picture);
 
         function capitalizeFirstLetter(string) {
@@ -135,6 +136,7 @@ export default {
         // Création du lien vers le post
         let postLink = document.createElement("a");
         postLink.setAttribute("class", "postlink");
+        postLink.setAttribute("aria-label", "Lien vers le post " + post.id);
         postLink.setAttribute("href", "/#/Post?id=" + post.id);
         postLink.innerText = "Ouvrir le post !";
 
@@ -155,6 +157,7 @@ export default {
           // Création de l'image de post
           let postContentPicture = document.createElement("img");
           postContentPicture.setAttribute("class", "postcontentpic");
+          postContentPicture.setAttribute("alt", "Picture of the post");
           postContentPicture.setAttribute("src", post.picture);
           cardBody.appendChild(postContentPicture);
         }
@@ -192,6 +195,7 @@ export default {
         let userRole = localStorage.getItem("groupomaniarole");
         let deleteButton = document.createElement("button");
         deleteButton.setAttribute("class", "deletebutton");
+        deleteButton.setAttribute("aria-label", "Suppression du post");
         let deleteIcon = document.createElement("i");
         deleteIcon.setAttribute("class", "far fa-trash-alt");
         deleteIcon.setAttribute("id", "deleteicon");
@@ -212,7 +216,7 @@ export default {
 
 <style>
 button {
-  background-color: #ff7070;
+  background-color: #df7070;
   color: white;
   border: none;
   cursor: pointer;
@@ -233,7 +237,7 @@ li {
   margin: 0 10px;
 }
 a {
-  color: #ff7070;
+  color: #df7070;
 }
 .imgcontainer {
   height: 15vh;
@@ -265,7 +269,7 @@ span.psw {
 
 .card {
   border: solid;
-  border-color: #ff7070;
+  border-color: #df7070;
   border-radius: 30px;
   margin: 3rem;
   width: 50rem;
@@ -287,6 +291,7 @@ span.psw {
   padding-left: 1rem;
   font-weight: bold;
   font-size: 1.2rem;
+  font-size: 14pt;
 }
 
 .carduser {
@@ -315,6 +320,7 @@ span.psw {
   margin-right: auto;
   padding-bottom: 0.5rem;
   font-weight: bold;
+  font-size: 14pt;
 }
 
 .postdate {
@@ -322,11 +328,13 @@ span.psw {
   padding-right: 1rem;
   padding-top: 0.3rem;
   font-weight: bold;
+  font-size: 14pt;
 }
 
 .carddescription {
   text-align: left;
   margin-left: 2rem;
+  font-size: 14pt;
 }
 
 .postlink {
@@ -336,6 +344,7 @@ span.psw {
   margin-left: auto;
   padding-bottom: 0.5rem;
   font-weight: bold;
+  font-size: 14pt;
 }
 
 .deletebutton {

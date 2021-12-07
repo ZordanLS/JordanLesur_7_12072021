@@ -1,8 +1,8 @@
 <template>
   <div id="navcontainer" class="nav-container">
     <div class="nav">
-      <router-link to="/"><img src="../assets/header-logo.png" alt="Logo Groupomania" class="headerlogo" id="logobig"/></router-link>
-      <router-link to="/"><img src="../assets/icon.png" alt="Logo Groupomania" class="headerlogo" id="logosmall"/></router-link>
+      <router-link aria-label="Home link" to="/"><img src="../assets/header-logo.png" alt="Logo Groupomania" class="headerlogo" id="logobig"/></router-link>
+      <router-link aria-label="Home link" to="/"><img src="../assets/icon.png" alt="Logo Groupomania" class="headerlogo" id="logosmall"/></router-link>
     </div>
     <div class="nav">
       <a id="profilelink"><i class="fas fa-user iconlink" /><span class="textlink">Mon profil</span></a>

@@ -103,14 +103,6 @@ export default {
         cardDescription.setAttribute("class", "carddescription");
         cardDescription.innerText = post.content;
 
-        if (post.picture != null) {
-          // Création de l'image de post
-          let postContentPicture = document.createElement("img");
-          postContentPicture.setAttribute("class", "postcontentpic");
-          postContentPicture.setAttribute("src", post.picture);
-          cardBody.appendChild(postContentPicture);
-        }
-
         // Création de la div cardBottom
         let cardBottom = document.createElement("div");
         cardBottom.setAttribute("class", "cardbottom");
@@ -148,6 +140,14 @@ export default {
         card.appendChild(cardBottom);
         cardBottom.appendChild(commentCount);
         cardBottom.appendChild(postLink);
+
+        if (post.picture != null) {
+          // Création de l'image de post
+          let postContentPicture = document.createElement("img");
+          postContentPicture.setAttribute("class", "postcontentpic");
+          postContentPicture.setAttribute("src", post.picture);
+          cardBody.appendChild(postContentPicture);
+        }
 
         // Création de la fonction de suppression de post
 

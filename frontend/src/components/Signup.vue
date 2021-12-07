@@ -1,24 +1,24 @@
 <template>
   <div>
-    <div class="imgcontainer">
+    <h1 class="imgcontainer">
       <img src="../assets/icon-above-font.png" alt="Groupomania" class="logo" />
-    </div>
+    </h1>
     <form id="signupform" onsubmit="return(false)" autocomplete="off">
       <div class="container">
         <label for="email"><b>Adresse email</b></label>
-        <input type="text" placeholder="Entrez votre adresse email" name="email" required />
+        <input type="text" id="email" placeholder="Entrez votre adresse email" name="email" required />
 
         <label for="firstname"><b>Prénom</b></label>
-        <input type="text" placeholder="Entrez votre prénom" name="firstname" required />
+        <input type="text" id="firstname" placeholder="Entrez votre prénom" name="firstname" required />
 
-        <label for="lastname"><b>Nom</b></label>
-        <input type="text" placeholder="Entrez votre nom" name="lastname" required />
+        <label for="lastname"><b>Nom de famille</b></label>
+        <input type="text" id="lastname" placeholder="Entrez votre nom de famille" name="lastname" required />
 
         <label for="password"><b>Mot de passe</b></label>
-        <input type="password" placeholder="Entrez votre mot de passe" name="password" required />
+        <input type="password" id="password" placeholder="Entrez votre mot de passe" name="password" required />
 
-        <label for="password"><b>Vérification du mot de passe</b></label>
-        <input type="password" placeholder="Entrez à nouveau votre mot de passe" name="confirmpassword" required />
+        <label for="confirmpassword"><b>Confirmation du mot de passe</b></label>
+        <input type="password" id="confirmpassword" placeholder="Entrez à nouveau votre mot de passe" name="confirmpassword" required />
 
         <span class="texterror hidden" id="confirmpassworderror">Les mots de passe ne sont pas identiques<br /><br /></span>
 
@@ -28,7 +28,7 @@
         <button id="signupbutton" type="button">S'inscrire</button>
       </div>
       <div class="container">
-        <span class="psw">Déjà inscrit ? <router-link to="/Login">Connectez vous</router-link> </span>
+        <span class="psw loginlink">Déjà inscrit ? <router-link to="/Login">Connectez vous</router-link> </span>
       </div>
     </form>
   </div>
@@ -79,6 +79,10 @@ export default {
 </script>
 
 <style scoped>
+.loginlink {
+font-size: 14pt;
+font-weight: bold;
+}
 h3 {
   margin: 40px 0 0;
 }
@@ -91,7 +95,8 @@ li {
   margin: 0 10px;
 }
 a {
-  color: #ff7070;
+  color: #df7070;
+  text-decoration: none;
 }
 .imgcontainer {
   height: 15vh;
@@ -118,14 +123,17 @@ input[type="password"] {
   border-radius: 30px;
 }
 button {
-  background-color: #ff7070;
+  background-color: #df7070;
   color: white;
   padding: 14px 20px;
-  margin: 8px 0;
   border: none;
+  margin: 8px auto;
   cursor: pointer;
   width: 20rem;
   border-radius: 30px;
+  font-size: 14pt;
+  font-weight: bold;
+  min-width: 160px;
 }
 
 button:hover {
@@ -162,10 +170,12 @@ span.psw {
     width: 60%;
   }
 }
-
+.hidden {
+  display: none;
+}
 .texterror {
   font-family: Arial;
-  font-size: 12px;
+  font-size: 14pt;
   font-weight: bold;
   color: red;
 }

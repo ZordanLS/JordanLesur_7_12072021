@@ -1,24 +1,21 @@
 <template>
   <div>
-    <div class="imgcontainer">
+    <h1 class="imgcontainer">
       <img src="../assets/icon-above-font.png" alt="Groupomania" class="logo" />
-    </div>
+    </h1>
     <form id="loginform" onsubmit="return(false)">
       <div class="container">
         <label for="email"><b>Adresse email</b></label>
-        <input type="text" placeholder="Entrez votre adresse email" name="email" required />
+        <input id="email" type="text" name="email" required />
 
         <label for="password"><b>Mot de passe</b></label>
-        <input type="password" placeholder="Entrez votre mot de passe" name="password" required />
+        <input id="password" type="password" name="password" required />
 
         <button id="loginbutton" type="button">Se connecter</button>
-        <div>
-          <label class="button-label"> <input type="checkbox" checked="unchecked" name="remember" /> Se souvenir de moi </label>
-        </div>
       </div>
 
       <div class="container">
-        <span class="psw"
+        <span class="psw signuplink"
           >Pas encore inscrit ?
           <router-link to="/Signup">Créez votre compte</router-link>
         </span>
@@ -59,6 +56,10 @@ export default {
 </script>
 
 <style scoped>
+.signuplink {
+font-size: 14pt;
+font-weight: bold;
+}
 h3 {
   margin: 40px 0 0;
 }
@@ -71,7 +72,8 @@ li {
   margin: 0 10px;
 }
 a {
-  color: #ff7070;
+  color: #df7070;
+  text-decoration: none;
 }
 .imgcontainer {
   height: 15vh;
@@ -98,7 +100,7 @@ input[type="password"] {
 }
 
 button {
-  background-color: #ff7070;
+  background-color: #df7070;
   color: white;
   padding: 14px 20px;
   border: none;
@@ -106,6 +108,9 @@ button {
   cursor: pointer;
   width: 20rem;
   border-radius: 30px;
+  font-size: 14pt;
+  font-weight: bold;
+  min-width: 160px;
 }
 
 button:hover {

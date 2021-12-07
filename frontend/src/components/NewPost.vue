@@ -2,13 +2,14 @@
   <div>
     <form id="postform" enctype="multipart/form-data">
       <div class="container">
+        <label class="postlabel" for="postcontent">Qu'avez-vous à dire ?</label><br>
         <textarea
           class="newposttext"
           onfocus="this.style.height='250px'"
-          onblur="if(this.value==''){this.style.height=''}"
+          onblur="if(this.value==''){this.style.height='20px'}"
+          placeholder="Tapez ici !"
           id="postcontent"
           type="text"
-          placeholder="Qu'avez-vous à dire?"
           name="postcontent"
           required
           maxlength="255"
@@ -51,6 +52,10 @@ export default {
 </script>
 
 <style scoped>
+.postlabel {
+  font-weight: bold;
+  font-size: 14pt;
+}
 h3 {
   margin: 40px 0 0;
 }
@@ -63,7 +68,7 @@ li {
   margin: 0 10px;
 }
 a {
-  color: #ff7070;
+  color: #df7070;
 }
 .imgcontainer {
   height: 15vh;
@@ -90,7 +95,7 @@ input[type="password"] {
 }
 
 button {
-  background-color: #ff7070;
+  background-color: #df7070;
   color: white;
   padding: none;
   margin: 8px 0;
@@ -98,6 +103,8 @@ button {
   cursor: pointer;
   width: 20rem;
   border-radius: 30px;
+  font-size: 14pt;
+  font-weight: bold;
 }
 
 button:hover {
@@ -125,7 +132,7 @@ span.psw {
 .newposttext {
   width: 49rem;
   max-width: 80%;
-  height: 3rem;
+  height: 20px;
   font-family: Helvetica, Arial, sans-serif;
   font-size: 1rem;
   -webkit-font-smoothing: antialiased;
@@ -138,6 +145,10 @@ span.psw {
   input[type="password"] {
     width: 90%;
   }
+  button {
+    width: 60%;
+    min-width: 160px;
+  }
 }
 .uploadcontainer {
   display: flex;
@@ -145,6 +156,7 @@ span.psw {
   justify-content: center;
 }
 input[type="file"] {
-  padding-top: 1.2rem;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 </style>

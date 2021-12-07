@@ -1,10 +1,8 @@
 <template>
-  <main>
     <div>
       <h1>Commentaires</h1>
       <div id="comments"></div>
     </div>
-  </main>
 </template>
 
 <script>
@@ -75,6 +73,7 @@ export default {
         let cardUserPic = document.createElement("img");
         cardUserPic.setAttribute("class", "commentuserpic");
         cardUserPic.setAttribute("src", post.picture);
+        cardUserPic.setAttribute("alt", "User profile picture");
 
         function capitalizeFirstLetter(string) {
           return string.charAt(0).toUpperCase() + string.slice(1);
@@ -143,6 +142,7 @@ export default {
         let userRole = localStorage.getItem("groupomaniarole");
         let deleteButton = document.createElement("button");
         deleteButton.setAttribute("class", "deletebutton");
+        deleteButton.setAttribute("aria-label", "Suppression du commentaire");
         let deleteIcon = document.createElement("i");
         deleteIcon.setAttribute("class", "far fa-trash-alt");
         deleteButton.onclick = askDelete;
@@ -176,7 +176,7 @@ li {
   margin: 0 10px;
 }
 a {
-  color: #ff7070;
+  color: #df7070;
 }
 .imgcontainer {
   height: 15vh;
@@ -212,7 +212,7 @@ span.psw {
   margin-right: auto;
   margin-left: auto;
   border: 2px solid;
-  border-color: #ff7070;
+  border-color: #df7070;
   border-radius: 30px;
   overflow: hidden;
 }
@@ -229,7 +229,7 @@ span.psw {
   padding-top: 1rem;
   padding-left: 1rem;
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 14pt;
 }
 
 .carduser {
@@ -254,7 +254,7 @@ span.psw {
 .commentcarddescription {
   text-align: left;
   margin-left: 2rem;
-  font-size: 0.9rem;
+  font-size: 14pt;
 }
 
 .postlink {

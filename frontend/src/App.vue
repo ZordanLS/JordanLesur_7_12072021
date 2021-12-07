@@ -6,7 +6,11 @@
 
 <script>
 export default {
-  mounted() {
+  created() {
+    const html = document.documentElement
+    html.setAttribute('lang', 'fr')
+  },
+    mounted() {
     let fontAwesome = document.createElement("script");
     fontAwesome.setAttribute("src", "https://kit.fontawesome.com/cc06608881.js");
     fontAwesome.setAttribute("crossorigin", "anonymous");

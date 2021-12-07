@@ -5,13 +5,14 @@
       <div id="posts"></div>
       <form id="commentform">
         <div class="container">
+          <label class="commentlabel" for="commentcontent">Vous voulez répondre ?</label>
           <textarea
             class="newcommenttext"
             onfocus="this.style.height='150px'"
             onblur="if(this.value==''){this.style.height=''}"
             id="commentcontent"
             type="text"
-            placeholder="Qu'avez-vous à dire?"
+            placeholder="Tapez ici !"
             name="commentcontent"
             required
             maxlength="255"
@@ -101,6 +102,8 @@ export default {
         let cardUserPic = document.createElement("img");
         cardUserPic.setAttribute("class", "userpic");
         cardUserPic.setAttribute("src", post.user_picture);
+        cardUserPic.setAttribute("alt", "User profile picture");
+
 
         // Creation du nom d'utilisateur
         let cardUserName = document.createElement("a");
@@ -125,13 +128,6 @@ export default {
         cardDescription.setAttribute("class", "carddescription");
         cardDescription.innerText = post.content;
 
-        if (post.picture != null) {
-          // Création de l'image de post
-          let postContentPicture = document.createElement("img");
-          postContentPicture.setAttribute("class", "postcontentpic");
-          postContentPicture.setAttribute("src", post.picture);
-          cardBody.appendChild(postContentPicture);
-        }
 
         // Création de la div cardBottom
         let cardBottom = document.createElement("div");
@@ -164,6 +160,14 @@ export default {
         card.appendChild(cardBottom);
         cardBottom.appendChild(commentCount);
 
+        if (post.picture != null) {
+          // Création de l'image de post
+          let postContentPicture = document.createElement("img");
+          postContentPicture.setAttribute("class", "postcontentpic");
+          postContentPicture.setAttribute("alt", "Picture of the post");
+          postContentPicture.setAttribute("src", post.picture);
+          cardBody.appendChild(postContentPicture);
+        }
         // Création de la fonction de suppression de post
 
         function askDelete(ev) {
@@ -197,6 +201,7 @@ export default {
         let userRole = localStorage.getItem("groupomaniarole");
         let deleteButton = document.createElement("button");
         deleteButton.setAttribute("class", "deletebutton");
+        deleteButton.setAttribute("aria-label", "Suppression du post");
         let deleteIcon = document.createElement("i");
         deleteIcon.setAttribute("class", "far fa-trash-alt");
         deleteButton.onclick = askDelete;
@@ -233,6 +238,10 @@ export default {
 </script>
 
 <style>
+.commentlabel {
+  font-size: 14pt;
+  font-weight: bold;
+}
 #commentcontent,
 input[type="text"],
 input[type="password"] {
@@ -248,7 +257,7 @@ input[type="password"] {
 }
 
 #commentbutton {
-  background-color: #ff7070;
+  background-color: #df7070;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -257,6 +266,8 @@ input[type="password"] {
   cursor: pointer;
   width: 12rem;
   border-radius: 30px;
+  font-size: 14pt;
+  font-weight: bold;
 }
 
 #commentbutton:hover {
@@ -277,7 +288,7 @@ li {
   margin: 0 10px;
 }
 a {
-  color: #ff7070;
+  color: #df7070;
 }
 .imgcontainer {
   height: 15vh;
