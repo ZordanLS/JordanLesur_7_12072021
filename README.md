@@ -7,7 +7,7 @@ Instructions pour l'installation :
 
 Créer une nouvelle base de données mysql "groupomania"
 Depuis l'emplacement du fichier groupomania.sql, utilisez :
-mysql -u username -p password groupomania < "C:\groupomania.sql"
+mysql -u username -p password groupomania < groupomania.sql
 ou importer groupomania.sql dans votre gestionnaire de bases de données SQL
 
 Un compte administrateur est automatiquement créé pour l'environnement de test.
