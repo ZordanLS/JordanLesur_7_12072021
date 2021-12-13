@@ -232,7 +232,6 @@
     "signal-exit": "^3.0.6",
     "sliced": "^1.0.1",
     "sparse-bitfield": "^3.0.3",
-    "sqlite3": "^4.2.0",
     "sqlstring": "^2.3.1",
     "statuses": "^1.5.0",
     "streamsearch": "^0.1.2",
