@@ -138,7 +138,7 @@ export default {
         postLink.setAttribute("class", "postlink");
         postLink.setAttribute("aria-label", "Lien vers le post " + post.id);
         postLink.setAttribute("href", "/#/Post?id=" + post.id);
-        postLink.innerText = "Ouvrir le post !";
+        postLink.innerText = "Ouvrir le post";
 
         // Création de la structure parent/enfants de la page des produits
         container.appendChild(card);

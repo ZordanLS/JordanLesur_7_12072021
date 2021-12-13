@@ -17,7 +17,7 @@
       </div>
       <div class="uploadcontainer">
         <input type="file" id="postpicture" name1="postpicture" />
-        <button id="postbutton" type="button">Publier !</button>
+        <button id="postbutton" type="button">Publier</button>
       </div>
     </form>
   </div>

@@ -5,7 +5,9 @@
       <div id="posts"></div>
       <form id="commentform">
         <div class="container">
-          <label class="commentlabel" for="commentcontent">Vous voulez répondre ?</label>
+          <h1 class="h1label">
+          <label class="commentlabel" for="commentcontent">Voulez-vous commenter ?</label>
+          </h1>
           <textarea
             class="newcommenttext"
             onfocus="this.style.height='150px'"
@@ -17,7 +19,7 @@
             required
             maxlength="255"
           />
-          <button id="commentbutton" type="button">Publier !</button>
+          <button id="commentbutton" type="button">Commenter</button>
         </div>
       </form>
       <Comment />
@@ -238,7 +240,11 @@ export default {
 </script>
 
 <style>
+.h1label {
+  text-align: center;
+}
 .commentlabel {
+  text-align: center;
   font-size: 14pt;
   font-weight: bold;
 }
@@ -274,11 +280,6 @@ input[type="password"] {
   opacity: 0.8;
 }
 
-h1 {
-  text-align: left;
-  margin: 40px 0 0;
-  margin-left: 3rem;
-}
 a {
   color: #df7070;
 }

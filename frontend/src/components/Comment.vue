@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>Commentaires</h1>
     <div id="comments"></div>
   </div>
 </template>
