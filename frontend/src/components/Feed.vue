@@ -198,7 +198,6 @@ export default {
         deleteButton.setAttribute("aria-label", "Suppression du post");
         let deleteIcon = document.createElement("i");
         deleteIcon.setAttribute("class", "far fa-trash-alt");
-        deleteIcon.setAttribute("id", "deleteicon");
         deleteButton.onclick = askDelete;
 
         if (post.user_id === parseInt(loggedUserId)) {
