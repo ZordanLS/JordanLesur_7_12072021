@@ -10,7 +10,7 @@ const fs = require("fs");
 // Create and Save a new Post
 exports.create = (req, res) => {
   // Validate request
-  if (!req.body.postcontent) {
+  if (!req.body.postcontent && !req.file) {
     res.status(400).send({
       message: "Content can not be empty!",
     });
