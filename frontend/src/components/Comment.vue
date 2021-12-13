@@ -1,8 +1,8 @@
 <template>
-    <div>
-      <h1>Commentaires</h1>
-      <div id="comments"></div>
-    </div>
+  <div>
+    <h1>Commentaires</h1>
+    <div id="comments"></div>
+  </div>
 </template>
 
 <script>
@@ -235,9 +235,12 @@ span.psw {
 .carduser {
   display: flex;
 }
-
 .commentuserpic {
-  max-height: 2.5rem;
+  height: 3.5rem;
+  width: 3.5rem;
+  object-fit: cover;
+  object-position: center;
+  border-bottom-right-radius: 30px;
 }
 
 .cardbody {
@@ -257,7 +260,6 @@ span.psw {
   font-size: 14pt;
   word-break: break-word;
   margin-right: 2rem;
-
 }
 
 .postlink {

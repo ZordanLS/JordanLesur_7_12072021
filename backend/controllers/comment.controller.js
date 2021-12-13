@@ -46,7 +46,7 @@ exports.findPostsComments = (req, res) => {
 
   db.sequelize
     .query(
-      `SELECT A.*, B.first_name, B.last_name, B.email, B.picture FROM comments A INNER JOIN users B ON A.user_id = B.id WHERE A.post_id=${id} order by A.createdAt DESC`,
+      `SELECT A.*, B.first_name, B.last_name, B.email, B.picture FROM comments A INNER JOIN users B ON A.user_id = B.id WHERE A.post_id=${id} order by A.createdAt ASC`,
       { type: QueryTypes.SELECT }
     )
     .then((data) => {
