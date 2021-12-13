@@ -5,7 +5,7 @@
         <label class="postlabel" for="postcontent">Qu'avez-vous à dire ?</label><br>
         <textarea
           class="newposttext"
-          onfocus="this.style.height='250px'"
+          onfocus="this.style.height='150px'"
           onblur="if(this.value==''){this.style.height='20px'}"
           placeholder="Tapez ici !"
           id="postcontent"

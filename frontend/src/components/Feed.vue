@@ -335,6 +335,8 @@ span.psw {
   text-align: left;
   margin-left: 2rem;
   font-size: 14pt;
+  word-break: break-word;
+  margin-right: 2rem;
 }
 
 .postlink {

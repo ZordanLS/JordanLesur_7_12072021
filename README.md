@@ -21,5 +21,7 @@ Le backend est sur le port 3000
 
 Importer groupomania.sql dans votre gestionnaire de bases de données SQL
 
+Pour donner les droits administrateur à un compte, la clé "role" dans la base de données doit être "1".
+
 
 Pour accéder à l'application, rendez-vous sur http://localhost:8080/

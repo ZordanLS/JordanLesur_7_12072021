@@ -9,7 +9,7 @@
           <textarea
             class="newcommenttext"
             onfocus="this.style.height='150px'"
-            onblur="if(this.value==''){this.style.height=''}"
+            onblur="if(this.value==''){this.style.height='46px'}"
             id="commentcontent"
             type="text"
             placeholder="Tapez ici !"
@@ -279,14 +279,6 @@ h1 {
   margin: 40px 0 0;
   margin-left: 3rem;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
 a {
   color: #df7070;
 }
@@ -351,7 +343,7 @@ span.psw {
 .newcommenttext {
   width: 49rem;
   max-width: 80%;
-  height: 3rem;
+  height: 46px;
   font-family: Helvetica, Arial, sans-serif;
   font-size: 1rem;
   -webkit-font-smoothing: antialiased;

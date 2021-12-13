@@ -88,19 +88,6 @@ export default {
 </script>
 
 <style>
-h1 {
-  text-align: left;
-  margin: 40px 0 0;
-  margin-left: 3rem;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
 a {
   color: #df7070;
   text-decoration: none;
@@ -156,6 +143,8 @@ span.psw {
   height: 10rem;
   width: 10rem;
   border-radius: 10px;
+  margin-left: 4rem;
+  margin-right: 4rem;
   object-fit: cover;
   object-position: center;
 }

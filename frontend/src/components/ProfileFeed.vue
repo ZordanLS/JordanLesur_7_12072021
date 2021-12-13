@@ -277,12 +277,6 @@ span.psw {
   padding-right: 1rem;
   padding-top: 0.3rem;
 }
-
-.carddescription {
-  text-align: left;
-  margin-left: 2rem;
-}
-
 .postlink {
   margin-right: 0.5rem;
   margin-left: auto;
