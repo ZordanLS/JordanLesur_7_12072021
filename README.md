@@ -6,14 +6,19 @@ Jordan LESUR - OpenClassrooms
 ### Base de données
 
 Créer une nouvelle base de données mysql "groupomania"
+
 Depuis l'emplacement du fichier groupomania.sql, utilisez :
+
 ``mysql -u username -p password groupomania < groupomania.sql``
+
 ou importer groupomania.sql dans votre gestionnaire de bases de données SQL
 
 Attention à ne pas oublier de mettre à jour le .env avec vos informations.
 
 Un compte administrateur est automatiquement créé pour le test de l'application.
+
 Identifiant : admin
+
 Mot de passe : admin
 
 Pour donner les droits administrateur à un compte, la clé "role" dans la base de données doit avoir la valeur "1".
@@ -21,7 +26,9 @@ Pour donner les droits administrateur à un compte, la clé "role" dans la base 
 ### Frontend
 
 ``cd frontend``
+
 ``npm install``
+
 ``npm start``
 
 Le frontend est sur le port 8080
@@ -29,7 +36,9 @@ Le frontend est sur le port 8080
 ### Backend
 
 ``cd backend``
+
 ``npm install``
+
 ``npm start``
 
 Le backend est sur le port 3000
