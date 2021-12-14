@@ -13,15 +13,20 @@ Depuis l'emplacement du fichier groupomania.sql, utilisez :
 
 ou importer groupomania.sql dans votre gestionnaire de bases de données SQL
 
+
 Attention à ne pas oublier de mettre à jour le .env avec vos informations.
 
+
 Un compte administrateur est automatiquement créé pour le test de l'application.
+
 
 Identifiant : admin
 
 Mot de passe : admin
 
+
 Pour donner les droits administrateur à un compte, la clé "role" dans la base de données doit avoir la valeur "1".
+
 
 ### Frontend
 
@@ -32,6 +37,7 @@ Pour donner les droits administrateur à un compte, la clé "role" dans la base 
 ``npm start``
 
 Le frontend est sur le port 8080
+
 
 ### Backend
 
