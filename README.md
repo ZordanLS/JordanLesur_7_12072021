@@ -1,9 +1,9 @@
 # Projet 7 du parcours Développeur Web
 Jordan LESUR - OpenClassrooms
 
-## Instructions pour l'installation :
+# Instructions pour l'installation :
 
-### Base de données
+## Base de données
 
 Créer une nouvelle base de données mysql "groupomania"
 
@@ -14,7 +14,7 @@ Depuis l'emplacement du fichier groupomania.sql, utilisez :
 ou importez groupomania.sql dans votre gestionnaire de bases de données SQL
 
 
-_Attention à ne pas oublier de mettre à jour le .env avec vos informations._
+### Attention à ne pas oublier de mettre à jour le .env avec vos informations.
 
 
 Un compte administrateur est automatiquement créé pour le test de l'application.
@@ -28,7 +28,7 @@ Mot de passe : admin
 _Pour donner les droits administrateur à un compte, la clé "role" dans la base de données doit avoir la valeur "1"._
 
 
-### Frontend
+## Frontend
 
 ``cd frontend``
 
@@ -39,7 +39,7 @@ _Pour donner les droits administrateur à un compte, la clé "role" dans la base
 Le frontend est sur le port 8080
 
 
-### Backend
+## Backend
 
 ``cd backend``
 
