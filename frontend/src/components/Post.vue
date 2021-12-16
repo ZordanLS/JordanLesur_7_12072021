@@ -110,7 +110,7 @@ export default {
         // Creation du nom d'utilisateur
         let cardUserName = document.createElement("a");
         cardUserName.setAttribute("class", "username");
-        cardUserName.setAttribute("href", "http://localhost:8080/#/Profile?id=" + post.user_id);
+        cardUserName.setAttribute("href", "#/Profile?id=" + post.user_id);
 
         let firstName = capitalizeFirstLetter(post.first_name);
         let lastName = capitalizeFirstLetter(post.last_name);
