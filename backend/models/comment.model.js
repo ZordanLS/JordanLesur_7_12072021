@@ -2,8 +2,8 @@ module.exports = (sequelize, Sequelize) => {
   const Comment = sequelize.define(
     "comment",
     {
-      user_id: { type: Sequelize.INTEGER },
-      post_id: { type: Sequelize.INTEGER },
+      userId: { type: Sequelize.INTEGER,field: 'user_id' },
+      postId: { type: Sequelize.INTEGER, field: 'post_id' },
       content: { type: Sequelize.STRING },
     },
     {

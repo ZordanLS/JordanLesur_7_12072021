@@ -23,8 +23,8 @@ exports.create = (req, res) => {
     // Create a Comment
     const comment = {
       content: req.body.commentcontent,
-      user_id: userIdDecoded,
-      post_id: req.body.post_id,
+      userId: userIdDecoded,
+      postId: req.body.post_id,
     };
 
     // Save Comment in the database

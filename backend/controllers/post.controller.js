@@ -24,7 +24,7 @@ exports.create = (req, res) => {
     let post = {
       content: req.body.postcontent,
       picture: null,
-      user_id: userIdDecoded,
+      userId: userIdDecoded,
     };
 
     if (req.file != null) {
@@ -109,39 +109,43 @@ exports.delete = (req, res) => {
     let userIdDecoded = tokeninfo.userId;
     let userRoleDecoded = tokeninfo.userRole;
 
-    if (userRoleDecoded === 1 || userIdDecoded === req.body.userid) {
-      Comment.destroy({
-        where: { post_id: id },
-      });
-      Post.findOne({
-        where: { id: id },
-      })
-        .then((post) => {
-          if (post.picture != null) {
-          let filename = post.picture.split("http://localhost:3000/images/")[1];
-          fs.unlink(`images/${filename}`, () => {});
-          }
-          Post.destroy({
-            where: { id: id },
-          })
-            .then((num) => {
-              if (num == 1) {
-                res.send({
-                  message: "Post was deleted successfully!",
-                });
-              } else {
-                res.send({
-                  message: `Cannot delete Post with id=${id}. Maybe Post was not found!`,
-                });
-              }
-            })
-            .catch((err) => {
-              res.status(500).send({
-                message: "Could not delete Post with id=" + id,
-              });
-            });
+    Post.findOne({
+      where: { id: id },
+    }).then((post) => {
+      if (userRoleDecoded === 1 || userIdDecoded === post.userId) {
+        Comment.destroy({
+          where: { post_id: id },
+        });
+        Post.findOne({
+          where: { id: id },
         })
-        .catch((error) => res.status(500).json({ error }));
-    }
+          .then((post) => {
+            if (post.picture != null) {
+              let filename = post.picture.split("http://localhost:3000/images/")[1];
+              fs.unlink(`images/${filename}`, () => {});
+            }
+            Post.destroy({
+              where: { id: id },
+            })
+              .then((num) => {
+                if (num == 1) {
+                  res.send({
+                    message: "Post was deleted successfully!",
+                  });
+                } else {
+                  res.send({
+                    message: `Cannot delete Post with id=${id}. Maybe Post was not found!`,
+                  });
+                }
+              })
+              .catch((err) => {
+                res.status(500).send({
+                  message: "Could not delete Post with id=" + id,
+                });
+              });
+          })
+          .catch((error) => res.status(500).json({ error }));
+      }
+    });
   });
 };

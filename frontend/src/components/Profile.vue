@@ -58,8 +58,8 @@ export default {
       // Création du nom d'utilisateur
       let userNameContainer = document.createElement("div");
       userNameContainer.setAttribute("class", "usernamecontainer");
-      let firstName = capitalizeFirstLetter(user.first_name);
-      let lastName = capitalizeFirstLetter(user.last_name);
+      let firstName = capitalizeFirstLetter(user.firstName);
+      let lastName = capitalizeFirstLetter(user.lastName);
       userNameContainer.innerText = firstName + " " + lastName;
 
       // Création de l'adresse mail

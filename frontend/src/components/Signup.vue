@@ -5,6 +5,9 @@
     </h1>
     <form id="signupform" onsubmit="return(false)" autocomplete="off">
       <div class="container">
+
+        <span class="texterror hidden" id="signuperror">Veuillez vous assurer que les champs sont remplis correctement<br /><br /></span>
+
         <label for="email"><b>Adresse email</b></label>
         <input type="text" id="email" placeholder="Entrez votre adresse email" name="email" required />
 
@@ -48,8 +51,8 @@ export default {
       }
       let signupData = new FormData();
       signupData.append("email", signupFormData.get("email"));
-      signupData.append("firstname", signupFormData.get("firstname"));
-      signupData.append("lastname", signupFormData.get("lastname"));
+      signupData.append("firstName", signupFormData.get("firstname"));
+      signupData.append("lastName", signupFormData.get("lastname"));
       signupData.append("password", signupFormData.get("password"));
 
       if (document.getElementById("profilepic").files.length > 0) {
@@ -62,8 +65,8 @@ export default {
       })
         .then((res) => {
           if (!res.ok) {
-            res.json().then((res) => {
-              alert(res.message);
+            res.json().then(() => {
+            document.getElementById("signuperror").className = "texterror";
             });
             throw new Error();
           }

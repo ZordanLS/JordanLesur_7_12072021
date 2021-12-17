@@ -30,8 +30,8 @@ exports.create = async (req, res) => {
 
   // Create a User
   const user = {
-    first_name: req.body.firstname,
-    last_name: req.body.lastname,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
     email: req.body.email,
     password: hash,
     picture: "http://localhost:3000/assets/defaultuser.jpg",
@@ -75,8 +75,8 @@ exports.update = async (req, res) => {
   const id = req.body.id;
 
   const user = {
-    first_name: req.body.firstname,
-    last_name: req.body.lastname,
+    firstName: req.body.firstname,
+    lastName: req.body.lastname,
   };
 
   if (req.body.password != null) {
@@ -129,42 +129,51 @@ exports.delete = (req, res) => {
     let userIdDecoded = tokeninfo.userId;
     let userRoleDecoded = tokeninfo.userRole;
 
-    if (userRoleDecoded === 1 || userIdDecoded === req.body.userid) {
-      Comment.destroy({
-        where: { user_id: id },
-      });
-      Post.destroy({
-        where: { user_id: id },
-      });
-      User.findOne({
-        where: { id: id },
-      })
+    User.findOne({
+      where: { id: id },
+    }).then((user) => {
+      
+      
+      if (userRoleDecoded === 1 || userIdDecoded === user.id) {
+        Comment.destroy({
+          where: { user_id: id },
+        });
+        Post.destroy({
+          where: { user_id: id },
+        });
+        User.findOne({
+          where: { id: id },
+        })
         .then((user) => {
           let filename = user.picture.split("http://localhost:3000/images/")[1];
           fs.unlink(`images/${filename}`, () => {});
-
+          
           User.destroy({
             where: { id: id },
           })
-            .then((num) => {
-              if (num == 1) {
-                res.send({
-                  message: "User was deleted successfully!",
-                });
-              } else {
-                res.send({
-                  message: `Cannot delete User with id=${id}. Maybe User was not found!`,
-                });
-              }
-            })
-            .catch((err) => {
-              res.status(500).send({
-                message: "Could not delete User with id=" + id,
+          .then((num) => {
+            if (num == 1) {
+              res.send({
+                message: "User was deleted successfully!",
               });
+            } else {
+              res.send({
+                message: `Cannot delete User with id=${id}. Maybe User was not found!`,
+              });
+            }
+          })
+          .catch((err) => {
+            res.status(500).send({
+              message: "Could not delete User with id=" + id,
             });
+          });
         })
         .catch((error) => res.status(500).json({ error }));
     }
+    
+  })
+    
+    
   });
 };
 

@@ -2,7 +2,7 @@ module.exports = (sequelize, Sequelize) => {
   const Post = sequelize.define(
     "post",
     {
-      user_id: { type: Sequelize.INTEGER },
+      userId: { type: Sequelize.INTEGER, field: 'user_id' },
       content: { type: Sequelize.STRING },
       picture: { type: Sequelize.STRING },
     },

@@ -77,8 +77,8 @@ export default {
       // Création du nom d'utilisateur
       let userNameContainer = document.createElement("div");
       userNameContainer.setAttribute("class", "usernamecontainer");
-      let firstName = capitalizeFirstLetter(user.first_name);
-      let lastName = capitalizeFirstLetter(user.last_name);
+      let firstName = capitalizeFirstLetter(user.firstName);
+      let lastName = capitalizeFirstLetter(user.lastName);
       userNameContainer.innerText = firstName + " " + lastName;
 
       // Création de l'adresse mail
@@ -110,14 +110,12 @@ export default {
       }
 
       function deleteUser() {
-        let body = JSON.stringify({ userid: user.id });
         fetch(`http://localhost:3000/api/users/${user.id}`, {
           method: "DELETE",
           headers: new Headers({
             Authorization: "Basic " + localStorage.getItem("groupomaniatoken"),
             "Content-Type": "application/json",
           }),
-          body: body,
         }).then((res) => res.json(localStorage.removeItem("groupomaniauserid"), localStorage.removeItem("groupomaniatoken"), window.location.replace("#")));
       }
 
